@@ -1,0 +1,129 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DungeonGenerator : MonoBehaviour
+{
+
+    private Level test;
+
+    public GameObject roomLeftRightUpDown;
+    public GameObject roomLeftRight;
+    public GameObject roomLeftUp;
+    public GameObject roomLeft;
+    public GameObject roomRight;
+    public GameObject roomUpDown;
+    public GameObject roomClosed;
+
+    public GameObject testPlayer;
+    public GameObject testHealth;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        test = new Level(4, 4);
+        test.InitRooms();
+        test.GenerateMainPath();
+        GeneratePrefabs();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    void GeneratePrefabs()
+    {
+        for (int i = 0; i < test.levelWidth; i++)
+        {
+            for (int j = 0; j < test.levelHeight; j++)
+            {
+                GameObject room = GetRoomPrefab(test.grid[i, j].pattern);
+                if (room != null)
+                {
+                    if (test.grid[i, j].type == RoomType.Entrance)
+                    {
+                        GameObject player = Instantiate(testPlayer);
+                        player.transform.position = new Vector3(i * 20, 0, j * 20);
+                    }
+                    else if (test.grid[i, j].type == RoomType.Exit)
+                    {
+                        GameObject health = Instantiate(testHealth);
+                        health.transform.position = new Vector3(i * 20, 0, j * 20);
+                    }
+                    room.transform.position = new Vector3(i * 20, 0, j * 20);
+                    
+                }
+            }
+        }
+    }
+
+    GameObject GetRoomPrefab(RoomPattern pattern)
+    {
+        switch (pattern)
+        {
+            case RoomPattern.Down:
+                GameObject downFacingRoom = Instantiate(roomLeft);
+                downFacingRoom.transform.Rotate(new Vector3(0, -90, 0));
+                return downFacingRoom;
+                break;
+
+            case RoomPattern.Left:
+                GameObject leftRoom;
+                leftRoom = Instantiate(roomLeft);
+                leftRoom.transform.Rotate(new Vector3(0, 180, 0));
+                return leftRoom;
+                break;
+
+            case RoomPattern.Right:
+                GameObject rightRoom;
+                rightRoom = Instantiate(roomRight);
+                rightRoom.transform.Rotate(new Vector3(0, 180, 0));
+                return rightRoom;
+                break;
+
+            case RoomPattern.Up:
+                GameObject upFacingRoom = Instantiate(roomLeft);
+                upFacingRoom.transform.Rotate(new Vector3(0, 90, 0));
+                return upFacingRoom;
+
+            case RoomPattern.RightDown:
+                GameObject rightDownRoom = Instantiate(roomLeftUp);
+                rightDownRoom.transform.Rotate(new Vector3(0, -90, 0));
+                return rightDownRoom;
+
+            case RoomPattern.LeftDown:
+                GameObject leftDownRoom = Instantiate(roomLeftUp);
+                leftDownRoom.transform.Rotate(new Vector3(0, 180, 0));
+                return leftDownRoom;
+
+            case RoomPattern.LeftUp:
+                GameObject leftUpRoom = Instantiate(roomLeftUp);
+                leftUpRoom.transform.Rotate(new Vector3(0, 90, 0));
+                return leftUpRoom;
+
+            case RoomPattern.RightUp:
+                GameObject rightUpRoom = Instantiate(roomLeftUp);
+                rightUpRoom.transform.Rotate(new Vector3(0, 0, 0));
+                return rightUpRoom;
+
+            case RoomPattern.UpDown:
+                GameObject upDownRoom = Instantiate(roomUpDown);
+                upDownRoom.transform.Rotate(new Vector3(0, 0, 0));
+                return upDownRoom;
+
+            case RoomPattern.LeftRight:
+                GameObject leftRightRoom = Instantiate(roomLeftRight);
+                leftRightRoom.transform.Rotate(new Vector3(0, 0, 0));
+                return leftRightRoom;
+
+            default:
+                //GameObject cantBeBotherRoom = Instantiate(roomClosed);
+                //return cantBeBotherRoom;
+                return null;
+
+        }
+        
+    }
+}
