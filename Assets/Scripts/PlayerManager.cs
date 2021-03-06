@@ -38,12 +38,19 @@ public class PlayerManager : MonoBehaviour
     public float cameraYAxis = 10;
 
 
-	public float health;
+	public int health;
     public int armour;
+    public int maxHealth;
+    public int maxArmour;
 
     // We have pointers to these rooms so that we can use them to spawn the player.
+    [HideInInspector]
     public GameObject currentEntranceRoom;
+    [HideInInspector]
     public GameObject currentExitRoom;
+
+    [HideInInspector]
+    public bool isAlive;
 
 
     // Start is called before the first frame update
@@ -67,7 +74,7 @@ public class PlayerManager : MonoBehaviour
         SpawnCamera();
         
     }
-    public void HitPlayer(float damageAmount)
+    public void HitPlayer(int damageAmount)
     {
         // The player will lose 1 peice of armour if they have it, if the player has no armour the damage goes to their health.
         if (armour > 0)
@@ -82,10 +89,20 @@ public class PlayerManager : MonoBehaviour
     public void AddArmour(int armourAmount)
     {
         armour += armourAmount;
+        // Making it so that the player never has over the max amount.
+        if (armour > maxArmour)
+        {
+            armour = maxArmour;
+        }
     }
-    public void AddHealth(float healthAmount)
+    public void AddHealth(int healthAmount)
     {
         health += healthAmount;
+        // Making it so that the player never has over the max amount.
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
     }
 
     public void SpawnCamera()
