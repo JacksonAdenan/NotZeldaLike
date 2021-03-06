@@ -6,6 +6,9 @@ public class DungeonGenerator : MonoBehaviour
 {
 
     private Level test;
+    public int roomSpacingX = 20;
+    public int roomSpacingY = 20;
+    
 
     public GameObject roomLeftRightUpDown;
     public GameObject roomLeftRight;
@@ -18,17 +21,32 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject testPlayer;
     public GameObject testHealth;
 
+    private PlayerManager playerManager;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        
+
+        
+        
+        
+    }
+
+	private void Awake()
+	{
+        // We pass playerManager references to the entrance and exit rooms so that we can spawn players there.
+        playerManager = PlayerManager.GetInstance();
+
         test = new Level(4, 4);
         test.InitRooms();
         test.GenerateMainPath();
         GeneratePrefabs();
     }
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	void Update()
     {
         
     }
@@ -44,15 +62,17 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     if (test.grid[i, j].type == RoomType.Entrance)
                     {
-                        GameObject player = Instantiate(testPlayer);
-                        player.transform.position = new Vector3(i * 20, 0, j * 20);
+                        //GameObject player = Instantiate(testPlayer);
+                        //player.transform.position = new Vector3(i * roomSpacingX, 1, j * roomSpacingY);
+                        playerManager.currentEntranceRoom = room;
                     }
                     else if (test.grid[i, j].type == RoomType.Exit)
                     {
                         GameObject health = Instantiate(testHealth);
-                        health.transform.position = new Vector3(i * 20, 0, j * 20);
+                        health.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
+                        playerManager.currentExitRoom = room;
                     }
-                    room.transform.position = new Vector3(i * 20, 0, j * 20);
+                    room.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
                     
                 }
             }

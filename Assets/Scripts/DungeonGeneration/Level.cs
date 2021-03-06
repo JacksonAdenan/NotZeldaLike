@@ -10,6 +10,9 @@ public class Level
 	public Room[,] grid;// = new Room[levelWidth, levelHeight];
 
 
+	public Room entranceRoom;
+	public Room exitRoom;
+
 	private Room currentRoom = null;
 	private Room previousRoom = null;
 	public Level(int width, int height)
@@ -50,6 +53,7 @@ public class Level
 
 
 		currentRoom = grid[entranceRoomNumber, 0];
+		entranceRoom = currentRoom;
 	}
 
 	public void PickNextRoom()
@@ -89,7 +93,10 @@ public class Level
 					currentRoom = grid[currentRoom.x, currentRoom.y + 1];
 					currentRoom.pattern = RoomPattern.Up;
 					if (currentRoom.y == 3)
+					{ 
 						currentRoom.type = RoomType.Exit;
+						exitRoom = currentRoom;
+					}
 				}
 			}
 			else if (nextRoomNum == 2)
@@ -116,7 +123,10 @@ public class Level
 					currentRoom = grid[currentRoom.x, currentRoom.y + 1];
 					currentRoom.pattern = RoomPattern.Up;
 					if (currentRoom.y == 3)
+					{ 
 						currentRoom.type = RoomType.Exit;
+						exitRoom = currentRoom;
+					}
 				}
 			}
 			else if (nextRoomNum == 1)
@@ -129,6 +139,7 @@ public class Level
 					currentRoom.pattern = RoomPattern.Up;
 					previousRoom.AddDownRoom();
 					currentRoom.type = RoomType.Exit;
+					exitRoom = currentRoom;
 				}
 				else
 				{

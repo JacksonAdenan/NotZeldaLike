@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform player;
     public float speed = 5;
+    private Transform player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = this.gameObject.transform;
     }
 
     // Update is called once per frame

@@ -31,23 +31,42 @@ public class PlayerManager : MonoBehaviour
         }    
 	}
 
+    // Replace this with loading it in from the resources folder.
+    public GameObject player;
+
+    public float cameraZAxis = -3;
+    public float cameraYAxis = 10;
+
 
 	public float health;
     public int armour;
+
+    // We have pointers to these rooms so that we can use them to spawn the player.
+    public GameObject currentEntranceRoom;
+    public GameObject currentExitRoom;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        SpawnPlayer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Put SpawnCamera() here to check the camera y axis and z axis in real time. Useful for positioning it just right.
+        //SpawnCamera();
     }
 
+    public void SpawnPlayer()
+    {
+        player = Instantiate(player);
+        player.transform.position = new Vector3(currentEntranceRoom.transform.position.x, 1, currentEntranceRoom.transform.position.y);
+
+        SpawnCamera();
+        
+    }
     public void HitPlayer(float damageAmount)
     {
         // The player will lose 1 peice of armour if they have it, if the player has no armour the damage goes to their health.
@@ -67,5 +86,12 @@ public class PlayerManager : MonoBehaviour
     public void AddHealth(float healthAmount)
     {
         health += healthAmount;
+    }
+
+    public void SpawnCamera()
+    {
+        Camera theCamera = Camera.main;
+
+        theCamera.transform.position = new Vector3(player.transform.position.x, cameraYAxis, cameraZAxis);
     }
 }

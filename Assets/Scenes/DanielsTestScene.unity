@@ -123,6 +123,89 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1483205189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1483205192}
+  - component: {fileID: 1483205191}
+  - component: {fileID: 1483205190}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1483205190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483205189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d79d11312409b428ed18fdb63399f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 3070133563548722364, guid: a1197956af98fa248905782de2cec927, type: 3}
+  cameraZAxis: -3
+  cameraYAxis: 10
+  health: 0
+  armour: 0
+  currentEntranceRoom: {fileID: 0}
+  currentExitRoom: {fileID: 0}
+--- !u!114 &1483205191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483205189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5675ecf845b909844a927c6e49f1f2a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomSpacingX: 15
+  roomSpacingY: 13
+  roomLeftRightUpDown: {fileID: 4902166714983145322, guid: 97aec22cf12063245a7b0f106ef0988d,
+    type: 3}
+  roomLeftRight: {fileID: 5354862115850762534, guid: 7e6765ec01a4d0a42aff3f545c43cb13,
+    type: 3}
+  roomLeftUp: {fileID: 1896462083164563866, guid: 8f1a3b202e09ce5418c9d979e38c5175,
+    type: 3}
+  roomLeft: {fileID: 2629725531852103378, guid: 4cc6a6eddd3e4fe429a3762c8d2f5f89,
+    type: 3}
+  roomRight: {fileID: 4734565961200129026, guid: 7407a53c1000f984da01f1bf43a2bbc5,
+    type: 3}
+  roomUpDown: {fileID: 5951385231629973539, guid: db4164aea5bcb7c4492fbd14f8491f13,
+    type: 3}
+  roomClosed: {fileID: 5696414912635604455, guid: 30491074b745bb34699a3c4d1d32e722,
+    type: 3}
+  testPlayer: {fileID: 3070133563548722364, guid: a1197956af98fa248905782de2cec927,
+    type: 3}
+  testHealth: {fileID: 3375369376480409711, guid: aa924965b95c52e4e976684f3c19f9eb,
+    type: 3}
+--- !u!4 &1483205192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483205189}
+  m_LocalRotation: {x: -0.008386732, y: -0, z: -0, w: 0.99996483}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: -0.961, y: 0, z: 0}
 --- !u!1 &1696908744
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +217,6 @@ GameObject:
   - component: {fileID: 1696908747}
   - component: {fileID: 1696908746}
   - component: {fileID: 1696908745}
-  - component: {fileID: 1696908749}
   - component: {fileID: 1696908748}
   m_Layer: 0
   m_Name: Main Camera
@@ -201,13 +283,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696908744}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 75, y: 0, z: 0}
 --- !u!114 &1696908748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,36 +321,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &1696908749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1696908744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5675ecf845b909844a927c6e49f1f2a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomLeftRightUpDown: {fileID: 4902166714983145322, guid: 97aec22cf12063245a7b0f106ef0988d,
-    type: 3}
-  roomLeftRight: {fileID: 5354862115850762534, guid: 7e6765ec01a4d0a42aff3f545c43cb13,
-    type: 3}
-  roomLeftUp: {fileID: 1896462083164563866, guid: 8f1a3b202e09ce5418c9d979e38c5175,
-    type: 3}
-  roomLeft: {fileID: 2629725531852103378, guid: 4cc6a6eddd3e4fe429a3762c8d2f5f89,
-    type: 3}
-  roomRight: {fileID: 4734565961200129026, guid: 7407a53c1000f984da01f1bf43a2bbc5,
-    type: 3}
-  roomUpDown: {fileID: 5951385231629973539, guid: db4164aea5bcb7c4492fbd14f8491f13,
-    type: 3}
-  roomClosed: {fileID: 5696414912635604455, guid: 30491074b745bb34699a3c4d1d32e722,
-    type: 3}
-  testPlayer: {fileID: 3070133563548722364, guid: a1197956af98fa248905782de2cec927,
-    type: 3}
-  testHealth: {fileID: 3375369376480409711, guid: aa924965b95c52e4e976684f3c19f9eb,
-    type: 3}
 --- !u!1 &1836557068
 GameObject:
   m_ObjectHideFlags: 0
