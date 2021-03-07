@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 1483205191}
   - component: {fileID: 1483205190}
   - component: {fileID: 1483205193}
+  - component: {fileID: 1483205194}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -405,6 +406,19 @@ MonoBehaviour:
     type: 3}
   armourIcon: {fileID: 3224695636793645931, guid: 6b1ffb94fc79e004c869b1bc100db45e,
     type: 3}
+--- !u!114 &1483205194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483205189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad3b41b80e70fe4189252c18a301f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navMeshSurfaces: []
 --- !u!1 &1696908744
 GameObject:
   m_ObjectHideFlags: 0
