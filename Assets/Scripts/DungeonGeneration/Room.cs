@@ -39,6 +39,8 @@ public class Room
     public int x;
     public int y;
 
+
+    public GameObject roomObj = null;
     public Room()
     {
         type = RoomType.Empty;
@@ -159,6 +161,9 @@ public class Room
             Debug.Log("Tried to add room but previous room did not match any valid type!");
         }
     }
-    
-    
+
+    public void SetRoomObj(GameObject newRoomObj)
+    {
+        this.roomObj = newRoomObj;
+    }
 }
