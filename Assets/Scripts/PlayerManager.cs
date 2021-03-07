@@ -53,9 +53,13 @@ public class PlayerManager : MonoBehaviour
     public bool isAlive;
 
 
+    // Reference to the UIManager so we can take away and add hearts and stuff to the screen.
+    private UIManager uiManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        uiManager = UIManager.GetInstance();
         SpawnPlayer();
     }
 
@@ -64,6 +68,16 @@ public class PlayerManager : MonoBehaviour
     {
         // Put SpawnCamera() here to check the camera y axis and z axis in real time. Useful for positioning it just right.
         //SpawnCamera();
+
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            HitPlayer(1);
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            AddHealth(1);
+        }
     }
 
     public void SpawnPlayer()
@@ -84,6 +98,13 @@ public class PlayerManager : MonoBehaviour
         else
         { 
             health -= damageAmount;
+            for (int i = 0; i < damageAmount; i++)
+            { 
+                uiManager.RemoveIcon(UIManager.IconType.HealthIcon);
+            }
+
+            if (health < 0)
+                health = 0;
         }
     }
     public void AddArmour(int armourAmount)
@@ -98,6 +119,14 @@ public class PlayerManager : MonoBehaviour
     public void AddHealth(int healthAmount)
     {
         health += healthAmount;
+
+        for (int i = 0; i < healthAmount; i++)
+        {
+            if((health - healthAmount) + 1 <= maxHealth)
+                uiManager.AddIcon(UIManager.IconType.HealthIcon, health);
+        }
+
+
         // Making it so that the player never has over the max amount.
         if (health > maxHealth)
         {
