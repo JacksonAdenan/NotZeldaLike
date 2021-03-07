@@ -6,8 +6,8 @@ using UnityEngine;
 // These mob types are just place holders until we discuss what monsters we actually want.
 public enum MobType
 { 
-    Goblin,
-    Ranged_Goblin
+    Skeleton,
+    Zombie
 }
 public class MobSpawner : MonoBehaviour
 {
@@ -15,8 +15,8 @@ public class MobSpawner : MonoBehaviour
     public MobType spawnerType;
 
     // For now ill keep prefabs here but replace it by loading in resources.
-    public GameObject goblin;
-    public GameObject ranged_Goblin;
+    public GameObject skeleton;
+    public GameObject zombie;
 
 
     // Start is called before the first frame update
@@ -36,12 +36,12 @@ public class MobSpawner : MonoBehaviour
     {
         switch (type)
         {
-            case MobType.Goblin:
-                GameObject newGoblin = Instantiate(goblin);
+            case MobType.Skeleton:
+                GameObject newGoblin = Instantiate(skeleton);
                 newGoblin.transform.position = this.gameObject.transform.position;
                 break;
-            case MobType.Ranged_Goblin:
-                GameObject newRangedGoblin = Instantiate(ranged_Goblin);
+            case MobType.Zombie:
+                GameObject newRangedGoblin = Instantiate(zombie);
                 newRangedGoblin.transform.position = this.gameObject.transform.position;
                 break;
         }

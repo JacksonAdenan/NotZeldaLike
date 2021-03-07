@@ -16,7 +16,7 @@ public class AgentController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        stateMachine = new AIStateMachine(MobType.Goblin, agent, this);
+        stateMachine = new AIStateMachine(MobType.Skeleton, agent, this);
         //agent.destination = goal.position;
     }
 
