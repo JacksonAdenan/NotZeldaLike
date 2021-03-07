@@ -22,6 +22,7 @@ public class AIStateMachine
     {
         WANDER,
         CHASE,
+        ATTACK,
         FLEE
     }
     public AIStateMachine(MobType type, NavMeshAgent agent, AgentController control)
@@ -45,10 +46,10 @@ public class AIStateMachine
     {
         if (currentState == BasicDecisions.WANDER)
         {
-            //if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) < controller.attackDistance)
-            //{
-            //    //currentState = BasicDecisions.CHASE;
-            //}
+            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) < controller.attackDistance)
+            {
+                currentState = BasicDecisions.CHASE;
+            }
 
             if (hasReachedDestination)
             {
@@ -79,8 +80,39 @@ public class AIStateMachine
         }
 
         else if (currentState == BasicDecisions.CHASE)
-        { 
-            
+        {
+            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) >= controller.attackDistance)
+            {
+                currentState = BasicDecisions.WANDER;
+            }
+
+            agent.SetDestination(player.transform.position);
+
+            if (hasReachedDestination)
+            {
+                hasReachedDestination = false;
+            }
+
+
+            if (!agent.pathPending)
+            {
+                if (Vector3.Distance(agent.transform.position, player.transform.position) <= 2)
+                {
+                    hasReachedDestination = true;
+                    Debug.Log("Agent completed chase path.");
+                    currentState = BasicDecisions.ATTACK;
+                    agent.ResetPath();
+                }
+            }
+        }
+
+        else if (currentState == BasicDecisions.ATTACK)
+        {
+            Debug.Log("Agent is attacking");
+            if (Vector3.Distance(agent.transform.position, player.transform.position) > 1)
+            {
+                currentState = BasicDecisions.CHASE;
+            }
         }
     }
 }

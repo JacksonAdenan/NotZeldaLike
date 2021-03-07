@@ -336,7 +336,7 @@ MonoBehaviour:
   player: {fileID: 3070133563548722364, guid: a1197956af98fa248905782de2cec927, type: 3}
   cameraZAxis: -3
   cameraYAxis: 10
-  health: 5
+  health: 1
   armour: 0
   maxHealth: 0
   maxArmour: 0
