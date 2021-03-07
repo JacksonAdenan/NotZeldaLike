@@ -5,8 +5,10 @@ using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour
 {
-    public Transform goal;
     NavMeshAgent agent;
+    public float xWanderDistance = 2;
+    public float yWanderDistance = 2;
+    public float attackDistance = 3;
 
     private AIStateMachine stateMachine;
 
@@ -14,13 +16,13 @@ public class AgentController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        stateMachine = new AIStateMachine(MobType.Goblin, agent);
+        stateMachine = new AIStateMachine(MobType.Goblin, agent, this);
         //agent.destination = goal.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        stateMachine.RunStateMachine();
     }
 }
