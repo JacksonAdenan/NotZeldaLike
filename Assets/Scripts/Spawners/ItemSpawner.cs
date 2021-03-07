@@ -9,15 +9,22 @@ public enum ItemType
 }
 public class ItemSpawner : MonoBehaviour
 {
-    public ItemType spawnerType;
+    public bool health;
+    public bool armour;
 
-    public GameObject health;
-    public GameObject armour;
+    public GameObject healthObj;
+    public GameObject armourObj;
+
+    private List<ItemType> listOfItemsTicked;
+    private ItemType typeSelected;
 
     // Start is called before the first frame update
     void Start()
     {
-        SpawnItem(spawnerType);
+        listOfItemsTicked = new List<ItemType>();
+        AddSelectedItems();
+        PickType();
+        SpawnItem(typeSelected);
     }
 
     // Update is called once per frame
@@ -26,16 +33,28 @@ public class ItemSpawner : MonoBehaviour
         
     }
 
+    void AddSelectedItems()
+    {
+        if (health)
+            listOfItemsTicked.Add(ItemType.Health);
+        if (armour)
+            listOfItemsTicked.Add(ItemType.Armour);
+    }
+    void PickType()
+    {
+        int randomNum = Random.Range(0, listOfItemsTicked.Count);
+        typeSelected = listOfItemsTicked[randomNum];
+    }
     public void SpawnItem(ItemType type)
     {
         switch (type)
         {
             case ItemType.Health:
-                GameObject newHealth = Instantiate(health);
+                GameObject newHealth = Instantiate(healthObj);
                 newHealth.transform.position = this.transform.position;
                 break;
             case ItemType.Armour:
-                GameObject newArmour = Instantiate(armour);
+                GameObject newArmour = Instantiate(armourObj);
                 newArmour.transform.position = this.transform.position;
                 break;
         }

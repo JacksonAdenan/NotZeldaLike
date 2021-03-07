@@ -109,6 +109,10 @@ public class AIStateMachine
         else if (currentState == BasicDecisions.ATTACK)
         {
             Debug.Log("Agent is attacking");
+            Vector3 lookPosition = player.transform.position - agent.transform.position;
+            lookPosition.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(lookPosition);
+            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 10);
             if (Vector3.Distance(agent.transform.position, player.transform.position) > 1)
             {
                 currentState = BasicDecisions.CHASE;
