@@ -24,6 +24,24 @@ public class PlayerController : MonoBehaviour
             Vector3 movement = new Vector3(xTranslation, 0, yTranslation).normalized;
             //movement = Vector3.Normalize(movement);
             player.position += movement * speed * Time.deltaTime;
+
+        }
+
+        LookAtMouse();
+    }
+
+    void LookAtMouse()
+    {
+        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength;
+
+        if (groundPlane.Raycast(cameraRay, out rayLength))
+        {
+            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
         }
     }
+
+
 }
