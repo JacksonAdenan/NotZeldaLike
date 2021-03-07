@@ -6,7 +6,8 @@ public enum RoomType
 { 
     Empty,
     Entrance,
-    Exit
+    Exit,
+    DeadEnd
 }
 public enum RoomPattern
 {
@@ -21,6 +22,13 @@ public enum RoomPattern
     LeftDown,
     RightUp,
     LeftUp,
+    LeftRightDown,
+    LeftRightUp,
+    UpRightDown,
+    UpLeftDown,
+    
+    
+
     Closed // Closed is used only in intermediate stages during generation. A room should never be closed after generation is complete.
 }
 public class Room
@@ -55,6 +63,17 @@ public class Room
         {
             pattern = RoomPattern.Down;
         }
+        else if (pattern == RoomPattern.LeftRight)
+            pattern = RoomPattern.LeftRightDown;
+
+        else if (pattern == RoomPattern.RightUp)
+            pattern = RoomPattern.UpRightDown;
+
+        else if (pattern == RoomPattern.LeftUp)
+            pattern = RoomPattern.UpLeftDown;
+
+
+
         else
         {
             Debug.Log("Tried to add room but previous room did not match any valid type!");
@@ -79,6 +98,15 @@ public class Room
             pattern = RoomPattern.Right;
         }
 
+        else if (pattern == RoomPattern.UpDown)
+            pattern = RoomPattern.UpRightDown;
+
+        else if (pattern == RoomPattern.LeftUp)
+            pattern = RoomPattern.LeftRightUp;
+
+        else if (pattern == RoomPattern.LeftDown)
+            pattern = RoomPattern.LeftRightDown;
+
         else
         {
             Debug.Log("Tried to add room but previous room did not match any valid type!");
@@ -91,7 +119,7 @@ public class Room
 
         else if (pattern == RoomPattern.Down)
             pattern = RoomPattern.LeftDown;
-            
+
         else if (pattern == RoomPattern.Right)
             pattern = RoomPattern.LeftRight;
 
@@ -102,6 +130,15 @@ public class Room
         {
             pattern = RoomPattern.Left;
         }
+
+        else if (pattern == RoomPattern.LeftRight)
+            pattern = RoomPattern.LeftRightDown;
+
+        else if (pattern == RoomPattern.RightUp)
+            pattern = RoomPattern.LeftRightUp;
+
+        else if (pattern == RoomPattern.RightDown)
+            pattern = RoomPattern.LeftRightDown;
 
         else
         {
