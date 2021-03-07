@@ -355,8 +355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5675ecf845b909844a927c6e49f1f2a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomSpacingX: 15
-  roomSpacingY: 13
+  roomSpacingX: 14
+  roomSpacingY: 10
   roomLeftRightUpDown: {fileID: 4902166714983145322, guid: 97aec22cf12063245a7b0f106ef0988d,
     type: 3}
   roomLeftRight: {fileID: 5354862115850762534, guid: 7e6765ec01a4d0a42aff3f545c43cb13,
@@ -370,6 +370,15 @@ MonoBehaviour:
   roomUpDown: {fileID: 5951385231629973539, guid: db4164aea5bcb7c4492fbd14f8491f13,
     type: 3}
   roomClosed: {fileID: 5696414912635604455, guid: 30491074b745bb34699a3c4d1d32e722,
+    type: 3}
+  roomRightDown: {fileID: 2599383397612976892, guid: 339830b779d84684cba3c35e5685e035,
+    type: 3}
+  roomLeftDown: {fileID: 7242996482021933017, guid: dad10f768ce24b941b0853cb215c8438,
+    type: 3}
+  roomRightUp: {fileID: 8251616963325379421, guid: 26f9fb134e3aa534f9d00ce92eb2bab5,
+    type: 3}
+  roomUp: {fileID: 4651701937060507601, guid: dc961c6268931904086ec1f59b9e107d, type: 3}
+  roomDown: {fileID: 2242161411866238958, guid: dd43d8ac69c23724f8279126fdbb4400,
     type: 3}
   testPlayer: {fileID: 3070133563548722364, guid: a1197956af98fa248905782de2cec927,
     type: 3}
