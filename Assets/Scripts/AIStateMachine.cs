@@ -15,19 +15,20 @@ public class AIStateMachine
     private BasicDecisions currentState = BasicDecisions.WANDER;
 
     enum BasicDecisions
-    { 
+    {
         WANDER,
         ATTACK,
         FLEE
     }
-    public AIStateMachine(MobType type)
+    public AIStateMachine(MobType type, NavMeshAgent agent)
     {
         stateMachineType = type;
+        this.agent = agent;
     }
 
     public void RunStateMachine()
-    { 
-        
+    {
+        StateMachine1();
     }
 
     private void StateMachine1()
