@@ -3,24 +3,24 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour
 {
-    public enum RoomStates { Inactive, Active, Cleared }
-    public RoomStates roomStatesToggle = RoomStates.Inactive;
-
-    [SerializeField]
-    GameObject enemySpawnersParent;
-    [SerializeField]
-    GameObject pickupSpawnersParent;
-
-    public List<GameObject> enemies = new List<GameObject>();
+    [HideInInspector]
     public List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
+    [HideInInspector]
     public List<GameObject> pickupSpawners = new List<GameObject>();
-
+    [Header("Scene")]
+    public List<GameObject> enemySpawnersList = new List<GameObject>();
+    public enum RoomStates { Inactive, Active, Cleared }
+    [Header("Runtime")]
+    public RoomStates roomStatesToggle = RoomStates.Inactive;
+    public List<GameObject> enemies = new List<GameObject>();
+    [HideInInspector]
+    public GameObject layout;
     bool activeFirstTimeRunning;
     bool clearedFirstTimeRunning;
 
     void Start()
     {
-        foreach (GameObject enemySpawner in enemySpawnersParent.transform)
+        foreach (GameObject enemySpawner in enemySpawnersList)
             enemySpawners.Add(enemySpawner.GetComponent<EnemySpawner>());
 
         RollEnemies();
