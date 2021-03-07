@@ -17,6 +17,12 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject roomRight;
     public GameObject roomUpDown;
     public GameObject roomClosed;
+    public GameObject roomRightDown;
+    public GameObject roomLeftDown;
+    public GameObject roomRightUp;
+    public GameObject roomUp;
+    public GameObject roomDown;
+
 
     public GameObject testPlayer;
     public GameObject testHealth;
