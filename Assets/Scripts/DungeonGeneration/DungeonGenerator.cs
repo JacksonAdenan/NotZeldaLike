@@ -49,6 +49,7 @@ public class DungeonGenerator : MonoBehaviour
         test.InitRooms();
         test.GenerateMainPath();
         GeneratePrefabs();
+        GenerateFloorVariations();
     }
 
 	// Update is called once per frame
@@ -80,6 +81,24 @@ public class DungeonGenerator : MonoBehaviour
                     }
                     room.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
                     
+                }
+            }
+        }
+    }
+
+    void GenerateFloorVariations()
+    {
+        for (int i = 0; i < test.levelWidth; i++)
+        {
+            for (int j = 0; j < test.levelHeight; j++)
+            {
+                if (test.grid[i, j].pattern != RoomPattern.Closed)
+                { 
+                    int randomNum = Random.Range(0, 12);
+                    string roomPath = "Rooms/Layouts/" + randomNum.ToString();
+                    //GameObject room = Resources.Load(roomPath) as GameObject;
+                    GameObject roomReal = Instantiate(Resources.Load<GameObject>(roomPath));
+                    roomReal.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
                 }
             }
         }
