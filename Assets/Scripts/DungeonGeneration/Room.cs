@@ -145,6 +145,20 @@ public class Room
             Debug.Log("Tried to add room but previous room did not match any valid type!");
         }
     }
+
+    public void AddUpRoom()
+    {
+        if (pattern == RoomPattern.RightDown)
+            pattern = RoomPattern.UpRightDown;
+
+        else if (pattern == RoomPattern.LeftRight)
+            pattern = RoomPattern.LeftRightUp;
+
+        else
+        {
+            Debug.Log("Tried to add room but previous room did not match any valid type!");
+        }
+    }
     
     
 }

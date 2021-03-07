@@ -160,6 +160,19 @@ public class DungeonGenerator : MonoBehaviour
                 leftRightRoom.transform.Rotate(new Vector3(0, 0, 0));
                 return leftRightRoom;
 
+            //case RoomPattern.UpLeftDown:
+            //    break;
+            //
+            //case RoomPattern.LeftRightUp:
+            //    break;
+            //
+            //case RoomPattern.LeftRightDown:
+            //    break;
+            //
+            //case RoomPattern.UpRightDown:
+            //    break;
+
+
             default:
                 //GameObject cantBeBotherRoom = Instantiate(roomClosed);
                 //return cantBeBotherRoom;
