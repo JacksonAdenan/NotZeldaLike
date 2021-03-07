@@ -90,48 +90,45 @@ public class DungeonGenerator : MonoBehaviour
         switch (pattern)
         {
             case RoomPattern.Down:
-                GameObject downFacingRoom = Instantiate(roomLeft);
-                downFacingRoom.transform.Rotate(new Vector3(0, -90, 0));
+                GameObject downFacingRoom = Instantiate(roomDown);
+                downFacingRoom.transform.Rotate(new Vector3(0, 180, 0));
                 return downFacingRoom;
-                break;
 
             case RoomPattern.Left:
                 GameObject leftRoom;
                 leftRoom = Instantiate(roomLeft);
                 leftRoom.transform.Rotate(new Vector3(0, 180, 0));
                 return leftRoom;
-                break;
 
             case RoomPattern.Right:
                 GameObject rightRoom;
                 rightRoom = Instantiate(roomRight);
                 rightRoom.transform.Rotate(new Vector3(0, 180, 0));
                 return rightRoom;
-                break;
 
             case RoomPattern.Up:
-                GameObject upFacingRoom = Instantiate(roomLeft);
-                upFacingRoom.transform.Rotate(new Vector3(0, 90, 0));
+                GameObject upFacingRoom = Instantiate(roomUp);
+                upFacingRoom.transform.Rotate(new Vector3(0, 180, 0));
                 return upFacingRoom;
 
             case RoomPattern.RightDown:
-                GameObject rightDownRoom = Instantiate(roomLeftUp);
-                rightDownRoom.transform.Rotate(new Vector3(0, -90, 0));
+                GameObject rightDownRoom = Instantiate(roomLeftDown);
+                //rightDownRoom.transform.Rotate(new Vector3(0, 90, 0));
                 return rightDownRoom;
 
             case RoomPattern.LeftDown:
-                GameObject leftDownRoom = Instantiate(roomLeftUp);
-                leftDownRoom.transform.Rotate(new Vector3(0, 180, 0));
+                GameObject leftDownRoom = Instantiate(roomRightDown);
+                //leftDownRoom.transform.Rotate(new Vector3(0, 90, 0));
                 return leftDownRoom;
 
             case RoomPattern.LeftUp:
-                GameObject leftUpRoom = Instantiate(roomLeftUp);
-                leftUpRoom.transform.Rotate(new Vector3(0, 90, 0));
+                GameObject leftUpRoom = Instantiate(roomRightUp);
+                //leftUpRoom.transform.Rotate(new Vector3(0, -180, 0));
                 return leftUpRoom;
 
             case RoomPattern.RightUp:
                 GameObject rightUpRoom = Instantiate(roomLeftUp);
-                rightUpRoom.transform.Rotate(new Vector3(0, 0, 0));
+                //rightUpRoom.transform.Rotate(new Vector3(0, 0, 0));
                 return rightUpRoom;
 
             case RoomPattern.UpDown:
