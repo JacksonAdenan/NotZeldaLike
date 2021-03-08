@@ -12,6 +12,7 @@ public class RoomController : MonoBehaviour
     public List<GameObject> enemies = new List<GameObject>();
     public GameObject layout;
     public GameObject enemySpawnerParent;
+    public GameObject mapColourObject;
     bool activeFirstTimeRunning;
     bool clearedFirstTimeRunning;
 
@@ -33,9 +34,12 @@ public class RoomController : MonoBehaviour
                 break;
             case RoomStates.Active:
                 if (activeFirstTimeRunning == false)
+                {
                     foreach (EnemySpawner enemySpawner in enemySpawners)
                         Instantiate(enemySpawner.rolledEnemy, enemySpawner.transform);
-                activeFirstTimeRunning = true;
+                    mapColourObject.SetActive(false);
+                    activeFirstTimeRunning = true;
+                }
                 //Add room to minimap
                 //foreach (GameObject enemy in enemies)
                     //roomStatesToggle = RoomStates.Cleared;

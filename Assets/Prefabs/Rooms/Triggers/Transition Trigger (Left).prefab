@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7982788029544047147}
   - component: {fileID: 7982788029544047146}
   - component: {fileID: 1013001283054267852}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Transition Trigger (Left)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
