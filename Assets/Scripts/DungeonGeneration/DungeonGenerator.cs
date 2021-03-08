@@ -22,7 +22,16 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject roomRightUp;
     public GameObject roomUp;
     public GameObject roomDown;
+
+    public GameObject outlineLeftRightDown;
+    public GameObject outlineLeftRightUp;
+    public GameObject outlineUpRightDown;
+    public GameObject outlineUpLeftDown;
+
     public GameObject roomObj;
+
+
+
 
     public GameObject testPlayer;
     public GameObject testHealth;
@@ -48,6 +57,9 @@ public class DungeonGenerator : MonoBehaviour
         test = new Level(4, 4);
         test.InitRooms();
         test.GenerateMainPath();
+
+        test.GenerateDeadEnds();
+
         GeneratePrefabs();
         GenerateFloorVariations();
     }
@@ -178,17 +190,21 @@ public class DungeonGenerator : MonoBehaviour
                 leftRightRoom.transform.Rotate(new Vector3(0, 0, 0));
                 return leftRightRoom;
 
-            //case RoomPattern.UpLeftDown:
-            //    break;
-            //
-            //case RoomPattern.LeftRightUp:
-            //    break;
-            //
-            //case RoomPattern.LeftRightDown:
-            //    break;
-            //
-            //case RoomPattern.UpRightDown:
-            //    break;
+            case RoomPattern.UpLeftDown:
+                GameObject upLeftDownRoom = Instantiate(outlineUpLeftDown);
+                return upLeftDownRoom;
+            
+            case RoomPattern.LeftRightUp:
+                GameObject leftRightUpRoom = Instantiate(outlineLeftRightUp);
+                return leftRightUpRoom;
+
+            case RoomPattern.LeftRightDown:
+                GameObject leftRightDownRoom = Instantiate(outlineLeftRightDown);
+                return leftRightDownRoom;
+            
+            case RoomPattern.UpRightDown:
+                GameObject upRightDownRoom = Instantiate(outlineUpRightDown);
+                return upRightDownRoom;
 
 
             default:

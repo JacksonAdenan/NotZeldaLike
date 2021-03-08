@@ -441,6 +441,14 @@ MonoBehaviour:
   roomUp: {fileID: 4651701937060507601, guid: dc961c6268931904086ec1f59b9e107d, type: 3}
   roomDown: {fileID: 2242161411866238958, guid: dd43d8ac69c23724f8279126fdbb4400,
     type: 3}
+  outlineLeftRightDown: {fileID: 6650797174318292091, guid: a0dacfa9f419bb24d8da7955059cb936,
+    type: 3}
+  outlineLeftRightUp: {fileID: 73105621892220172, guid: a1538e907110af04ab42617badae8d23,
+    type: 3}
+  outlineUpRightDown: {fileID: 2863179737798653175, guid: 1f864521e51bd0344a4532f073ac534e,
+    type: 3}
+  outlineUpLeftDown: {fileID: 2863179737798653175, guid: 1f864521e51bd0344a4532f073ac534e,
+    type: 3}
   roomObj: {fileID: 7388344468979255195, guid: 6cf892164369a524ab9598361a0e8d7c, type: 3}
   testPlayer: {fileID: 3070133563548722364, guid: a1197956af98fa248905782de2cec927,
     type: 3}

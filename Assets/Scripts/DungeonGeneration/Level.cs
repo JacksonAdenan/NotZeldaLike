@@ -165,7 +165,7 @@ public class Level
 			for (int j = 0; j < levelHeight; j++)
 			{
 				Room currentRoom = grid[i, j];
-				if (grid[i, j].pattern != RoomPattern.Closed && currentRoom.type != RoomType.DeadEnd)
+				if (grid[i, j].pattern != RoomPattern.Closed && currentRoom.type != RoomType.DeadEnd && currentRoom.type != RoomType.Entrance && currentRoom.type != RoomType.Exit)
 				{
 					switch (currentRoom.pattern)
 					{
@@ -175,13 +175,15 @@ public class Level
 								if (randomNum == 0 && currentRoom.x != 0)
 								{
 									currentRoom.AddLeftRoom();
-									grid[i - 1, j].pattern = RoomPattern.Right;
+									//grid[i - 1, j].pattern = RoomPattern.Right;
+									grid[i - 1, j].AddRightRoom();
 									grid[i - 1, j].type = RoomType.DeadEnd;
 								}
 								else if (randomNum == 1 && currentRoom.x != 3)
 								{ 
 									currentRoom.AddRightRoom();
-									grid[i + 1, j].pattern = RoomPattern.Left;
+									//grid[i + 1, j].pattern = RoomPattern.Left;
+									grid[i + 1, j].AddLeftRoom();
 									grid[i + 1, j].type = RoomType.DeadEnd;
 								}
 								break;
@@ -192,13 +194,15 @@ public class Level
 								if (randomNum == 0 && currentRoom.x != 0)
 								{
 									currentRoom.AddLeftRoom();
-									grid[i - 1, j].pattern = RoomPattern.Right;
+									//grid[i - 1, j].pattern = RoomPattern.Right;
+									grid[i - 1, j].AddRightRoom();
 									grid[i - 1, j].type = RoomType.DeadEnd;
 								}
 								else if (randomNum == 1 && currentRoom.y != 3)
 								{
 									currentRoom.AddDownRoom();
-									grid[i, j - 1].pattern = RoomPattern.Up;
+									//grid[i, j - 1].pattern = RoomPattern.Up;
+									grid[i, j - 1].AddUpRoom();
 									grid[i, j - 1].type = RoomType.DeadEnd;
 								}
 								break;
@@ -209,13 +213,15 @@ public class Level
 								if (randomNum == 0 && currentRoom.x != 0)
 								{
 									currentRoom.AddLeftRoom();
-									grid[i - 1, j].pattern = RoomPattern.Right;
+									//grid[i - 1, j].pattern = RoomPattern.Right;
+									grid[i - 1, j].AddRightRoom();
 									grid[i - 1, j].type = RoomType.DeadEnd;
 								}
 								else if (randomNum == 1 && currentRoom.y != 0)
 								{
 									currentRoom.AddUpRoom();
-									grid[i, j + 1].pattern = RoomPattern.Down;
+									//grid[i, j + 1].pattern = RoomPattern.Down;
+									grid[i, j + 1].AddDownRoom();
 									grid[i, j + 1].type = RoomType.DeadEnd;
 								}
 								break;
@@ -226,14 +232,16 @@ public class Level
 								if (randomNum == 0 && currentRoom.y != 0)
 								{
 									currentRoom.AddUpRoom();
-									grid[i, j + 1].pattern = RoomPattern.Down;
-									grid[i, j + 1].type = RoomType.DeadEnd;
+									//grid[i, j + 1].pattern = RoomPattern.Down;
+									grid[i, j - 1].AddDownRoom();
+									grid[i, j - 1].type = RoomType.DeadEnd;
 								}
 								else if (randomNum == 1 && currentRoom.y != 3)
 								{
 									currentRoom.AddDownRoom();
-									grid[i, j - 1].pattern = RoomPattern.Up;
-									grid[i, j - 1].type = RoomType.DeadEnd;
+									//grid[i, j - 1].pattern = RoomPattern.Up;
+									grid[i, j + 1].AddUpRoom();
+									grid[i, j + 1].type = RoomType.DeadEnd;
 								}
 								break;
 							}
@@ -243,13 +251,15 @@ public class Level
 								if (randomNum == 0 && currentRoom.x != 3)
 								{
 									currentRoom.AddRightRoom();
-									grid[i + 1, j].pattern = RoomPattern.Left;
+									//grid[i + 1, j].pattern = RoomPattern.Left;
+									grid[i + 1, j].AddLeftRoom();
 									grid[i + 1, j].type = RoomType.DeadEnd;
 								}
 								else if (randomNum == 1 && currentRoom.y != 3)
 								{
 									currentRoom.AddDownRoom();
-									grid[i, j - 1].pattern = RoomPattern.Up;
+									//grid[i, j - 1].pattern = RoomPattern.Up;
+									grid[i, j - 1].AddUpRoom();
 									grid[i, j - 1].type = RoomType.DeadEnd;
 								}
 								break;
@@ -260,13 +270,15 @@ public class Level
 								if (randomNum == 0 && currentRoom.x != 3)
 								{
 									currentRoom.AddRightRoom();
-									grid[i + 1, j].pattern = RoomPattern.Left;
+									//grid[i + 1, j].pattern = RoomPattern.Left;
+									grid[i + 1, j].AddLeftRoom();
 									grid[i + 1, j].type = RoomType.DeadEnd;
 								}
 								else if (randomNum == 1 && currentRoom.y != 0)
 								{
 									currentRoom.AddUpRoom();
-									grid[i, j + 1].pattern = RoomPattern.Down;
+									//grid[i, j + 1].pattern = RoomPattern.Down;
+									grid[i, j + 1].AddDownRoom();
 									grid[i, j + 1].type = RoomType.DeadEnd;
 								}
 								break;

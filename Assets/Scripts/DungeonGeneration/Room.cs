@@ -22,6 +22,7 @@ public enum RoomPattern
     LeftDown,
     RightUp,
     LeftUp,
+
     LeftRightDown,
     LeftRightUp,
     UpRightDown,
@@ -155,6 +156,41 @@ public class Room
 
         else if (pattern == RoomPattern.LeftRight)
             pattern = RoomPattern.LeftRightUp;
+
+        else if (pattern == RoomPattern.Up)
+            pattern = RoomPattern.Up;
+
+        else if (pattern == RoomPattern.Down)
+            pattern = RoomPattern.UpDown;
+
+        else if (pattern == RoomPattern.Right)
+            pattern = RoomPattern.RightUp;
+
+        else if (pattern == RoomPattern.Left)
+            pattern = RoomPattern.LeftUp;
+
+        else if (pattern == RoomPattern.Closed)
+        {
+            pattern = RoomPattern.Up;
+        }
+
+        //else if (pattern == RoomPattern.LeftRight)
+        //    pattern = RoomPattern.LeftRightDown;
+
+        else if (pattern == RoomPattern.RightUp)
+            pattern = RoomPattern.RightUp;
+
+        else if (pattern == RoomPattern.LeftDown)
+            pattern = RoomPattern.UpLeftDown;
+
+        else if (pattern == RoomPattern.UpDown)
+        {
+            pattern = RoomPattern.UpDown;
+        }
+
+        //else if (pattern == RoomPattern.RightDown)
+        //    pattern = RoomPattern.LeftRightDown;
+
 
         else
         {
