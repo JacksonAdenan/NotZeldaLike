@@ -20,7 +20,11 @@ public class AIStateMachine
     bool hasReachedDestination = true;
 
 
-    private float damagedCounter = 0.0f; 
+    private float damagedCounter = 0.0f;
+
+
+    private float attackWindUpTimer = 0.0f;
+    private bool isAttackReady = false;
     public enum BasicDecisions
     {
         WANDER,
@@ -50,7 +54,7 @@ public class AIStateMachine
     {
         if (currentState == BasicDecisions.WANDER)
         {
-            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) < controller.attackDistance)
+            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) < controller.chaseDistance)
             {
                 currentState = BasicDecisions.CHASE;
             }
@@ -85,7 +89,7 @@ public class AIStateMachine
 
         else if (currentState == BasicDecisions.CHASE)
         {
-            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) >= controller.attackDistance)
+            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) >= controller.chaseDistance)
             {
                 currentState = BasicDecisions.WANDER;
             }
@@ -120,6 +124,15 @@ public class AIStateMachine
             if (Vector3.Distance(agent.transform.position, player.transform.position) > 1)
             {
                 currentState = BasicDecisions.CHASE;
+            }
+
+            // Actual attack wind up.
+            AttackTimer();
+            if (isAttackReady)
+            {
+                isAttackReady = false;
+                attackWindUpTimer = 0;
+                controller.Attack();
             }
         }
 
@@ -171,6 +184,16 @@ public class AIStateMachine
             case BasicDecisions.DAMAGED:
                 currentState = BasicDecisions.DAMAGED;
                 break;
+        }
+    }
+
+
+    private void AttackTimer()
+    {
+        attackWindUpTimer += Time.deltaTime;
+        if (attackWindUpTimer >= 1)
+        {
+            isAttackReady = true;
         }
     }
 }

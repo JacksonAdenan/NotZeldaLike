@@ -56,6 +56,13 @@ public class PlayerManager : MonoBehaviour
     public bool isAlive;
 
 
+    public Material damageMaterial;
+    private Material originalMaterial;
+
+
+    private float tookDamageCounter = 0;
+    private bool isHit = false;
+
     // Reference to the UIManager so we can take away and add hearts and stuff to the screen.
     private UIManager uiManager;
 
@@ -64,6 +71,8 @@ public class PlayerManager : MonoBehaviour
     {
         uiManager = UIManager.GetInstance();
         SpawnPlayer();
+
+        originalMaterial = player.GetComponent<Renderer>().material;
     }
 
     // Update is called once per frame
@@ -81,6 +90,9 @@ public class PlayerManager : MonoBehaviour
         {
             AddHealth(1);
         }
+
+
+        TookDamagerTimer();
     }
 
     public void SpawnPlayer()
@@ -108,6 +120,8 @@ public class PlayerManager : MonoBehaviour
 
             if (health < 0)
                 health = 0;
+
+
         }
     }
     public void AddArmour(int armourAmount)
@@ -142,5 +156,39 @@ public class PlayerManager : MonoBehaviour
         Camera theCamera = Camera.main;
 
         theCamera.transform.position = new Vector3(player.transform.position.x, cameraYAxis, cameraZAxis);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "EnemyMeleeZone" && !isHit)
+        {
+            AgentController enemy = other.gameObject.GetComponent<AgentController>();
+
+            HitPlayer(enemy.meleeDamage);
+            Vector3 pushDirection = other.transform.parent.position - transform.position;
+            pushDirection = Vector3.Normalize(pushDirection);
+
+            isHit = true;
+            this.gameObject.GetComponent<Renderer>().material = damageMaterial;
+
+            //gameObject. = pushDirection * playerManager.meleeKnockbackForce;
+
+
+            Debug.Log("Enemy took damage.");
+        }
+    }
+
+    void TookDamagerTimer()
+    {
+        if (isHit)
+        {
+            tookDamageCounter += Time.deltaTime;
+            if (tookDamageCounter >= 0.2f)
+            {
+                isHit = false;
+                tookDamageCounter = 0;
+                this.gameObject.GetComponent<Renderer>().material = originalMaterial;
+            }
+        }
     }
 }
