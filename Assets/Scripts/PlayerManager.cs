@@ -43,6 +43,8 @@ public class PlayerManager : MonoBehaviour
     public int maxHealth;
     public int maxArmour;
 
+    public float meleeKnockbackForce = 7.0f;
+
     // We have pointers to these rooms so that we can use them to spawn the player.
     [HideInInspector]
     public GameObject currentEntranceRoom;

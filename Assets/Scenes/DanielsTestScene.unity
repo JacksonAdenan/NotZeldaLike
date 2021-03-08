@@ -401,6 +401,7 @@ MonoBehaviour:
   armour: 0
   maxHealth: 5
   maxArmour: 5
+  meleeKnockbackForce: 7
   currentEntranceRoom: {fileID: 0}
   currentExitRoom: {fileID: 0}
   isAlive: 0

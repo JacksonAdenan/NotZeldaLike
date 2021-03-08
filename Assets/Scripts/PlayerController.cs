@@ -7,10 +7,19 @@ public class PlayerController : MonoBehaviour
     public float speed = 5;
     private Transform player;
 
+
+    [HideInInspector]
+    public bool isAttacking = false;
+
+    private float attackCounter = 0.0f;
+
+    private BoxCollider meleeZone;
+
     // Start is called before the first frame update
     void Start()
     {
         player = this.gameObject.transform;
+        meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -28,6 +37,9 @@ public class PlayerController : MonoBehaviour
         }
 
         LookAtMouse();
+
+        PollAttack();
+        AttackTimer();
     }
 
     void LookAtMouse()
@@ -40,6 +52,33 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
             transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+        }
+    }
+
+    void PollAttack()
+    {
+        //meleeZone.gameObject.SetActive(false);
+        if (Input.GetMouseButtonDown(0))
+        { 
+            meleeZone.gameObject.SetActive(true);
+            isAttacking = true;
+        }
+    }
+
+
+    // Even though attacks will be pretty much instant. I'm not sure if setting a collider to true and false within the same update frame will be registed by things so I've made a timer of like
+    // .1 of a second just to make sure things register the attack.
+    void AttackTimer()
+    {
+        if (isAttacking)
+        {
+            attackCounter += Time.deltaTime;
+            if (attackCounter >= 0.3f)
+            {
+                isAttacking = false;
+                meleeZone.gameObject.SetActive(false);
+                attackCounter = 0;
+            }
         }
     }
 
