@@ -1157,6 +1157,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2745875241208908311}
     m_Modifications:
+    - target: {fileID: 2939808572190580412, guid: 412ea7fb7d8145640b66a5b57f42eaa5,
+        type: 3}
+      propertyPath: directionToggle
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9014744328531010886, guid: 412ea7fb7d8145640b66a5b57f42eaa5,
         type: 3}
       propertyPath: m_LocalPosition.x
