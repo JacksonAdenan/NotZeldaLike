@@ -24,10 +24,13 @@ public class PlayerManager : MonoBehaviour
         if (instance != null && instance != this)
         {
             Debug.Log("======= WARNING ======= : You have created PlayerManager multiple times!");
+            Destroy(this.gameObject);
         }
         else
         {
             instance = this;
+
+            DontDestroyOnLoad(this.gameObject);
         }    
 	}
 
@@ -46,11 +49,11 @@ public class PlayerManager : MonoBehaviour
     public int meleeDamage = 1;
     public float meleeKnockbackForce = 7.0f;
 
-    // We have pointers to these rooms so that we can use them to spawn the player.
-    [HideInInspector]
-    public GameObject currentEntranceRoom;
-    [HideInInspector]
-    public GameObject currentExitRoom;
+    //// We have pointers to these rooms so that we can use them to spawn the player.
+    //[HideInInspector]
+    //public GameObject currentEntranceRoom;
+    //[HideInInspector]
+    //public GameObject currentExitRoom;
 
     [HideInInspector]
     public bool isAlive;
@@ -66,13 +69,17 @@ public class PlayerManager : MonoBehaviour
     // Reference to the UIManager so we can take away and add hearts and stuff to the screen.
     private UIManager uiManager;
 
+    [HideInInspector]
+    public Rigidbody playerRigidbody;
+
     // Start is called before the first frame update
     void Start()
     {
         uiManager = UIManager.GetInstance();
-        SpawnPlayer();
+        //SpawnPlayer();
 
         originalMaterial = player.GetComponent<Renderer>().material;
+        playerRigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -88,27 +95,34 @@ public class PlayerManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            AddHealth(1);
+            AddArmour(1);
         }
 
 
         TookDamagerTimer();
     }
 
-    public void SpawnPlayer()
-    {
-        player = Instantiate(player);
-        player.transform.position = new Vector3(currentEntranceRoom.transform.position.x, 1, currentEntranceRoom.transform.position.y);
-
-        SpawnCamera();
-        
-    }
+    //public void SpawnPlayer()
+    //{
+    //    player = Instantiate(player);
+    //    player.transform.position = new Vector3(currentEntranceRoom.transform.position.x, 1, currentEntranceRoom.transform.position.y);
+    //
+    //    SpawnCamera();
+    //    
+    //}
     public void HitPlayer(int damageAmount)
     {
         // The player will lose 1 peice of armour if they have it, if the player has no armour the damage goes to their health.
         if (armour > 0)
         {
             armour -= 1;
+            for (int i = 0; i < damageAmount; i++)
+            {
+                uiManager.RemoveIcon(UIManager.IconType.ArmourIcon);
+            }
+
+            if (armour < 0)
+                armour = 0;
         }
         else
         { 
@@ -127,6 +141,12 @@ public class PlayerManager : MonoBehaviour
     public void AddArmour(int armourAmount)
     {
         armour += armourAmount;
+        for (int i = 0; i < armourAmount; i++)
+        {
+            if ((armour - armourAmount) + 1 <= maxArmour)
+                uiManager.AddIcon(UIManager.IconType.ArmourIcon, armour);
+        }
+
         // Making it so that the player never has over the max amount.
         if (armour > maxArmour)
         {
@@ -151,30 +171,32 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void SpawnCamera()
-    {
-        Camera theCamera = Camera.main;
-
-        theCamera.transform.position = new Vector3(player.transform.position.x, cameraYAxis, cameraZAxis);
-    }
+    //public void SpawnCamera()
+    //{
+    //    Camera theCamera = Camera.main;
+    //
+    //    theCamera.transform.position = new Vector3(player.transform.position.x, cameraYAxis, cameraZAxis);
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "EnemyMeleeZone" && !isHit)
         {
-            AgentController enemy = other.gameObject.GetComponent<AgentController>();
+            AgentController enemy = other.transform.parent.GetComponent<AgentController>();
 
             HitPlayer(enemy.meleeDamage);
-            Vector3 pushDirection = other.transform.parent.position - transform.position;
+            Vector3 pushDirection = transform.position - other.transform.parent.position;
             pushDirection = Vector3.Normalize(pushDirection);
+            playerRigidbody.AddForce(pushDirection * enemy.knockback, ForceMode.Impulse);
+            //gameObject.transform.position += pushDirection;
 
             isHit = true;
             this.gameObject.GetComponent<Renderer>().material = damageMaterial;
 
-            //gameObject. = pushDirection * playerManager.meleeKnockbackForce;
+            //gameObject.transform.position += pushDirection * enemy.knockback;
 
 
-            Debug.Log("Enemy took damage.");
+            Debug.Log("Player took damage.");
         }
     }
 

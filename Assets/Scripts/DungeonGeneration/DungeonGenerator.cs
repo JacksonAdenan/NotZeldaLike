@@ -39,6 +39,7 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject testHealth;
 
     private PlayerManager playerManager;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +55,8 @@ public class DungeonGenerator : MonoBehaviour
 	private void Awake()
 	{
         // We pass playerManager references to the entrance and exit rooms so that we can spawn players there.
+        // GameManager must be first because it spawns the playerManager!!!.
+        gameManager = GameManager.GetInstance();
         playerManager = PlayerManager.GetInstance();
 
         test = new Level(4, 4);
@@ -86,13 +89,13 @@ public class DungeonGenerator : MonoBehaviour
                     {
                         //GameObject player = Instantiate(testPlayer);
                         //player.transform.position = new Vector3(i * roomSpacingX, 1, j * roomSpacingY);
-                        playerManager.currentEntranceRoom = outline;
+                        gameManager.currentEntranceRoom = outline;
                     }
                     else if (test.grid[i, j].type == RoomType.Exit)
                     {
                         GameObject health = Instantiate(testHealth);
                         health.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
-                        playerManager.currentExitRoom = outline;
+                        gameManager.currentExitRoom = outline;
                     }
 
                     room.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);

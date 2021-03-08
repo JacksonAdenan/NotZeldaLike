@@ -27,10 +27,13 @@ public class UIManager : MonoBehaviour
         if (instance != null && instance != this)
         {
             Debug.Log("======= WARNING ======= : You have created UIManager multiple times!");
+            Destroy(this.gameObject);
         }
         else
         {
             instance = this;
+
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 
@@ -43,6 +46,7 @@ public class UIManager : MonoBehaviour
     private PlayerManager playerManager;
 
     private List<GameObject> healthIcons;
+    private List<GameObject> armourIcons;
     
 
     // Start is called before the first frame update
@@ -50,6 +54,7 @@ public class UIManager : MonoBehaviour
     {
         playerManager = PlayerManager.GetInstance();
         healthIcons = new List<GameObject>();
+        armourIcons = new List<GameObject>();
 
         //Hiding the health and armour sprites that are visible in editor.
         healthIcon.SetActive(false);
@@ -58,6 +63,11 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < playerManager.health; i++)
         {
             AddIcon(IconType.HealthIcon, i + 1);
+        }
+
+        for (int i = 0; i < playerManager.armour; i++)
+        {
+            AddIcon(IconType.ArmourIcon, i + 1);
         }
     }
 
@@ -92,6 +102,20 @@ public class UIManager : MonoBehaviour
             healthIcons.Add(newHealth);
             Debug.Log("Spawned health icon.");
         }
+
+        else if (type == IconType.ArmourIcon)
+        {
+            GameObject newArmour = Instantiate(armourIcon);
+            newArmour.SetActive(true);
+            //newHealth.transform.position = new Vector3(healthIcon.transform.position.x, healthIcon.transform.position.y, healthIcon.transform.position.z);
+            newArmour.transform.parent = gui.transform;
+
+            newArmour.transform.localScale = Vector3.one;
+            newArmour.transform.position = new Vector3(20 + (iconNumber * 60), armourIcon.transform.position.y, armourIcon.transform.position.z);
+
+            armourIcons.Add(newArmour);
+            Debug.Log("Spawned armour icon.");
+        }
     }
 
     public void RemoveIcon(IconType type)
@@ -103,7 +127,18 @@ public class UIManager : MonoBehaviour
                 GameObject healthIcon = healthIcons[healthIcons.Count - 1];
                 healthIcons.Remove(healthIcons[healthIcons.Count - 1]);
                 Destroy(healthIcon);
-                Debug.Log("Spawned health icon.");
+                Debug.Log("Removed health icon.");
+            }
+        }
+
+        else if (type == IconType.ArmourIcon)
+        {
+            if (armourIcons.Count > 0)
+            {
+                GameObject armourIcon = armourIcons[armourIcons.Count - 1];
+                armourIcons.Remove(armourIcons[armourIcons.Count - 1]);
+                Destroy(armourIcon);
+                Debug.Log("Removed armour icon.");
             }
         }
     }

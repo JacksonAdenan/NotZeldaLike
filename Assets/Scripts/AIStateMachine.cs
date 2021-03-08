@@ -104,7 +104,7 @@ public class AIStateMachine
 
             if (!agent.pathPending)
             {
-                if (Vector3.Distance(agent.transform.position, player.transform.position) <= 2)
+                if (Vector3.Distance(agent.transform.position, player.transform.position) <= 1.5f)
                 {
                     hasReachedDestination = true;
                     Debug.Log("Agent completed chase path.");
