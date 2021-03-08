@@ -1313,6 +1313,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transition Trigger (Up)
       objectReference: {fileID: 0}
+    - target: {fileID: 6680530441412373858, guid: fa44c951a5702864cbaf812d033fc4f4,
+        type: 3}
+      propertyPath: directionToggle
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa44c951a5702864cbaf812d033fc4f4, type: 3}
 --- !u!4 &8136834884567036241 stripped
