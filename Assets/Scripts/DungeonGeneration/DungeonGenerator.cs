@@ -55,8 +55,9 @@ public class DungeonGenerator : MonoBehaviour
 	private void Awake()
 	{
         // We pass playerManager references to the entrance and exit rooms so that we can spawn players there.
-        playerManager = PlayerManager.GetInstance();
+        // GameManager must be first because it spawns the playerManager!!!.
         gameManager = GameManager.GetInstance();
+        playerManager = PlayerManager.GetInstance();
 
         test = new Level(4, 4);
         test.InitRooms();

@@ -29,7 +29,11 @@ public class GameManager : MonoBehaviour
         else
         {
             instance = this;
+
+            SpawnPlayer();
         }
+
+
     }
 
 
@@ -50,7 +54,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnPlayer();
+        //SpawnPlayer();
+        SetPlayerPos();
+        SpawnCamera();
     }
 
     // Update is called once per frame
@@ -63,10 +69,14 @@ public class GameManager : MonoBehaviour
     public void SpawnPlayer()
     {
         player = Instantiate(player);
+        //player.transform.position = new Vector3(currentEntranceRoom.transform.position.x, 1, currentEntranceRoom.transform.position.y);
+
+        //SpawnCamera();
+
+    }
+    public void SetPlayerPos()
+    {
         player.transform.position = new Vector3(currentEntranceRoom.transform.position.x, 1, currentEntranceRoom.transform.position.y);
-
-        SpawnCamera();
-
     }
 
     public void SpawnCamera()

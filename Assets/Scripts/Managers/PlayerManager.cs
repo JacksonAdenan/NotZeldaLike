@@ -66,6 +66,8 @@ public class PlayerManager : MonoBehaviour
     // Reference to the UIManager so we can take away and add hearts and stuff to the screen.
     private UIManager uiManager;
 
+    private Rigidbody playerRigidbody;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +75,7 @@ public class PlayerManager : MonoBehaviour
         //SpawnPlayer();
 
         originalMaterial = player.GetComponent<Renderer>().material;
+        playerRigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -165,16 +168,18 @@ public class PlayerManager : MonoBehaviour
             AgentController enemy = other.transform.parent.GetComponent<AgentController>();
 
             HitPlayer(enemy.meleeDamage);
-            Vector3 pushDirection = other.transform.parent.position - transform.position;
+            Vector3 pushDirection = transform.position - other.transform.parent.position;
             pushDirection = Vector3.Normalize(pushDirection);
+            playerRigidbody.AddForce(pushDirection * enemy.knockback, ForceMode.Impulse);
+            //gameObject.transform.position += pushDirection;
 
             isHit = true;
             this.gameObject.GetComponent<Renderer>().material = damageMaterial;
 
-            //gameObject. = pushDirection * playerManager.meleeKnockbackForce;
+            //gameObject.transform.position += pushDirection * enemy.knockback;
 
 
-            Debug.Log("Enemy took damage.");
+            Debug.Log("Player took damage.");
         }
     }
 
