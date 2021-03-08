@@ -20,7 +20,11 @@ public class AIStateMachine
     bool hasReachedDestination = true;
 
 
-    private float damagedCounter = 0.0f; 
+    private float damagedCounter = 0.0f;
+
+
+    private float attackWindUpTimer = 0.0f;
+    private bool isAttackReady = false;
     public enum BasicDecisions
     {
         WANDER,
@@ -50,7 +54,7 @@ public class AIStateMachine
     {
         if (currentState == BasicDecisions.WANDER)
         {
-            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) < controller.attackDistance)
+            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) < controller.chaseDistance)
             {
                 currentState = BasicDecisions.CHASE;
             }
@@ -85,7 +89,7 @@ public class AIStateMachine
 
         else if (currentState == BasicDecisions.CHASE)
         {
-            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) >= controller.attackDistance)
+            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) >= controller.chaseDistance)
             {
                 currentState = BasicDecisions.WANDER;
             }
@@ -121,13 +125,22 @@ public class AIStateMachine
             {
                 currentState = BasicDecisions.CHASE;
             }
+
+            // Actual attack wind up.
+            AttackTimer();
+            if (isAttackReady)
+            {
+                isAttackReady = false;
+                attackWindUpTimer = 0;
+                controller.Attack();
+            }
         }
 
         else if (currentState == BasicDecisions.DAMAGED)
         {
             Debug.Log("Agent is damaged");
             agent.ResetPath();
-            agent.updatePosition = false;
+            //agent.updatePosition = false;
             DamagedTimer();
             //Vector3 lookPosition = player.transform.position - agent.transform.position;
             //lookPosition.y = 0;
@@ -142,17 +155,17 @@ public class AIStateMachine
 
     private void DamagedTimer()
     {
-        //if (currentState == BasicDecisions.DAMAGED)
-        //{
-            damagedCounter += Time.deltaTime;
-            if (damagedCounter >= 2)
-            {
-                damagedCounter = 0;
+
+        damagedCounter += Time.deltaTime;
+        if (damagedCounter >= 2)
+        {
+            damagedCounter = 0;
             // After it's not stunned anymore just make it wander.
-                agent.updatePosition = true;
-                currentState = BasicDecisions.WANDER;
-            }
-        //}
+            //agent.updatePosition = true;
+            //agent.nextPosition = agent.transform.position;
+            currentState = BasicDecisions.WANDER;
+        }
+  
     }
 
     public void SetState(BasicDecisions newState)
@@ -171,6 +184,16 @@ public class AIStateMachine
             case BasicDecisions.DAMAGED:
                 currentState = BasicDecisions.DAMAGED;
                 break;
+        }
+    }
+
+
+    private void AttackTimer()
+    {
+        attackWindUpTimer += Time.deltaTime;
+        if (attackWindUpTimer >= 1)
+        {
+            isAttackReady = true;
         }
     }
 }

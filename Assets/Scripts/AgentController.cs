@@ -10,7 +10,10 @@ public class AgentController : MonoBehaviour
 
     public float xWanderDistance = 2;
     public float yWanderDistance = 2;
-    public float attackDistance = 3;
+    public float chaseDistance = 3;
+
+    public float knockback = 5.0f;
+    public int meleeDamage = 1;
 
     public Material damageMaterial;
     private Material originalMaterial;
@@ -23,6 +26,14 @@ public class AgentController : MonoBehaviour
 
     private float tookDamageCounter = 0.0f;
     private bool isHit = false;
+
+    private Collider meleeZone = null;
+
+    [HideInInspector]
+    public bool isAttacking = false;
+
+    private float attackCounter = 0.0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +48,11 @@ public class AgentController : MonoBehaviour
         // Saving a reference to the original material.
         originalMaterial = this.gameObject.GetComponent<Renderer>().material;
 
+        meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
+        if (meleeZone == null)
+        {
+            Debug.Log("Couldn't find melee zone for monster.");
+        }
 
         //agent.destination = goal.position;
     }
@@ -46,6 +62,8 @@ public class AgentController : MonoBehaviour
     {
         stateMachine.RunStateMachine();
         DamageTimer();
+
+        AttackTimer();
     }
 
     void DamageTimer()
@@ -81,17 +99,37 @@ public class AgentController : MonoBehaviour
             pushDirection = Vector3.Normalize(pushDirection);
             
             stateMachine.SetState(AIStateMachine.BasicDecisions.DAMAGED);
-            agentRigidbody.AddForce(pushDirection * playerManager.meleeKnockbackForce, ForceMode.Impulse);
-
+            //agentRigidbody.AddForce(pushDirection * playerManager.meleeKnockbackForce, ForceMode.Impulse);
+            //agentRigidbody.velocity = pushDirection * playerManager.meleeKnockbackForce;
             isHit = true;
             this.gameObject.GetComponent<Renderer>().material = damageMaterial;
 
             // We set the agents state to damaged which is like a "stun" phase. This is so the agent doesn't try to go towards the player while also getting pushed back.
             //agent.acceleration = 0;
-            //agent.velocity = pushDirection * playerManager.meleeKnockbackForce;
-         
+            agent.velocity = pushDirection * playerManager.meleeKnockbackForce;
+             
 
             Debug.Log("Enemy took damage.");
         }
 	}
+
+    public void Attack()
+    {
+        meleeZone.gameObject.SetActive(true);
+        isAttacking = true;
+    }
+
+    void AttackTimer()
+    {
+        if (isAttacking)
+        {
+            attackCounter += Time.deltaTime;
+            if (attackCounter >= 0.3f)
+            {
+                isAttacking = false;
+                meleeZone.gameObject.SetActive(false);
+                attackCounter = 0;
+            }
+        }
+    }
 }
