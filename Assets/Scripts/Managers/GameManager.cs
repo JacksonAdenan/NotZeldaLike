@@ -132,13 +132,14 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("DanielsTestScene");
         hasResetPlayer = false;
+        currentEntranceRoom = null;
     }
 
     public void ResetPlayer()
     {
+        
         ResetPlayerPos();
         SpawnCamera();
         hasResetPlayer = true;
-        currentEntranceRoom = null;
     }
 }
