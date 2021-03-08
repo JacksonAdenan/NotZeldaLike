@@ -207,6 +207,7 @@ public class DungeonGenerator : MonoBehaviour
             
             case RoomPattern.UpRightDown:
                 GameObject upRightDownRoom = Instantiate(outlineUpRightDown);
+                upRightDownRoom.transform.Rotate(new Vector3(0, 180, 0));
                 return upRightDownRoom;
 
 

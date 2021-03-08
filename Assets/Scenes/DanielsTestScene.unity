@@ -447,7 +447,7 @@ MonoBehaviour:
     type: 3}
   outlineLeftRightUp: {fileID: 73105621892220172, guid: a1538e907110af04ab42617badae8d23,
     type: 3}
-  outlineUpRightDown: {fileID: 2863179737798653175, guid: 1f864521e51bd0344a4532f073ac534e,
+  outlineUpRightDown: {fileID: 2321496167756326716, guid: 8c6ac6a2ee77a5a47bdfc65501b93c18,
     type: 3}
   outlineUpLeftDown: {fileID: 2863179737798653175, guid: 1f864521e51bd0344a4532f073ac534e,
     type: 3}
