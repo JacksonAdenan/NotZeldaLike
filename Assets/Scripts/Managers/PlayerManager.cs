@@ -46,11 +46,11 @@ public class PlayerManager : MonoBehaviour
     public int meleeDamage = 1;
     public float meleeKnockbackForce = 7.0f;
 
-    // We have pointers to these rooms so that we can use them to spawn the player.
-    [HideInInspector]
-    public GameObject currentEntranceRoom;
-    [HideInInspector]
-    public GameObject currentExitRoom;
+    //// We have pointers to these rooms so that we can use them to spawn the player.
+    //[HideInInspector]
+    //public GameObject currentEntranceRoom;
+    //[HideInInspector]
+    //public GameObject currentExitRoom;
 
     [HideInInspector]
     public bool isAlive;
@@ -70,7 +70,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         uiManager = UIManager.GetInstance();
-        SpawnPlayer();
+        //SpawnPlayer();
 
         originalMaterial = player.GetComponent<Renderer>().material;
     }
@@ -95,14 +95,14 @@ public class PlayerManager : MonoBehaviour
         TookDamagerTimer();
     }
 
-    public void SpawnPlayer()
-    {
-        player = Instantiate(player);
-        player.transform.position = new Vector3(currentEntranceRoom.transform.position.x, 1, currentEntranceRoom.transform.position.y);
-
-        SpawnCamera();
-        
-    }
+    //public void SpawnPlayer()
+    //{
+    //    player = Instantiate(player);
+    //    player.transform.position = new Vector3(currentEntranceRoom.transform.position.x, 1, currentEntranceRoom.transform.position.y);
+    //
+    //    SpawnCamera();
+    //    
+    //}
     public void HitPlayer(int damageAmount)
     {
         // The player will lose 1 peice of armour if they have it, if the player has no armour the damage goes to their health.
@@ -151,18 +151,18 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void SpawnCamera()
-    {
-        Camera theCamera = Camera.main;
-
-        theCamera.transform.position = new Vector3(player.transform.position.x, cameraYAxis, cameraZAxis);
-    }
+    //public void SpawnCamera()
+    //{
+    //    Camera theCamera = Camera.main;
+    //
+    //    theCamera.transform.position = new Vector3(player.transform.position.x, cameraYAxis, cameraZAxis);
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "EnemyMeleeZone" && !isHit)
         {
-            AgentController enemy = other.gameObject.GetComponent<AgentController>();
+            AgentController enemy = other.transform.parent.GetComponent<AgentController>();
 
             HitPlayer(enemy.meleeDamage);
             Vector3 pushDirection = other.transform.parent.position - transform.position;
