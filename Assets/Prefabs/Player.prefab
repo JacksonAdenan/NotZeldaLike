@@ -242,7 +242,7 @@ MonoBehaviour:
   cameraZAxis: -3
   cameraYAxis: 10
   health: 3
-  armour: 0
+  armour: 5
   maxHealth: 5
   maxArmour: 5
   meleeDamage: 1

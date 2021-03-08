@@ -91,7 +91,7 @@ public class PlayerManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            AddHealth(1);
+            AddArmour(1);
         }
 
 
@@ -112,6 +112,13 @@ public class PlayerManager : MonoBehaviour
         if (armour > 0)
         {
             armour -= 1;
+            for (int i = 0; i < damageAmount; i++)
+            {
+                uiManager.RemoveIcon(UIManager.IconType.ArmourIcon);
+            }
+
+            if (armour < 0)
+                armour = 0;
         }
         else
         { 
@@ -130,6 +137,12 @@ public class PlayerManager : MonoBehaviour
     public void AddArmour(int armourAmount)
     {
         armour += armourAmount;
+        for (int i = 0; i < armourAmount; i++)
+        {
+            if ((armour - armourAmount) + 1 <= maxArmour)
+                uiManager.AddIcon(UIManager.IconType.ArmourIcon, armour);
+        }
+
         // Making it so that the player never has over the max amount.
         if (armour > maxArmour)
         {
