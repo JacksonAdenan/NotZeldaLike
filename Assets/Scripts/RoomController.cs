@@ -53,20 +53,31 @@ public class RoomController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (roomStatesToggle == RoomStates.Inactive)
-            roomStatesToggle = RoomStates.Active;
-        //Camera
+        if (other.CompareTag("Player"))
+        {
+            if (roomStatesToggle == RoomStates.Inactive)
+                roomStatesToggle = RoomStates.Active;
+
+            Time.timeScale = 1.0f;
+
+            //Camera
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (roomStatesToggle == RoomStates.Active)
-            roomStatesToggle = RoomStates.Inactive;
-
-        foreach (GameObject enemy in enemies)
+        if (other.CompareTag("Player"))
         {
-            enemies.Remove(enemy);
-            Destroy(enemy);
+            if (roomStatesToggle == RoomStates.Active)
+                roomStatesToggle = RoomStates.Inactive;
+
+            foreach (GameObject enemy in enemies)
+            {
+                enemies.Remove(enemy);
+                Destroy(enemy);
+            }
+
+            Time.timeScale = 0.0f;
         }
     }
 
