@@ -75,11 +75,13 @@ public class Room
         else if (pattern == RoomPattern.LeftUp)
             pattern = RoomPattern.UpLeftDown;
 
-
+        else if (pattern == RoomPattern.LeftRightUp)
+            pattern = RoomPattern.UpDownLeftRight;
 
         else
         {
-            Debug.Log("Tried to add room but previous room did not match any valid type!");
+            //pattern = pattern;
+            Debug.Log("Tried to add room but previous room did not match any valid type!. Room pattern error: " + pattern.ToString());
         }
     }
     public void AddRightRoom()
@@ -112,7 +114,8 @@ public class Room
 
         else
         {
-            Debug.Log("Tried to add room but previous room did not match any valid type!");
+            //pattern = pattern;
+            Debug.Log("Tried to add room but previous room did not match any valid type!. Room pattern error: " + pattern.ToString());
         }
     }
     public void AddLeftRoom()
@@ -143,9 +146,13 @@ public class Room
         else if (pattern == RoomPattern.RightDown)
             pattern = RoomPattern.LeftRightDown;
 
+        else if (pattern == RoomPattern.UpDown)
+            pattern = RoomPattern.UpLeftDown;
+
         else
         {
-            Debug.Log("Tried to add room but previous room did not match any valid type!");
+            //pattern = pattern;
+            Debug.Log("Tried to add room but previous room did not match any valid type!. Room pattern error: " + pattern.ToString());
         }
     }
 
@@ -194,7 +201,8 @@ public class Room
 
         else
         {
-            Debug.Log("Tried to add room but previous room did not match any valid type!");
+            //pattern = pattern;
+            Debug.Log("Tried to add room but previous room did not match any valid type!. Room pattern error: " + pattern.ToString());
         }
     }
 

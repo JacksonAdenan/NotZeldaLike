@@ -174,13 +174,21 @@ public class Level
 								int randomNum = Random.Range(0, 2);
 								if (randomNum == 0 && currentRoom.x != 0)
 								{
+									if (grid[i - 1, j].type == RoomType.Entrance || grid[i - 1, j].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddLeftRoom();
 									//grid[i - 1, j].pattern = RoomPattern.Right;
 									grid[i - 1, j].AddRightRoom();
 									grid[i - 1, j].type = RoomType.DeadEnd;
 								}
 								else if (randomNum == 1 && currentRoom.x != 3)
-								{ 
+								{
+									if (grid[i + 1, j].type == RoomType.Entrance || grid[i + 1, j].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddRightRoom();
 									//grid[i + 1, j].pattern = RoomPattern.Left;
 									grid[i + 1, j].AddLeftRoom();
@@ -193,6 +201,10 @@ public class Level
 								int randomNum = Random.Range(0, 2);
 								if (randomNum == 0 && currentRoom.x != 0)
 								{
+									if (grid[i - 1, j].type == RoomType.Entrance || grid[i - 1, j].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddLeftRoom();
 									//grid[i - 1, j].pattern = RoomPattern.Right;
 									grid[i - 1, j].AddRightRoom();
@@ -200,10 +212,14 @@ public class Level
 								}
 								else if (randomNum == 1 && currentRoom.y != 3)
 								{
+									if (grid[i, j + 1].type == RoomType.Entrance || grid[i, j + 1].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddDownRoom();
 									//grid[i, j - 1].pattern = RoomPattern.Up;
-									grid[i, j - 1].AddUpRoom();
-									grid[i, j - 1].type = RoomType.DeadEnd;
+									grid[i, j + 1].AddUpRoom();
+									grid[i, j + 1].type = RoomType.DeadEnd;
 								}
 								break;
 							}
@@ -212,6 +228,10 @@ public class Level
 								int randomNum = Random.Range(0, 2);
 								if (randomNum == 0 && currentRoom.x != 0)
 								{
+									if (grid[i - 1, j].type == RoomType.Entrance || grid[i - 1, j].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddLeftRoom();
 									//grid[i - 1, j].pattern = RoomPattern.Right;
 									grid[i - 1, j].AddRightRoom();
@@ -219,10 +239,14 @@ public class Level
 								}
 								else if (randomNum == 1 && currentRoom.y != 0)
 								{
+									if (grid[i, j - 1].type == RoomType.Entrance || grid[i, j - 1].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddUpRoom();
 									//grid[i, j + 1].pattern = RoomPattern.Down;
-									grid[i, j + 1].AddDownRoom();
-									grid[i, j + 1].type = RoomType.DeadEnd;
+									grid[i, j - 1].AddDownRoom();
+									grid[i, j - 1].type = RoomType.DeadEnd;
 								}
 								break;
 							}
@@ -231,6 +255,10 @@ public class Level
 								int randomNum = Random.Range(0, 2);
 								if (randomNum == 0 && currentRoom.y != 0)
 								{
+									if (grid[i, j - 1].type == RoomType.Entrance || grid[i, j - 1].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddUpRoom();
 									//grid[i, j + 1].pattern = RoomPattern.Down;
 									grid[i, j - 1].AddDownRoom();
@@ -238,6 +266,10 @@ public class Level
 								}
 								else if (randomNum == 1 && currentRoom.y != 3)
 								{
+									if (grid[i, j + 1].type == RoomType.Entrance || grid[i, j + 1].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddDownRoom();
 									//grid[i, j - 1].pattern = RoomPattern.Up;
 									grid[i, j + 1].AddUpRoom();
@@ -250,6 +282,10 @@ public class Level
 								int randomNum = Random.Range(0, 2);
 								if (randomNum == 0 && currentRoom.x != 3)
 								{
+									if (grid[i + 1, j].type == RoomType.Entrance || grid[i + 1, j].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddRightRoom();
 									//grid[i + 1, j].pattern = RoomPattern.Left;
 									grid[i + 1, j].AddLeftRoom();
@@ -257,10 +293,14 @@ public class Level
 								}
 								else if (randomNum == 1 && currentRoom.y != 3)
 								{
+									if (grid[i, j + 1].type == RoomType.Entrance || grid[i, j + 1].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddDownRoom();
 									//grid[i, j - 1].pattern = RoomPattern.Up;
-									grid[i, j - 1].AddUpRoom();
-									grid[i, j - 1].type = RoomType.DeadEnd;
+									grid[i, j + 1].AddUpRoom();
+									grid[i, j + 1].type = RoomType.DeadEnd;
 								}
 								break;
 							}
@@ -269,6 +309,10 @@ public class Level
 								int randomNum = Random.Range(0, 2);
 								if (randomNum == 0 && currentRoom.x != 3)
 								{
+									if (grid[i + 1, j].type == RoomType.Entrance || grid[i + 1, j].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddRightRoom();
 									//grid[i + 1, j].pattern = RoomPattern.Left;
 									grid[i + 1, j].AddLeftRoom();
@@ -276,10 +320,14 @@ public class Level
 								}
 								else if (randomNum == 1 && currentRoom.y != 0)
 								{
+									if (grid[i, j - 1].type == RoomType.Entrance || grid[i, j - 1].type == RoomType.Exit)
+									{
+										continue;
+									}
 									currentRoom.AddUpRoom();
 									//grid[i, j + 1].pattern = RoomPattern.Down;
-									grid[i, j + 1].AddDownRoom();
-									grid[i, j + 1].type = RoomType.DeadEnd;
+									grid[i, j - 1].AddDownRoom();
+									grid[i, j - 1].type = RoomType.DeadEnd;
 								}
 								break;
 							}
