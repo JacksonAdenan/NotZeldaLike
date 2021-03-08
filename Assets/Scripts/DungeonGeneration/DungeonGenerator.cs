@@ -66,6 +66,7 @@ public class DungeonGenerator : MonoBehaviour
         test.GenerateDeadEnds();
 
         GeneratePrefabs();
+  
         GenerateFloorVariations();
     }
 

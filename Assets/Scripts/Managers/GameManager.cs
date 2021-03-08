@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
 	{
 
         // I think resetting the player pos has to be here because when we reload the scene we have to wait for DungeonGenerators Awake() function to be called before we re position the player.
-        if (!hasResetPlayer)
+        if (!hasResetPlayer && currentEntranceRoom != null)
         {
             ResetPlayer();
         }
@@ -139,5 +139,6 @@ public class GameManager : MonoBehaviour
         ResetPlayerPos();
         SpawnCamera();
         hasResetPlayer = true;
+        currentEntranceRoom = null;
     }
 }
