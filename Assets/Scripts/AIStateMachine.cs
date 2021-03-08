@@ -127,7 +127,7 @@ public class AIStateMachine
         {
             Debug.Log("Agent is damaged");
             agent.ResetPath();
-            agent.updatePosition = false;
+            //agent.updatePosition = false;
             DamagedTimer();
             //Vector3 lookPosition = player.transform.position - agent.transform.position;
             //lookPosition.y = 0;
@@ -142,17 +142,17 @@ public class AIStateMachine
 
     private void DamagedTimer()
     {
-        //if (currentState == BasicDecisions.DAMAGED)
-        //{
-            damagedCounter += Time.deltaTime;
-            if (damagedCounter >= 2)
-            {
-                damagedCounter = 0;
+
+        damagedCounter += Time.deltaTime;
+        if (damagedCounter >= 2)
+        {
+            damagedCounter = 0;
             // After it's not stunned anymore just make it wander.
-                agent.updatePosition = true;
-                currentState = BasicDecisions.WANDER;
-            }
-        //}
+            //agent.updatePosition = true;
+            //agent.nextPosition = agent.transform.position;
+            currentState = BasicDecisions.WANDER;
+        }
+  
     }
 
     public void SetState(BasicDecisions newState)

@@ -81,15 +81,15 @@ public class AgentController : MonoBehaviour
             pushDirection = Vector3.Normalize(pushDirection);
             
             stateMachine.SetState(AIStateMachine.BasicDecisions.DAMAGED);
-            agentRigidbody.AddForce(pushDirection * playerManager.meleeKnockbackForce, ForceMode.Impulse);
-
+            //agentRigidbody.AddForce(pushDirection * playerManager.meleeKnockbackForce, ForceMode.Impulse);
+            //agentRigidbody.velocity = pushDirection * playerManager.meleeKnockbackForce;
             isHit = true;
             this.gameObject.GetComponent<Renderer>().material = damageMaterial;
 
             // We set the agents state to damaged which is like a "stun" phase. This is so the agent doesn't try to go towards the player while also getting pushed back.
             //agent.acceleration = 0;
-            //agent.velocity = pushDirection * playerManager.meleeKnockbackForce;
-         
+            agent.velocity = pushDirection * playerManager.meleeKnockbackForce;
+             
 
             Debug.Log("Enemy took damage.");
         }
