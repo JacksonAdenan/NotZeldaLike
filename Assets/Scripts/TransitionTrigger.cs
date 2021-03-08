@@ -28,6 +28,7 @@ public class TransitionTrigger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Entered Transition Trigger ERFGEFEFE");
         if (other.CompareTag("Player"))
         {
             Debug.Log("Entered Transition Trigger");
