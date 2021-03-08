@@ -24,10 +24,13 @@ public class PlayerManager : MonoBehaviour
         if (instance != null && instance != this)
         {
             Debug.Log("======= WARNING ======= : You have created PlayerManager multiple times!");
+            Destroy(this.gameObject);
         }
         else
         {
             instance = this;
+
+            DontDestroyOnLoad(this.gameObject);
         }    
 	}
 
@@ -66,7 +69,8 @@ public class PlayerManager : MonoBehaviour
     // Reference to the UIManager so we can take away and add hearts and stuff to the screen.
     private UIManager uiManager;
 
-    private Rigidbody playerRigidbody;
+    [HideInInspector]
+    public Rigidbody playerRigidbody;
 
     // Start is called before the first frame update
     void Start()

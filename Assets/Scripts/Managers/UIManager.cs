@@ -27,10 +27,13 @@ public class UIManager : MonoBehaviour
         if (instance != null && instance != this)
         {
             Debug.Log("======= WARNING ======= : You have created UIManager multiple times!");
+            Destroy(this.gameObject);
         }
         else
         {
             instance = this;
+
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 
