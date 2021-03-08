@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194966463105312114}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.5, y: 0, z: 0}
+  m_LocalPosition: {x: -6.5, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 1, z: 0.4}
   m_Children: []
   m_Father: {fileID: 8437475853224315645}
@@ -250,7 +250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3805438381595855447}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.5, y: 0.75, z: 3.5}
+  m_LocalPosition: {x: -6.5, y: 0.75, z: 3.5}
   m_LocalScale: {x: 1, y: 1.5, z: 3}
   m_Children: []
   m_Father: {fileID: 8437475853224315645}
@@ -756,7 +756,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5291994832212895955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.5, y: 0.75, z: -3.5}
+  m_LocalPosition: {x: -6.5, y: 0.75, z: -3.5}
   m_LocalScale: {x: 1, y: 1.5, z: 3}
   m_Children: []
   m_Father: {fileID: 8437475853224315645}
@@ -987,7 +987,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8417632485877029383}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.5, y: 0.75, z: 2.5}
+  m_LocalPosition: {x: 6.5, y: 0.75, z: 2.5}
   m_LocalScale: {x: 1, y: 1.5, z: 5}
   m_Children: []
   m_Father: {fileID: 8437475853224315645}
@@ -1082,7 +1082,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8969055640318383347}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.5, y: 0.75, z: -2.5}
+  m_LocalPosition: {x: 6.5, y: 0.75, z: -2.5}
   m_LocalScale: {x: 1, y: 1.5, z: 5}
   m_Children: []
   m_Father: {fileID: 8437475853224315645}
@@ -1165,7 +1165,7 @@ PrefabInstance:
     - target: {fileID: 7982788029544047145, guid: 155ac38107155c1449b5f89897eb5339,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.5
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 7982788029544047145, guid: 155ac38107155c1449b5f89897eb5339,
         type: 3}
