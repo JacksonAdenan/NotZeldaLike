@@ -18,11 +18,15 @@ public class AIStateMachine
     private AgentController controller;
 
     bool hasReachedDestination = true;
-    enum BasicDecisions
+
+
+    private float damagedCounter = 0.0f; 
+    public enum BasicDecisions
     {
         WANDER,
         CHASE,
         ATTACK,
+        DAMAGED,
         FLEE
     }
     public AIStateMachine(MobType type, NavMeshAgent agent, AgentController control)
@@ -117,6 +121,56 @@ public class AIStateMachine
             {
                 currentState = BasicDecisions.CHASE;
             }
+        }
+
+        else if (currentState == BasicDecisions.DAMAGED)
+        {
+            Debug.Log("Agent is damaged");
+            agent.ResetPath();
+            agent.updatePosition = false;
+            DamagedTimer();
+            //Vector3 lookPosition = player.transform.position - agent.transform.position;
+            //lookPosition.y = 0;
+            //Quaternion rotation = Quaternion.LookRotation(lookPosition);
+            //agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 10);
+            //if (Vector3.Distance(agent.transform.position, player.transform.position) > 1)
+            //{
+            //    currentState = BasicDecisions.CHASE;
+            //}
+        }
+    }
+
+    private void DamagedTimer()
+    {
+        //if (currentState == BasicDecisions.DAMAGED)
+        //{
+            damagedCounter += Time.deltaTime;
+            if (damagedCounter >= 2)
+            {
+                damagedCounter = 0;
+            // After it's not stunned anymore just make it wander.
+                agent.updatePosition = true;
+                currentState = BasicDecisions.WANDER;
+            }
+        //}
+    }
+
+    public void SetState(BasicDecisions newState)
+    {
+        switch (newState)
+        {
+            case BasicDecisions.ATTACK:
+                currentState = BasicDecisions.ATTACK;
+                break;
+            case BasicDecisions.CHASE:
+                currentState = BasicDecisions.CHASE;
+                break;
+            case BasicDecisions.WANDER:
+                currentState = BasicDecisions.WANDER;
+                break;
+            case BasicDecisions.DAMAGED:
+                currentState = BasicDecisions.DAMAGED;
+                break;
         }
     }
 }

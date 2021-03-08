@@ -22,6 +22,7 @@ public enum RoomPattern
     LeftDown,
     RightUp,
     LeftUp,
+
     LeftRightDown,
     LeftRightUp,
     UpRightDown,
@@ -39,6 +40,8 @@ public class Room
     public int x;
     public int y;
 
+
+    public GameObject roomObj = null;
     public Room()
     {
         type = RoomType.Empty;
@@ -72,11 +75,13 @@ public class Room
         else if (pattern == RoomPattern.LeftUp)
             pattern = RoomPattern.UpLeftDown;
 
-
+        else if (pattern == RoomPattern.LeftRightUp)
+            pattern = RoomPattern.UpDownLeftRight;
 
         else
         {
-            Debug.Log("Tried to add room but previous room did not match any valid type!");
+            //pattern = pattern;
+            Debug.Log("Tried to add room but previous room did not match any valid type!. Room pattern error: " + pattern.ToString());
         }
     }
     public void AddRightRoom()
@@ -109,7 +114,8 @@ public class Room
 
         else
         {
-            Debug.Log("Tried to add room but previous room did not match any valid type!");
+            //pattern = pattern;
+            Debug.Log("Tried to add room but previous room did not match any valid type!. Room pattern error: " + pattern.ToString());
         }
     }
     public void AddLeftRoom()
@@ -140,11 +146,68 @@ public class Room
         else if (pattern == RoomPattern.RightDown)
             pattern = RoomPattern.LeftRightDown;
 
+        else if (pattern == RoomPattern.UpDown)
+            pattern = RoomPattern.UpLeftDown;
+
         else
         {
-            Debug.Log("Tried to add room but previous room did not match any valid type!");
+            //pattern = pattern;
+            Debug.Log("Tried to add room but previous room did not match any valid type!. Room pattern error: " + pattern.ToString());
         }
     }
-    
-    
+
+    public void AddUpRoom()
+    {
+        if (pattern == RoomPattern.RightDown)
+            pattern = RoomPattern.UpRightDown;
+
+        else if (pattern == RoomPattern.LeftRight)
+            pattern = RoomPattern.LeftRightUp;
+
+        else if (pattern == RoomPattern.Up)
+            pattern = RoomPattern.Up;
+
+        else if (pattern == RoomPattern.Down)
+            pattern = RoomPattern.UpDown;
+
+        else if (pattern == RoomPattern.Right)
+            pattern = RoomPattern.RightUp;
+
+        else if (pattern == RoomPattern.Left)
+            pattern = RoomPattern.LeftUp;
+
+        else if (pattern == RoomPattern.Closed)
+        {
+            pattern = RoomPattern.Up;
+        }
+
+        //else if (pattern == RoomPattern.LeftRight)
+        //    pattern = RoomPattern.LeftRightDown;
+
+        else if (pattern == RoomPattern.RightUp)
+            pattern = RoomPattern.RightUp;
+
+        else if (pattern == RoomPattern.LeftDown)
+            pattern = RoomPattern.UpLeftDown;
+
+        else if (pattern == RoomPattern.UpDown)
+        {
+            pattern = RoomPattern.UpDown;
+        }
+
+        //else if (pattern == RoomPattern.RightDown)
+        //    pattern = RoomPattern.LeftRightDown;
+
+
+        else
+        {
+            //pattern = pattern;
+            Debug.Log("Tried to add room but previous room did not match any valid type!. Room pattern error: " + pattern.ToString());
+        }
+    }
+
+    public void SetRoomObj(GameObject newRoomObj)
+    {
+        this.roomObj = newRoomObj;
+    }
 }

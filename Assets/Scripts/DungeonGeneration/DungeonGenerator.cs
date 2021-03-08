@@ -6,8 +6,8 @@ public class DungeonGenerator : MonoBehaviour
 {
 
     private Level test;
-    public int roomSpacingX = 20;
-    public int roomSpacingY = 20;
+    public int roomSpacingX = 14;
+    public int roomSpacingY = 12;
     
 
     public GameObject roomLeftRightUpDown;
@@ -22,6 +22,17 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject roomRightUp;
     public GameObject roomUp;
     public GameObject roomDown;
+
+    public GameObject outlineLeftRightDown;
+    public GameObject outlineLeftRightUp;
+    public GameObject outlineUpRightDown;
+    public GameObject outlineUpLeftDown;
+
+   
+
+    public GameObject roomObj;
+
+
 
 
     public GameObject testPlayer;
@@ -48,6 +59,9 @@ public class DungeonGenerator : MonoBehaviour
         test = new Level(4, 4);
         test.InitRooms();
         test.GenerateMainPath();
+
+        test.GenerateDeadEnds();
+
         GeneratePrefabs();
         GenerateFloorVariations();
     }
@@ -64,22 +78,31 @@ public class DungeonGenerator : MonoBehaviour
         {
             for (int j = 0; j < test.levelHeight; j++)
             {
-                GameObject room = GetRoomPrefab(test.grid[i, j].pattern);
-                if (room != null)
+                GameObject outline = GetRoomPrefab(test.grid[i, j].pattern);
+                if (outline != null)
                 {
+                    GameObject room = Instantiate(roomObj);
                     if (test.grid[i, j].type == RoomType.Entrance)
                     {
                         //GameObject player = Instantiate(testPlayer);
                         //player.transform.position = new Vector3(i * roomSpacingX, 1, j * roomSpacingY);
-                        playerManager.currentEntranceRoom = room;
+                        playerManager.currentEntranceRoom = outline;
                     }
                     else if (test.grid[i, j].type == RoomType.Exit)
                     {
                         GameObject health = Instantiate(testHealth);
                         health.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
-                        playerManager.currentExitRoom = room;
+                        playerManager.currentExitRoom = outline;
                     }
+
                     room.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
+                    outline.transform.parent = room.transform;
+                    outline.transform.localPosition = Vector3.zero;
+
+                    // Giving the actual "room" in memory a reference to the room game object so it can access the RoomController.
+                    test.grid[i, j].roomObj = room;
+
+                    //outline.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
                     
                 }
             }
@@ -95,10 +118,19 @@ public class DungeonGenerator : MonoBehaviour
                 if (test.grid[i, j].pattern != RoomPattern.Closed)
                 { 
                     int randomNum = Random.Range(0, 11);
-                    string roomPath = "Rooms/Layouts/" + randomNum.ToString();
+                    string floorVariation = "Rooms/Layouts/" + randomNum.ToString();
                     //GameObject room = Resources.Load(roomPath) as GameObject;
-                    GameObject roomReal = Instantiate(Resources.Load<GameObject>(roomPath));
-                    roomReal.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
+                    GameObject floor = Instantiate(Resources.Load<GameObject>(floorVariation));
+
+                    GameObject roomReference = test.grid[i, j].roomObj;
+                    floor.transform.parent = roomReference.transform;
+                    floor.transform.localPosition = Vector3.zero;
+
+                    // Passing the room controller a reference to the floor variation.
+                    RoomController controller = roomReference.GetComponent<RoomController>();
+                    controller.layout = floor;
+
+                    //floor.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
                 }
             }
         }
@@ -159,6 +191,28 @@ public class DungeonGenerator : MonoBehaviour
                 GameObject leftRightRoom = Instantiate(roomLeftRight);
                 leftRightRoom.transform.Rotate(new Vector3(0, 0, 0));
                 return leftRightRoom;
+
+            case RoomPattern.UpLeftDown:
+                GameObject upLeftDownRoom = Instantiate(outlineUpLeftDown);
+                upLeftDownRoom.transform.Rotate(new Vector3(0, 180, 0));
+                return upLeftDownRoom;
+            
+            case RoomPattern.LeftRightUp:
+                GameObject leftRightUpRoom = Instantiate(outlineLeftRightUp);
+                return leftRightUpRoom;
+
+            case RoomPattern.LeftRightDown:
+                GameObject leftRightDownRoom = Instantiate(outlineLeftRightDown);
+                return leftRightDownRoom;
+            
+            case RoomPattern.UpRightDown:
+                GameObject upRightDownRoom = Instantiate(outlineUpRightDown);
+                return upRightDownRoom;
+
+
+            case RoomPattern.UpDownLeftRight:
+                GameObject upDownLeftRightRoom = Instantiate(roomLeftRightUpDown);
+                return upDownLeftRightRoom;
 
             default:
                 //GameObject cantBeBotherRoom = Instantiate(roomClosed);
