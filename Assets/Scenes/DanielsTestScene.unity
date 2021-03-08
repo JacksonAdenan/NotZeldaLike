@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomSpacingX: 14
-  roomSpacingY: 10
+  roomSpacingY: 12
   roomLeftRightUpDown: {fileID: 4902166714983145322, guid: 97aec22cf12063245a7b0f106ef0988d,
     type: 3}
   roomLeftRight: {fileID: 5354862115850762534, guid: 7e6765ec01a4d0a42aff3f545c43cb13,

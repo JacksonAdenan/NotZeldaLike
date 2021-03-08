@@ -6,8 +6,8 @@ public class DungeonGenerator : MonoBehaviour
 {
 
     private Level test;
-    public int roomSpacingX = 20;
-    public int roomSpacingY = 20;
+    public int roomSpacingX = 14;
+    public int roomSpacingY = 12;
     
 
     public GameObject roomLeftRightUpDown;
