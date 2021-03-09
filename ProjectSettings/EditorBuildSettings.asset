@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DanielsTestScene.unity
     guid: 71bacd804f250d047b93c98d292498f2
+  - enabled: 1
+    path: Assets/Scenes/CreditsMenu.unity
+    guid: 5f912103150468f408eb131a19d1b3e6
   m_configObjects: {}
