@@ -125,7 +125,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 if (test.grid[i, j].pattern != RoomPattern.Closed)
                 { 
-                    int randomNum = Random.Range(0, 17);
+                    int randomNum = Random.Range(0, 16);
                     string floorVariation = "Rooms/Layouts/" + randomNum.ToString();
 
                     //GameObject floor = Instantiate(Resources.Load<GameObject>(floorVariation));
