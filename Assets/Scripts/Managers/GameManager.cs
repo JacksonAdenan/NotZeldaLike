@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
     public float cameraZAxis = -3;
     public float cameraYAxis = 10;
 
+    public TransitionManager transitionManager;
+
     // We have pointers to these rooms so that we can use them to spawn the player.
     //[HideInInspector]
     public GameObject currentEntranceRoom;
@@ -140,11 +142,16 @@ public class GameManager : MonoBehaviour
 
     public void LoadNewLevel()
     {
+        transitionManager.Transition();
+        StartCoroutine(PlayWait(1.6f));        
+    }
+
+    IEnumerator PlayWait(float time)
+    {
+        yield return new WaitForSeconds(time);
         SceneManager.LoadScene("DanielsTestScene");
         hasResetPlayer = false;
         currentEntranceRoom = null;
-
-        
     }
 
     public void ResetPlayer()
