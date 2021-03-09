@@ -1191,6 +1191,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eaa5fbc60cfc4914bb78d636990f4ef6, type: 3}
+--- !u!114 &535187654 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5953539270236465367, guid: eaa5fbc60cfc4914bb78d636990f4ef6,
+    type: 3}
+  m_PrefabInstance: {fileID: 535187653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eace8e3360ded14cb4fbc788b0562e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &544061669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2467,6 +2479,7 @@ MonoBehaviour:
   numberOfLayouts: 11
   cameraZAxis: -1
   cameraYAxis: 10
+  transitionManager: {fileID: 535187654}
   currentEntranceRoom: {fileID: 0}
   currentExitRoom: {fileID: 0}
   player: {fileID: 3070133563548722364, guid: a1197956af98fa248905782de2cec927, type: 3}
