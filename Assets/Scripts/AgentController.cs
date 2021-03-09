@@ -106,6 +106,11 @@ public class AgentController : MonoBehaviour
 
             // We set the agents state to damaged which is like a "stun" phase. This is so the agent doesn't try to go towards the player while also getting pushed back.
             //agent.acceleration = 0;
+
+            // We have to ResetPath() here because although we are doing it in the state machine when DAMAGED is the current state, the state machine hasn't neccessarily caught up to swapping to
+            // the DAMAGE state. To make sure no path's are active we make sure by resetting here.
+            if(agent.hasPath)
+                agent.ResetPath();
             agent.velocity = pushDirection * playerManager.meleeKnockbackForce;
              
 

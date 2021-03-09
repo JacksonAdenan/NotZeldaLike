@@ -139,7 +139,7 @@ public class AIStateMachine
         else if (currentState == BasicDecisions.DAMAGED)
         {
             Debug.Log("Agent is damaged");
-            agent.ResetPath();
+            //agent.ResetPath();
             //agent.updatePosition = false;
             DamagedTimer();
             //Vector3 lookPosition = player.transform.position - agent.transform.position;
