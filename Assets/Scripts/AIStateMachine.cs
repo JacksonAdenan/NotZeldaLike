@@ -12,7 +12,9 @@ public class AIStateMachine
     // We need to know where the player is so we can lookat/attack him.
     public GameObject player;
 
-    private BasicDecisions currentState = BasicDecisions.WANDER;
+
+    // This is public just for debugging purposes.
+    public BasicDecisions currentState = BasicDecisions.WANDER;
 
 
     private AgentController controller;
@@ -57,6 +59,7 @@ public class AIStateMachine
             if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) <= controller.chaseDistance)
             {
                 currentState = BasicDecisions.CHASE;
+                return;
             }
 
             if (hasReachedDestination)
@@ -92,7 +95,21 @@ public class AIStateMachine
             if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) >= controller.chaseDistance)
             {
                 currentState = BasicDecisions.WANDER;
+                return;
             }
+
+            if (!agent.pathPending)
+            {
+                if (Vector3.Distance(agent.transform.position, player.transform.position) < controller.attackDistance)
+                {
+                    hasReachedDestination = true;
+                    Debug.Log("Agent completed chase path.");
+                    currentState = BasicDecisions.ATTACK;
+                    //agent.ResetPath();
+                    return;
+                }
+            }
+
 
             agent.SetDestination(player.transform.position);
 
@@ -102,20 +119,12 @@ public class AIStateMachine
             }
 
 
-            if (!agent.pathPending)
-            {
-                if (Vector3.Distance(agent.transform.position, player.transform.position) < controller.attackDistance)
-                {
-                    hasReachedDestination = true;
-                    Debug.Log("Agent completed chase path.");
-                    currentState = BasicDecisions.ATTACK;
-                    agent.ResetPath();
-                }
-            }
+            
         }
 
         else if (currentState == BasicDecisions.ATTACK)
         {
+
             Debug.Log("Agent is attacking");
             Vector3 lookPosition = player.transform.position - agent.transform.position;
             lookPosition.y = 0;
@@ -126,6 +135,7 @@ public class AIStateMachine
                 // If the agent has an attack winded up, reset it to 0.
                 attackWindUpTimer = 0;
                 currentState = BasicDecisions.CHASE;
+                return;
             }
 
             // Actual attack wind up.
@@ -169,7 +179,12 @@ public class AIStateMachine
             // After it's not stunned anymore just make it wander.
             //agent.updatePosition = true;
             //agent.nextPosition = agent.transform.position;
+
+
+
             currentState = BasicDecisions.WANDER;
+            // IMPORTANT. Set the agent's velocity to zero otherwise he will move really quickly when swapping to the next state.
+            agent.velocity = Vector3.zero;
         }
   
     }

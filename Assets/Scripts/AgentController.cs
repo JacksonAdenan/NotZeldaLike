@@ -38,6 +38,10 @@ public class AgentController : MonoBehaviour
     public float attackCounter = 0.0f;
 
 
+    // Just for debugging purposes
+    public AIStateMachine.BasicDecisions currentState;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +71,11 @@ public class AgentController : MonoBehaviour
         DamageTimer();
 
         AttackTimer();
+
+
+        // Debugging purposes:
+        currentState = stateMachine.currentState;
+
     }
 
     void DamageTimer()
