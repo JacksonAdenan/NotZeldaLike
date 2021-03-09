@@ -48,11 +48,14 @@ public class PlayerManager : MonoBehaviour
     [Header("Stats")]
     public int startingHealth;
     public int startingMaxHealth;
+    public int startingArmour;
+    public int startingMaxArmour;
     int health;
     int maxHealth;
     int armour;
     int maxArmour;
     public List<HeartUI> hearts = new List<HeartUI>();
+    public List<ArmourUI> armours = new List<ArmourUI>();
 
     public int meleeDamage = 1;
     public float meleeKnockbackForce = 7.0f;
@@ -91,8 +94,12 @@ public class PlayerManager : MonoBehaviour
 
         foreach (Transform heart in GameManager.GetInstance().healthUIParent.transform)
             hearts.Add(heart.GetComponent<HeartUI>());
+        foreach (Transform armour in GameManager.GetInstance().armourUIParent.transform)
+            armours.Add(armour.GetComponent<ArmourUI>());
         AddMaxHealth(startingMaxHealth);
         AddHealth(startingHealth);
+        AddMaxArmour(startingMaxArmour);
+        AddArmour(startingArmour);
     }
 
     // Update is called once per frame
@@ -107,20 +114,23 @@ public class PlayerManager : MonoBehaviour
             HitPlayer(1);
         }
         if (Input.GetKeyDown(KeyCode.G))
-        {
             AddMaxHealth(1);
-        }
+
         if (Input.GetKeyDown(KeyCode.H))
-        {
             AddHealth(1);
-        }
+
         if (Input.GetKeyDown(KeyCode.J))
-        {
             DecreaseHealth(1);
-        }
+        if (Input.GetKeyDown(KeyCode.B))
+            AddMaxArmour(1);
+        if (Input.GetKeyDown(KeyCode.N))
+            AddArmour(1);
+        if (Input.GetKeyDown(KeyCode.M))
+            DecreaseArmour(1);
 
 
-        TookDamagerTimer();
+
+            TookDamagerTimer();
     }
 
     //public void SpawnPlayer()
@@ -133,7 +143,10 @@ public class PlayerManager : MonoBehaviour
     //}
     public void HitPlayer(int damageAmount)
     {
-        DecreaseHealth(damageAmount);
+        if (armour > 0)
+            DecreaseArmour(damageAmount);
+        else
+            DecreaseHealth(damageAmount);
         // The player will lose 1 peice of armour if they have it, if the player has no armour the damage goes to their health.
         /*if (armour > 0)
         {
@@ -228,14 +241,34 @@ public class PlayerManager : MonoBehaviour
             }
     }
 
-    void AddArmour()
+    void AddArmour(int add)
     {
+        for (int i = 0; i < add; i++)
+            if (armour < maxArmour)
+                armour++;
 
+        for (int i = 0; i < armour; i++)
+            armours[i].armourToggle = ArmourUI.ArmourStates.Full;
     }
 
-    void RemoveArmour()
+    void DecreaseArmour(int remove)
     {
+        for (int i = 0; i < remove; i++)
+            if (armour > 0)
+                armour--;
 
+        for (int i = 0; i < remove; i++)
+            armours[armour - i].armourToggle = ArmourUI.ArmourStates.Empty;
+    }
+
+    void AddMaxArmour(int add)
+    {
+        for (int i = 0; i < add; i++)
+            if (maxArmour < 6)
+            {
+                maxArmour++;
+                armours[maxArmour - 1].armourToggle = ArmourUI.ArmourStates.Empty;
+            }
     }
 
     private void OnTriggerEnter(Collider other)

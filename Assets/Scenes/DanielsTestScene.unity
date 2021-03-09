@@ -263,8 +263,9 @@ GameObject:
   - component: {fileID: 106414544}
   - component: {fileID: 106414546}
   - component: {fileID: 106414545}
+  - component: {fileID: 106414547}
   m_Layer: 5
-  m_Name: Heart (Render Texture Image)
+  m_Name: Heart 10 (Render Texture Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -324,6 +325,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106414543}
   m_CullTransparentMesh: 0
+--- !u!114 &106414547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106414543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0eae2c2f8231c4d8734280d2e6d19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartToggle: 0
+  heartImage: {fileID: 0}
 --- !u!1 &322442043
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,8 +350,9 @@ GameObject:
   - component: {fileID: 322442044}
   - component: {fileID: 322442046}
   - component: {fileID: 322442045}
+  - component: {fileID: 322442047}
   m_Layer: 5
-  m_Name: Heart (Render Texture Image)
+  m_Name: Heart 6 (Render Texture Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,6 +412,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322442043}
   m_CullTransparentMesh: 0
+--- !u!114 &322442047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322442043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0eae2c2f8231c4d8734280d2e6d19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartToggle: 0
+  heartImage: {fileID: 0}
 --- !u!1 &332302268
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,8 +437,9 @@ GameObject:
   - component: {fileID: 332302269}
   - component: {fileID: 332302271}
   - component: {fileID: 332302270}
+  - component: {fileID: 332302272}
   m_Layer: 5
-  m_Name: Heart (Render Texture Image)
+  m_Name: Heart 2 (Render Texture Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -468,6 +499,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332302268}
   m_CullTransparentMesh: 0
+--- !u!114 &332302272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332302268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0eae2c2f8231c4d8734280d2e6d19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartToggle: 0
+  heartImage: {fileID: 0}
 --- !u!1 &347835574
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,8 +659,9 @@ GameObject:
   - component: {fileID: 398266388}
   - component: {fileID: 398266390}
   - component: {fileID: 398266389}
+  - component: {fileID: 398266391}
   m_Layer: 5
-  m_Name: Heart (Render Texture Image)
+  m_Name: Heart 9 (Render Texture Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -675,6 +721,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398266387}
   m_CullTransparentMesh: 0
+--- !u!114 &398266391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398266387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0eae2c2f8231c4d8734280d2e6d19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartToggle: 0
+  heartImage: {fileID: 0}
 --- !u!1 &425731837
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,8 +746,9 @@ GameObject:
   - component: {fileID: 425731838}
   - component: {fileID: 425731840}
   - component: {fileID: 425731839}
+  - component: {fileID: 425731841}
   m_Layer: 5
-  m_Name: Heart (Render Texture Image)
+  m_Name: Heart 1 (Render Texture Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -747,6 +808,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425731837}
   m_CullTransparentMesh: 0
+--- !u!114 &425731841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425731837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0eae2c2f8231c4d8734280d2e6d19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartToggle: 0
+  heartImage: {fileID: 0}
 --- !u!1 &455992895
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +833,7 @@ GameObject:
   - component: {fileID: 455992896}
   - component: {fileID: 455992898}
   - component: {fileID: 455992897}
+  - component: {fileID: 455992899}
   m_Layer: 5
   m_Name: Armour (Render Texture Image)
   m_TagString: Untagged
@@ -819,6 +895,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455992895}
   m_CullTransparentMesh: 0
+--- !u!114 &455992899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455992895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d707a6c1517e14abd7330c69d2e3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armourToggle: 0
+  armourImage: {fileID: 0}
 --- !u!1 &470083701 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2379018663219010432, guid: 50e4b388fe39a8543ab8c16bc978832d,
@@ -951,6 +1041,7 @@ GameObject:
   - component: {fileID: 533690552}
   - component: {fileID: 533690554}
   - component: {fileID: 533690553}
+  - component: {fileID: 533690555}
   m_Layer: 5
   m_Name: Armour (Render Texture Image)
   m_TagString: Untagged
@@ -1012,6 +1103,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533690551}
   m_CullTransparentMesh: 0
+--- !u!114 &533690555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533690551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d707a6c1517e14abd7330c69d2e3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armourToggle: 0
+  armourImage: {fileID: 0}
 --- !u!1001 &544061669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1102,8 +1207,9 @@ GameObject:
   - component: {fileID: 618859396}
   - component: {fileID: 618859398}
   - component: {fileID: 618859397}
+  - component: {fileID: 618859399}
   m_Layer: 5
-  m_Name: Heart (Render Texture Image)
+  m_Name: Heart 7 (Render Texture Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1163,6 +1269,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618859395}
   m_CullTransparentMesh: 0
+--- !u!114 &618859399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618859395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0eae2c2f8231c4d8734280d2e6d19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartToggle: 0
+  heartImage: {fileID: 0}
 --- !u!1 &671872202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,6 +1294,7 @@ GameObject:
   - component: {fileID: 671872203}
   - component: {fileID: 671872205}
   - component: {fileID: 671872204}
+  - component: {fileID: 671872206}
   m_Layer: 5
   m_Name: Armour (Render Texture Image)
   m_TagString: Untagged
@@ -1235,12 +1356,226 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671872202}
   m_CullTransparentMesh: 0
+--- !u!114 &671872206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671872202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d707a6c1517e14abd7330c69d2e3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armourToggle: 0
+  armourImage: {fileID: 0}
 --- !u!224 &690122178 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8299044028343388992, guid: 6b1ffb94fc79e004c869b1bc100db45e,
     type: 3}
   m_PrefabInstance: {fileID: 8381786507804226941}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &741363732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 741363733}
+  - component: {fileID: 741363736}
+  - component: {fileID: 741363735}
+  - component: {fileID: 741363734}
+  m_Layer: 0
+  m_Name: ShieldCamera (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &741363733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741363732}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 29.45803, y: 0.111382246, z: 9.666024}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1418513429}
+  m_Father: {fileID: 1079057277}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &741363734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741363732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 0
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+--- !u!81 &741363735
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741363732}
+  m_Enabled: 1
+--- !u!20 &741363736
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741363732}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 4
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: -1
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 1
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 256
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 8400000, guid: 804424a8823565546b94f2cc2e8cd61d, type: 2}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!1001 &742587929
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 741363733}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 122001fdabad1304ebb20f66c4a8580b, type: 2}
+    - target: {fileID: 919132149155446097, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8b2666dde4f206a4c896848553bb4d20,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b2666dde4f206a4c896848553bb4d20, type: 3}
 --- !u!1 &815661024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,8 +1731,9 @@ GameObject:
   - component: {fileID: 918899560}
   - component: {fileID: 918899562}
   - component: {fileID: 918899561}
+  - component: {fileID: 918899563}
   m_Layer: 5
-  m_Name: Heart (Render Texture Image)
+  m_Name: Heart 8 (Render Texture Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1457,6 +1793,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918899559}
   m_CullTransparentMesh: 0
+--- !u!114 &918899563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918899559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0eae2c2f8231c4d8734280d2e6d19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartToggle: 0
+  heartImage: {fileID: 0}
 --- !u!1 &960769068 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3224695636793645931, guid: 6b1ffb94fc79e004c869b1bc100db45e,
@@ -1609,6 +1959,8 @@ Transform:
   - {fileID: 984795095}
   - {fileID: 815661025}
   - {fileID: 2125562662}
+  - {fileID: 1689082131}
+  - {fileID: 741363733}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1623,6 +1975,7 @@ GameObject:
   - component: {fileID: 1151484096}
   - component: {fileID: 1151484098}
   - component: {fileID: 1151484097}
+  - component: {fileID: 1151484099}
   m_Layer: 5
   m_Name: Armour (Render Texture Image)
   m_TagString: Untagged
@@ -1684,6 +2037,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151484095}
   m_CullTransparentMesh: 0
+--- !u!114 &1151484099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151484095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d707a6c1517e14abd7330c69d2e3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armourToggle: 0
+  armourImage: {fileID: 0}
 --- !u!1 &1326692879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,8 +2184,9 @@ GameObject:
   - component: {fileID: 1401555532}
   - component: {fileID: 1401555534}
   - component: {fileID: 1401555533}
+  - component: {fileID: 1401555535}
   m_Layer: 5
-  m_Name: Heart (Render Texture Image)
+  m_Name: Heart 3 (Render Texture Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1878,6 +2246,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401555531}
   m_CullTransparentMesh: 0
+--- !u!114 &1401555535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401555531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0eae2c2f8231c4d8734280d2e6d19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartToggle: 0
+  heartImage: {fileID: 0}
+--- !u!4 &1418513429 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8b2666dde4f206a4c896848553bb4d20,
+    type: 3}
+  m_PrefabInstance: {fileID: 742587929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1483205189
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,6 +2395,14 @@ MonoBehaviour:
   currentEntranceRoom: {fileID: 0}
   currentExitRoom: {fileID: 0}
   player: {fileID: 3070133563548722364, guid: a1197956af98fa248905782de2cec927, type: 3}
+  healthUIParent: {fileID: 1998093835}
+  armourUIParent: {fileID: 1354573074}
+--- !u!4 &1526787736 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1677038237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1565621349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2231,6 +2627,211 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660734669}
   m_CullTransparentMesh: 0
+--- !u!1001 &1677038237
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1689082131}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.000022888184
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00000008146035
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 122001fdabad1304ebb20f66c4a8580b, type: 2}
+    - target: {fileID: 919132149155446097, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_Name
+      value: Heart
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37a6b0d5545b4c54cb1900081ca65f2b, type: 3}
+--- !u!1 &1689082130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1689082131}
+  - component: {fileID: 1689082134}
+  - component: {fileID: 1689082133}
+  - component: {fileID: 1689082132}
+  m_Layer: 0
+  m_Name: HeartCamera (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1689082131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689082130}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 31.20803, y: 0.111382246, z: 9.666024}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1526787736}
+  m_Father: {fileID: 1079057277}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1689082132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689082130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 0
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+--- !u!81 &1689082133
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689082130}
+  m_Enabled: 1
+--- !u!20 &1689082134
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689082130}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 4
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: -1
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 1
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 256
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 8400000, guid: 4f9177ee9c7166341b4fef33950da9a9, type: 2}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &1693595017
 GameObject:
   m_ObjectHideFlags: 0
@@ -2242,6 +2843,7 @@ GameObject:
   - component: {fileID: 1693595018}
   - component: {fileID: 1693595020}
   - component: {fileID: 1693595019}
+  - component: {fileID: 1693595021}
   m_Layer: 5
   m_Name: Armour (Render Texture Image)
   m_TagString: Untagged
@@ -2303,6 +2905,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693595017}
   m_CullTransparentMesh: 0
+--- !u!114 &1693595021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693595017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d707a6c1517e14abd7330c69d2e3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armourToggle: 0
+  armourImage: {fileID: 0}
 --- !u!1 &1696908744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2731,8 +3347,9 @@ GameObject:
   - component: {fileID: 1913217118}
   - component: {fileID: 1913217120}
   - component: {fileID: 1913217119}
+  - component: {fileID: 1913217121}
   m_Layer: 5
-  m_Name: Heart (Render Texture Image)
+  m_Name: Heart 4 (Render Texture Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2792,6 +3409,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913217117}
   m_CullTransparentMesh: 0
+--- !u!114 &1913217121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913217117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0eae2c2f8231c4d8734280d2e6d19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartToggle: 0
+  heartImage: {fileID: 0}
 --- !u!1 &1980879694
 GameObject:
   m_ObjectHideFlags: 0
@@ -2803,6 +3434,7 @@ GameObject:
   - component: {fileID: 1980879695}
   - component: {fileID: 1980879697}
   - component: {fileID: 1980879696}
+  - component: {fileID: 1980879698}
   m_Layer: 5
   m_Name: Armour (Render Texture Image)
   m_TagString: Untagged
@@ -2864,6 +3496,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980879694}
   m_CullTransparentMesh: 0
+--- !u!114 &1980879698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980879694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d707a6c1517e14abd7330c69d2e3b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armourToggle: 0
+  armourImage: {fileID: 0}
 --- !u!1 &1998093835
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,8 +3566,9 @@ GameObject:
   - component: {fileID: 2036853322}
   - component: {fileID: 2036853324}
   - component: {fileID: 2036853323}
+  - component: {fileID: 2036853325}
   m_Layer: 5
-  m_Name: Heart (Render Texture Image)
+  m_Name: Heart 5 (Render Texture Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2981,6 +3628,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036853321}
   m_CullTransparentMesh: 0
+--- !u!114 &2036853325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036853321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e0eae2c2f8231c4d8734280d2e6d19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartToggle: 0
+  heartImage: {fileID: 0}
 --- !u!1 &2071201371
 GameObject:
   m_ObjectHideFlags: 0

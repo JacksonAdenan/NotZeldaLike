@@ -175,7 +175,7 @@ MonoBehaviour:
   down: 0
   left: 0
   right: 0
-  CompatibleWithEverything: 0
+  CompatibleWithEverything: 1
 --- !u!1 &2279531475713507638
 GameObject:
   m_ObjectHideFlags: 0
