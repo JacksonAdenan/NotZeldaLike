@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 public class GameManager : MonoBehaviour
 {
 
@@ -39,7 +41,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-
     private bool hasResetPlayer = false;
 
     public int numberOfLayouts;
@@ -50,6 +51,10 @@ public class GameManager : MonoBehaviour
 
     TransitionManager transitionManager;
     public GameObject transitionManagerPrefab;
+
+    public int levelCount = 1;
+    public int zoneCount = 1;
+    public TextMeshProUGUI levelUI;
 
     // We have pointers to these rooms so that we can use them to spawn the player.
     //[HideInInspector]
@@ -82,6 +87,7 @@ public class GameManager : MonoBehaviour
         navmeshBaker = NavMeshBaker.GetInstance();
 
         transitionManager = Instantiate(transitionManagerPrefab).GetComponent<TransitionManager>();
+        levelUI.text = "Level:" + zoneCount.ToString() + "-" + levelCount.ToString();
     }
 
     // Update is called once per frame
@@ -157,6 +163,14 @@ public class GameManager : MonoBehaviour
     IEnumerator PlayWait(float time)
     {
         yield return new WaitForSeconds(time);
+        if (levelCount == 5)
+        {
+            zoneCount++;
+            levelCount = 1;
+        }
+        else
+            levelCount++;
+        levelUI.text = "Level: " + zoneCount.ToString() + "-" + levelCount.ToString();
         SceneManager.LoadScene("DanielsTestScene");
         transitionReloadLock = false;
         hasResetPlayer = false;

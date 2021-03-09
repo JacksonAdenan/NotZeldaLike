@@ -15,6 +15,7 @@ public class RoomController : MonoBehaviour
     public GameObject enemySpawnerParent;
     public GameObject mapColourObject;
     bool activeFirstTimeRunning;
+    bool activeFirstTimeRunningButTheOneThatResetsSometimes;
     bool clearedFirstTimeRunning;
 
     void Start()
@@ -36,14 +37,26 @@ public class RoomController : MonoBehaviour
             case RoomStates.Active:
                 if (activeFirstTimeRunning == false)
                 {
-                    foreach (EnemySpawner enemySpawner in enemySpawners)
-                        Instantiate(enemySpawner.rolledEnemy, enemySpawner.transform);
                     mapColourObject.SetActive(false);
                     activeFirstTimeRunning = true;
                 }
-                //Add room to minimap
-                //foreach (GameObject enemy in enemies)
-                    //roomStatesToggle = RoomStates.Cleared;
+                if (activeFirstTimeRunningButTheOneThatResetsSometimes == false)
+                {
+                    foreach (EnemySpawner enemySpawner in enemySpawners)
+                        enemies.Add(Instantiate(enemySpawner.rolledEnemy, enemySpawner.transform));
+                    activeFirstTimeRunningButTheOneThatResetsSometimes = true;
+                }
+                int count = 0;
+                foreach (GameObject enemy in enemies)
+                    if (enemy.activeSelf)
+                        count++;
+                if (count == 0)
+                {
+                    foreach (GameObject enemy in enemies)
+                        Destroy(enemy);
+                    roomStatesToggle = RoomStates.Cleared;
+                }
+                count = 0;
                 break;
             case RoomStates.Cleared:
                 if (clearedFirstTimeRunning == false)
@@ -74,7 +87,7 @@ public class RoomController : MonoBehaviour
         {
             if (roomStatesToggle == RoomStates.Active)
                 roomStatesToggle = RoomStates.Inactive;
-
+            activeFirstTimeRunningButTheOneThatResetsSometimes = false;
             foreach (GameObject enemy in enemies)
             {
                 enemies.Remove(enemy);

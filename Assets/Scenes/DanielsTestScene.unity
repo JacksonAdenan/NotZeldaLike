@@ -2396,6 +2396,9 @@ MonoBehaviour:
   cameraYAxis: 10
   transitionManagerPrefab: {fileID: 3829657382016047609, guid: eaa5fbc60cfc4914bb78d636990f4ef6,
     type: 3}
+  levelCount: 1
+  zoneCount: 1
+  levelUI: {fileID: 1875555599}
   currentEntranceRoom: {fileID: 0}
   currentExitRoom: {fileID: 0}
   player: {fileID: 3070133563548722364, guid: a1197956af98fa248905782de2cec927, type: 3}
@@ -3217,7 +3220,7 @@ GameObject:
   - component: {fileID: 1875555600}
   - component: {fileID: 1875555599}
   m_Layer: 5
-  m_Name: Armor (Text) (1)
+  m_Name: Level (Text)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
