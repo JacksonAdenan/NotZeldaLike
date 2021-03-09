@@ -54,7 +54,7 @@ public class AIStateMachine
     {
         if (currentState == BasicDecisions.WANDER)
         {
-            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) < controller.chaseDistance)
+            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) <= controller.chaseDistance)
             {
                 currentState = BasicDecisions.CHASE;
             }
@@ -104,7 +104,7 @@ public class AIStateMachine
 
             if (!agent.pathPending)
             {
-                if (Vector3.Distance(agent.transform.position, player.transform.position) <= 1.5f)
+                if (Vector3.Distance(agent.transform.position, player.transform.position) < controller.attackDistance)
                 {
                     hasReachedDestination = true;
                     Debug.Log("Agent completed chase path.");
@@ -121,8 +121,10 @@ public class AIStateMachine
             lookPosition.y = 0;
             Quaternion rotation = Quaternion.LookRotation(lookPosition);
             agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 10);
-            if (Vector3.Distance(agent.transform.position, player.transform.position) > 1)
+            if (Vector3.Distance(agent.transform.position, player.transform.position) >= controller.attackDistance)
             {
+                // If the agent has an attack winded up, reset it to 0.
+                attackWindUpTimer = 0;
                 currentState = BasicDecisions.CHASE;
             }
 
@@ -141,6 +143,10 @@ public class AIStateMachine
             Debug.Log("Agent is damaged");
             //agent.ResetPath();
             //agent.updatePosition = false;
+
+            // If the agent has an attack winded up, reset it to 0.
+            attackWindUpTimer = 0;
+
             DamagedTimer();
             //Vector3 lookPosition = player.transform.position - agent.transform.position;
             //lookPosition.y = 0;

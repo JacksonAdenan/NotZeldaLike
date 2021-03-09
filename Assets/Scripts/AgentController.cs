@@ -11,9 +11,11 @@ public class AgentController : MonoBehaviour
     public float xWanderDistance = 2;
     public float yWanderDistance = 2;
     public float chaseDistance = 3;
+    public float attackDistance = 1;
 
     public float knockback = 5.0f;
     public int meleeDamage = 1;
+
 
     public Material damageMaterial;
     private Material originalMaterial;
@@ -32,7 +34,8 @@ public class AgentController : MonoBehaviour
     [HideInInspector]
     public bool isAttacking = false;
 
-    private float attackCounter = 0.0f;
+    
+    public float attackCounter = 0.0f;
 
 
     // Start is called before the first frame update
@@ -109,9 +112,13 @@ public class AgentController : MonoBehaviour
 
             // We have to ResetPath() here because although we are doing it in the state machine when DAMAGED is the current state, the state machine hasn't neccessarily caught up to swapping to
             // the DAMAGE state. To make sure no path's are active we make sure by resetting here.
-            if(agent.hasPath)
+            if (agent.hasPath)
+            { 
                 agent.ResetPath();
+                //agent.acceleration = 0;
+            }
             agent.velocity = pushDirection * playerManager.meleeKnockbackForce;
+            //agent.
              
 
             Debug.Log("Enemy took damage.");
@@ -135,6 +142,12 @@ public class AgentController : MonoBehaviour
                 meleeZone.gameObject.SetActive(false);
                 attackCounter = 0;
             }
+        }
+
+        // Safety incase melee box doesn't go away like it's supposed to.
+        if (!isAttacking && meleeZone.gameObject.activeSelf)
+        {
+            meleeZone.gameObject.SetActive(false);
         }
     }
 }
