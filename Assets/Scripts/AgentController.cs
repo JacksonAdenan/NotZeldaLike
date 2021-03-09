@@ -38,7 +38,11 @@ public class AgentController : MonoBehaviour
     public float attackCounter = 0.0f;
 
 
+    [HideInInspector]
+    public float originalAngularSpeed;
+
     // Just for debugging purposes
+    [HideInInspector]
     public AIStateMachine.BasicDecisions currentState;
 
 
@@ -61,7 +65,8 @@ public class AgentController : MonoBehaviour
             Debug.Log("Couldn't find melee zone for monster.");
         }
 
-        //agent.destination = goal.position;
+        // Storing agents original angular speed so we can modify it.
+        originalAngularSpeed = agent.angularSpeed;
     }
 
     // Update is called once per frame
@@ -128,7 +133,8 @@ public class AgentController : MonoBehaviour
             }
             agent.velocity = pushDirection * playerManager.meleeKnockbackForce;
             //agent.
-             
+
+            agent.angularSpeed = 0;
 
             Debug.Log("Enemy took damage.");
         }

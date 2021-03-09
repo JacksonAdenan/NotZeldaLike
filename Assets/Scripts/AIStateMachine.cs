@@ -185,6 +185,7 @@ public class AIStateMachine
             currentState = BasicDecisions.WANDER;
             // IMPORTANT. Set the agent's velocity to zero otherwise he will move really quickly when swapping to the next state.
             agent.velocity = Vector3.zero;
+            agent.angularSpeed = controller.originalAngularSpeed;
         }
   
     }
