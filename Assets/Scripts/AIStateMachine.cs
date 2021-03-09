@@ -261,17 +261,30 @@ public class AIStateMachine
                 agent.SetDestination(storedPlayerPos);
                 controller.Attack();
                 ChargeDuration();
+
+                
             }
-            
 
 
 
+            //else if (agent.pathStatus == NavMeshPathStatus.PathComplete)
+            //{
+            //    SetState(BasicDecisions.WANDER);
+            //    // If the agent has an attack winded up or charge, reset it to 0.
+            //    attackWindUpTimer = 0;
+            //    chargeWindupTimer = 0;
+            //    agent.ResetPath();
+            //    return;
+            //}
 
             else if (Vector3.Distance(agent.transform.position, player.transform.position) >= controller.attackDistance)
             {
-                // If the agent has an attack winded up, reset it to 0.
+                // If the agent has an attack winded up or charge, reset it to 0.
                 attackWindUpTimer = 0;
+                chargeWindupTimer = 0;
                 currentState = BasicDecisions.WANDER;
+
+                agent.ResetPath();
                 return;
             }
 
