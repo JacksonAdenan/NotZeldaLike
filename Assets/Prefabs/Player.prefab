@@ -211,7 +211,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 4
-  m_CollisionDetection: 2
+  m_CollisionDetection: 3
 --- !u!136 &6854540669001022599
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -243,7 +243,10 @@ MonoBehaviour:
   cameraYAxis: 10
   startingHealth: 3
   startingMaxHealth: 5
+  startingArmour: 0
+  startingMaxArmour: 0
   hearts: []
+  armours: []
   meleeDamage: 1
   meleeKnockbackForce: 10
   isAlive: 0

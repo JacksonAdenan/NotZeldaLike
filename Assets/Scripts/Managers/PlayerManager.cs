@@ -82,6 +82,8 @@ public class PlayerManager : MonoBehaviour
 
     [HideInInspector]
     public Rigidbody playerRigidbody;
+    private PlayerController controller;
+
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +93,7 @@ public class PlayerManager : MonoBehaviour
 
         originalMaterial = player.GetComponent<Renderer>().material;
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
+        controller = gameObject.GetComponent<PlayerController>();
 
         foreach (Transform heart in GameManager.GetInstance().healthUIParent.transform)
             hearts.Add(heart.GetComponent<HeartUI>());
@@ -211,7 +214,7 @@ public class PlayerManager : MonoBehaviour
     //    theCamera.transform.position = new Vector3(player.transform.position.x, cameraYAxis, cameraZAxis);
     //}
 
-    void AddHealth(int add)
+    public void AddHealth(int add)
     {
         for (int i = 0; i < add; i++)
             if (health < maxHealth)
@@ -221,7 +224,7 @@ public class PlayerManager : MonoBehaviour
             hearts[i].heartToggle = HeartUI.HeartStates.Full;
     }
 
-    void DecreaseHealth(int remove)
+    public void DecreaseHealth(int remove)
     {
         for (int i = 0; i < remove; i++)
             if (health > 0)
@@ -231,7 +234,7 @@ public class PlayerManager : MonoBehaviour
             hearts[health - i].heartToggle = HeartUI.HeartStates.Empty;
     }
 
-    void AddMaxHealth(int add)
+    public void AddMaxHealth(int add)
     {
         for (int i = 0; i < add; i++)
             if (maxHealth < 10)
@@ -241,7 +244,7 @@ public class PlayerManager : MonoBehaviour
             }
     }
 
-    void AddArmour(int add)
+    public void AddArmour(int add)
     {
         for (int i = 0; i < add; i++)
             if (armour < maxArmour)
@@ -251,7 +254,7 @@ public class PlayerManager : MonoBehaviour
             armours[i].armourToggle = ArmourUI.ArmourStates.Full;
     }
 
-    void DecreaseArmour(int remove)
+    public void DecreaseArmour(int remove)
     {
         for (int i = 0; i < remove; i++)
             if (armour > 0)
@@ -261,7 +264,7 @@ public class PlayerManager : MonoBehaviour
             armours[armour - i].armourToggle = ArmourUI.ArmourStates.Empty;
     }
 
-    void AddMaxArmour(int add)
+    public void AddMaxArmour(int add)
     {
         for (int i = 0; i < add; i++)
             if (maxArmour < 6)
@@ -269,6 +272,21 @@ public class PlayerManager : MonoBehaviour
                 maxArmour++;
                 armours[maxArmour - 1].armourToggle = ArmourUI.ArmourStates.Empty;
             }
+    }
+
+    public void AddKnockback(int add)
+    {
+        meleeKnockbackForce += add;
+    }
+
+    public void AddMovementSpeed(int add)
+    {
+        controller.speed += add;
+    }
+
+    public void AddDamage(int add)
+    {
+        meleeDamage += add;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -7,9 +7,12 @@ using UnityEngine;
 public enum PickupType
 { 
     HEALTH,
-    ARMOUR
-    //MAX_HEALTH,
-    //MAX_ARMOUR
+    ARMOUR,
+    MAX_HEALTH,
+    MAX_ARMOUR,
+    MOVEMENT_SPEED,
+    KNOCK_BACK,
+    DAMAGE
 }
 public class Pickup : MonoBehaviour
 {
@@ -49,18 +52,27 @@ public class Pickup : MonoBehaviour
     {
         switch (type)
         {
-            //case PickupType.HEALTH:
-            //    playerManager.AddHealth(amount);
-            //    break;
-            //case PickupType.ARMOUR:
-            //    playerManager.AddArmour(amount);
-            //    break;
-            //case PickupType.MAX_ARMOUR:
-            //    playerManager.AddMaxArmour(amount);
-            //    break;
-            //case PickupType.MAX_HEALTH:
-            //    playerManager.AddMaxHealth(amount);
-            //    break;
+            case PickupType.HEALTH:
+                playerManager.AddHealth(amount);
+                break;
+            case PickupType.ARMOUR:
+                playerManager.AddArmour(amount);
+                break;
+            case PickupType.MAX_ARMOUR:
+                playerManager.AddMaxArmour(amount);
+                break;
+            case PickupType.MAX_HEALTH:
+                playerManager.AddMaxHealth(amount);
+                break;
+            case PickupType.MOVEMENT_SPEED:
+                playerManager.AddMovementSpeed(amount);
+                break;
+            case PickupType.KNOCK_BACK:
+                playerManager.AddKnockback(amount);
+                break;
+            case PickupType.DAMAGE:
+                playerManager.AddDamage(amount);
+                break;
         }
     }
 
