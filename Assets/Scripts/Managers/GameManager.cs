@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
     private PlayerManager playerManager;
     private GameObject playerInstance;
 
+    private NavMeshBaker navmeshBaker;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +69,8 @@ public class GameManager : MonoBehaviour
 
         playerManager = PlayerManager.GetInstance();
         playerInstance = playerManager.player;
+
+        navmeshBaker = NavMeshBaker.GetInstance();
 
     }
 
@@ -91,7 +94,9 @@ public class GameManager : MonoBehaviour
         // I think resetting the player pos has to be here because when we reload the scene we have to wait for DungeonGenerators Awake() function to be called before we re position the player.
         if (!hasResetPlayer && currentEntranceRoom != null)
         {
+            Debug.Log("!NOTE!========= NAV MESH REBAKED ==========!NOTE!");
             ResetPlayer();
+            navmeshBaker.ResetBaker();
         }
     }
 
@@ -132,13 +137,16 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("DanielsTestScene");
         hasResetPlayer = false;
+        currentEntranceRoom = null;
+
+        
     }
 
     public void ResetPlayer()
     {
+        
         ResetPlayerPos();
         SpawnCamera();
         hasResetPlayer = true;
-        currentEntranceRoom = null;
     }
 }

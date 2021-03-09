@@ -11,6 +11,7 @@ public class RoomController : MonoBehaviour
     public RoomStates roomStatesToggle = RoomStates.Inactive;
     public List<GameObject> enemies = new List<GameObject>();
     public GameObject layout;
+    public GameObject outline;
     public GameObject enemySpawnerParent;
     public GameObject mapColourObject;
     bool activeFirstTimeRunning;

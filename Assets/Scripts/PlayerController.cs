@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5;
+    public float speed = 0.4f;
     private Transform player;
 
 
@@ -15,11 +15,15 @@ public class PlayerController : MonoBehaviour
 
     private BoxCollider meleeZone;
 
+    private Rigidbody playerRigidbody;
+
     // Start is called before the first frame update
     void Start()
     {
         player = this.gameObject.transform;
         meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
+
+        playerRigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -32,7 +36,10 @@ public class PlayerController : MonoBehaviour
             // We put yTranslation in the z value because in our game, y means going into the sky.
             Vector3 movement = new Vector3(xTranslation, 0, yTranslation).normalized;
             //movement = Vector3.Normalize(movement);
-            player.position += movement * speed * Time.deltaTime;
+
+            //player.position += movement * speed * Time.deltaTime;
+            movement *= speed;
+            playerRigidbody.AddForce(movement, ForceMode.VelocityChange);
 
         }
 
