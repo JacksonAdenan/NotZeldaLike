@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
         healthIcon.SetActive(false);
         armourIcon.SetActive(false);
 
-        for (int i = 0; i < playerManager.health; i++)
+        /*for (int i = 0; i < playerManager.health; i++)
         {
             AddIcon(IconType.HealthIcon, i + 1);
         }
@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < playerManager.armour; i++)
         {
             AddIcon(IconType.ArmourIcon, i + 1);
-        }
+        }*/
     }
 
     // Update is called once per frame

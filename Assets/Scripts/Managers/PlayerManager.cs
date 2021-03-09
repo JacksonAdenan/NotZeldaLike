@@ -41,10 +41,18 @@ public class PlayerManager : MonoBehaviour
     public float cameraYAxis = 10;
 
 
-	public int health;
+    /*public int health;
     public int armour;
     public int maxHealth;
-    public int maxArmour;
+    public int maxArmour;*/
+    [Header("Stats")]
+    public int startingHealth;
+    public int startingMaxHealth;
+    int health;
+    int maxHealth;
+    int armour;
+    int maxArmour;
+    public List<HeartUI> hearts = new List<HeartUI>();
 
     public int meleeDamage = 1;
     public float meleeKnockbackForce = 7.0f;
@@ -80,6 +88,11 @@ public class PlayerManager : MonoBehaviour
 
         originalMaterial = player.GetComponent<Renderer>().material;
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
+
+        foreach (Transform heart in GameManager.GetInstance().healthUIParent.transform)
+            hearts.Add(heart.GetComponent<HeartUI>());
+        AddMaxHealth(startingMaxHealth);
+        AddHealth(startingHealth);
     }
 
     // Update is called once per frame
@@ -95,7 +108,15 @@ public class PlayerManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            AddArmour(1);
+            AddMaxHealth(1);
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            AddHealth(1);
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            DecreaseHealth(1);
         }
 
 
@@ -112,8 +133,9 @@ public class PlayerManager : MonoBehaviour
     //}
     public void HitPlayer(int damageAmount)
     {
+        DecreaseHealth(damageAmount);
         // The player will lose 1 peice of armour if they have it, if the player has no armour the damage goes to their health.
-        if (armour > 0)
+        /*if (armour > 0)
         {
             armour -= 1;
             for (int i = 0; i < damageAmount; i++)
@@ -134,11 +156,9 @@ public class PlayerManager : MonoBehaviour
 
             if (health < 0)
                 health = 0;
-
-
-        }
+        }*/
     }
-    public void AddArmour(int armourAmount)
+    /*public void AddArmour(int armourAmount)
     {
         armour += armourAmount;
         for (int i = 0; i < armourAmount; i++)
@@ -169,7 +189,7 @@ public class PlayerManager : MonoBehaviour
         {
             health = maxHealth;
         }
-    }
+    }*/
 
     //public void SpawnCamera()
     //{
@@ -177,6 +197,46 @@ public class PlayerManager : MonoBehaviour
     //
     //    theCamera.transform.position = new Vector3(player.transform.position.x, cameraYAxis, cameraZAxis);
     //}
+
+    void AddHealth(int add)
+    {
+        for (int i = 0; i < add; i++)
+            if (health < maxHealth)
+                health++;
+
+        for (int i = 0; i < health; i++)
+            hearts[i].heartToggle = HeartUI.HeartStates.Full;
+    }
+
+    void DecreaseHealth(int remove)
+    {
+        for (int i = 0; i < remove; i++)
+            if (health > 0)
+                health--;
+
+        for (int i = 0; i < remove; i++)
+            hearts[health - i].heartToggle = HeartUI.HeartStates.Empty;
+    }
+
+    void AddMaxHealth(int add)
+    {
+        for (int i = 0; i < add; i++)
+            if (maxHealth < 10)
+            {
+                maxHealth++;
+                hearts[maxHealth - 1].heartToggle = HeartUI.HeartStates.Empty;
+            }
+    }
+
+    void AddArmour()
+    {
+
+    }
+
+    void RemoveArmour()
+    {
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
