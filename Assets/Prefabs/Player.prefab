@@ -241,10 +241,9 @@ MonoBehaviour:
   player: {fileID: 3070133563548722364}
   cameraZAxis: -3
   cameraYAxis: 10
-  health: 3
-  armour: 5
-  maxHealth: 5
-  maxArmour: 5
+  startingHealth: 3
+  startingMaxHealth: 5
+  hearts: []
   meleeDamage: 1
   meleeKnockbackForce: 10
   isAlive: 0

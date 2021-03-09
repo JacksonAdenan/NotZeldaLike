@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
 
     private NavMeshBaker navmeshBaker;
 
+    public GameObject healthUIParent;
+    public GameObject armourUIParent;
+
     // Start is called before the first frame update
     void Start()
     {

@@ -43,7 +43,7 @@ public class Pickup : MonoBehaviour
 
     void DoPickUp()
     {
-        switch (type)
+        /*switch (type)
         {
             case PickupType.HEALTH:
                 playerManager.AddHealth(1);
@@ -51,7 +51,7 @@ public class Pickup : MonoBehaviour
             case PickupType.ARMOUR:
                 playerManager.AddArmour(1);
                 break;
-        }
+        }*/
     }
 
 	public void OnTriggerEnter(Collider other)

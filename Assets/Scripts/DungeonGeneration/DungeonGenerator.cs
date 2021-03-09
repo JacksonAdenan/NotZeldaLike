@@ -157,12 +157,18 @@ public class DungeonGenerator : MonoBehaviour
                         GameObject floorToCheck = Resources.Load<GameObject>(floorVariation);
                         LayoutData layoutData = floorToCheck.GetComponent<LayoutData>();
 
+                        if (randomNum >= 13)
+                        {
+                            int hi = 1;
+                        }
+
                         if (CheckOutlineLayoutCompatability(outlineData, layoutData))
                         {
                             Debug.Log("Found match for floor and outline.");
                             GameObject floor = Instantiate(floorToCheck);
                             floor.transform.parent = roomReference.transform;
                             floor.transform.localPosition = Vector3.zero;
+                            floor.transform.rotation = controller.outline.transform.rotation;
 
                             controller.layout = floor;
                             break;
@@ -186,8 +192,11 @@ public class DungeonGenerator : MonoBehaviour
 
     bool CheckOutlineLayoutCompatability(OutlineData outline, LayoutData layout)
     {
-        
-        if ((outline.up == layout.up && outline.down == layout.down && outline.right == layout.right && outline.left == layout.left) || layout.CompatibleWithEverything)
+        if ((outline.up == layout.up && outline.down == layout.down && outline.right == layout.right && outline.left == layout.left))
+        {
+            return true;
+        }
+        else if (layout.CompatibleWithEverything)
         {
             return true;
         }
