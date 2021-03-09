@@ -1605,6 +1605,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transition Trigger (Up)
       objectReference: {fileID: 0}
+    - target: {fileID: 6680530441412373858, guid: fa44c951a5702864cbaf812d033fc4f4,
+        type: 3}
+      propertyPath: directionToggle
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa44c951a5702864cbaf812d033fc4f4, type: 3}
 --- !u!4 &3833524940650554010 stripped
@@ -1620,6 +1625,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1207640145428696565}
     m_Modifications:
+    - target: {fileID: 1013001283054267852, guid: 155ac38107155c1449b5f89897eb5339,
+        type: 3}
+      propertyPath: directionToggle
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7982788029544047144, guid: 155ac38107155c1449b5f89897eb5339,
         type: 3}
       propertyPath: m_Name
@@ -1695,6 +1705,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1207640145428696565}
     m_Modifications:
+    - target: {fileID: 181704756546422746, guid: 80da3cf708c8608438f1804832c64e4c,
+        type: 3}
+      propertyPath: directionToggle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2135094855710741986, guid: 80da3cf708c8608438f1804832c64e4c,
         type: 3}
       propertyPath: m_Name

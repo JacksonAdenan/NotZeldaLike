@@ -1157,6 +1157,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 471846111124830901}
     m_Modifications:
+    - target: {fileID: 1013001283054267852, guid: 155ac38107155c1449b5f89897eb5339,
+        type: 3}
+      propertyPath: directionToggle
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7982788029544047144, guid: 155ac38107155c1449b5f89897eb5339,
         type: 3}
       propertyPath: m_Name

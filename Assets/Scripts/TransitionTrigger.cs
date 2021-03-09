@@ -4,25 +4,32 @@ using UnityEngine;
 
 public class TransitionTrigger : MonoBehaviour
 {
-    Vector3 location;
+    Vector3 playerLocation;
+    Vector3 cameraLocation;
+    Camera camera;
     public enum Direction { Up, Down, Left, Right }
     public Direction directionToggle;
 
     private void Start()
     {
+        camera = Camera.main;
         switch (directionToggle)
         {
             case Direction.Up:
-                location = new Vector3(0, 0, 2);
+                playerLocation = new Vector3(0, 0, -2);
+                cameraLocation = new Vector3(0, 0, -12);
                 break;
             case Direction.Down:
-                location = new Vector3(0, 0, -2);
+                playerLocation = new Vector3(0, 0, 2);
+                cameraLocation = new Vector3(0, 0, 12);
                 break;
             case Direction.Left:
-                location = new Vector3(-2, 0, 0);
+                playerLocation = new Vector3(2, 0, 0);
+                cameraLocation = new Vector3(14, 0, 0);
                 break;
             case Direction.Right:
-                location = new Vector3(2, 0, 0);
+                playerLocation = new Vector3(-2, 0, 0);
+                cameraLocation = new Vector3(-14, 0, 0);
                 break;
         }
     }
@@ -32,7 +39,8 @@ public class TransitionTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Entered Transition Trigger");
-            other.transform.position = transform.position + location;
+            other.transform.position = transform.position + playerLocation;
+            camera.transform.position += cameraLocation;
         }
     }
 }

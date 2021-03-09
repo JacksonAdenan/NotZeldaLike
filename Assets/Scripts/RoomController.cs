@@ -3,25 +3,25 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour
 {
-    [HideInInspector]
     public List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
     [HideInInspector]
     public List<GameObject> pickupSpawners = new List<GameObject>();
-    [Header("Scene")]
-    public List<GameObject> enemySpawnersList = new List<GameObject>();
     public enum RoomStates { Inactive, Active, Cleared }
     [Header("Runtime")]
     public RoomStates roomStatesToggle = RoomStates.Inactive;
     public List<GameObject> enemies = new List<GameObject>();
-    [HideInInspector]
     public GameObject layout;
+    public GameObject enemySpawnerParent;
+    public GameObject mapColourObject;
     bool activeFirstTimeRunning;
     bool clearedFirstTimeRunning;
 
     void Start()
     {
-        foreach (GameObject enemySpawner in enemySpawnersList)
-            enemySpawners.Add(enemySpawner.GetComponent<EnemySpawner>());
+        foreach (Transform enemySpawnersObjects in layout.transform.GetChild(1).transform)
+        {
+            enemySpawners.Add(enemySpawnersObjects.GetComponent<EnemySpawner>());
+        }
 
         RollEnemies();
     }
@@ -34,12 +34,15 @@ public class RoomController : MonoBehaviour
                 break;
             case RoomStates.Active:
                 if (activeFirstTimeRunning == false)
+                {
                     foreach (EnemySpawner enemySpawner in enemySpawners)
                         Instantiate(enemySpawner.rolledEnemy, enemySpawner.transform);
-
+                    mapColourObject.SetActive(false);
+                    activeFirstTimeRunning = true;
+                }
                 //Add room to minimap
-                foreach (GameObject enemy in enemies)
-                    roomStatesToggle = RoomStates.Cleared;
+                //foreach (GameObject enemy in enemies)
+                    //roomStatesToggle = RoomStates.Cleared;
                 break;
             case RoomStates.Cleared:
                 if (clearedFirstTimeRunning == false)
