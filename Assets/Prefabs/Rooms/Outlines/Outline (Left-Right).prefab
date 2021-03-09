@@ -527,6 +527,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4116604918575614893}
+  - component: {fileID: 3800505451618506196}
   m_Layer: 0
   m_Name: Outline (Left-Right)
   m_TagString: Untagged
@@ -550,6 +551,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3800505451618506196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5354862115850762534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27aaa36c7bc33bb478e464bfc4d8657a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: 0
+  down: 0
+  left: 1
+  right: 1
 --- !u!1 &5563877741347612586
 GameObject:
   m_ObjectHideFlags: 0

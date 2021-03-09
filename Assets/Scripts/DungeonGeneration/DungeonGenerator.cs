@@ -106,6 +106,10 @@ public class DungeonGenerator : MonoBehaviour
                     // Giving the actual "room" in memory a reference to the room game object so it can access the RoomController.
                     test.grid[i, j].roomObj = room;
 
+                    // Giving the RoomController a reference to the outline game object.
+                    RoomController controller = room.GetComponent<RoomController>();
+                    controller.outline = outline;
+
                     //outline.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
                     
                 }
@@ -123,21 +127,71 @@ public class DungeonGenerator : MonoBehaviour
                 { 
                     int randomNum = Random.Range(0, 11);
                     string floorVariation = "Rooms/Layouts/" + randomNum.ToString();
-                    //GameObject room = Resources.Load(roomPath) as GameObject;
-                    GameObject floor = Instantiate(Resources.Load<GameObject>(floorVariation));
+
+                    //GameObject floor = Instantiate(Resources.Load<GameObject>(floorVariation));
 
                     GameObject roomReference = test.grid[i, j].roomObj;
-                    floor.transform.parent = roomReference.transform;
-                    floor.transform.localPosition = Vector3.zero;
+                    //floor.transform.parent = roomReference.transform;
+                    //floor.transform.localPosition = Vector3.zero;
 
                     // Passing the room controller a reference to the floor variation.
                     RoomController controller = roomReference.GetComponent<RoomController>();
-                    controller.layout = floor;
+                    //controller.layout = floor;
+
+                    // If infiniteLoopPrevention hits 100, we stop trying to find a match. I picked 100 because its way above the amount of variations we will have for a while.
+                    int infiniteLoopPrevention = 0;
+                    OutlineData outlineData = controller.outline.GetComponent<OutlineData>();
+                    bool foundMatch = false;
+                    while (!foundMatch)
+                    {
+                        infiniteLoopPrevention += 1;
+                        if (infiniteLoopPrevention == 100)
+                        {
+                            Debug.Log("ERROR OCCURED: No variations match any outlines!!!");
+                            break;
+                        }
+
+                        // Updating floorVariation to have the new rolled number.
+                        floorVariation = "Rooms/Layouts/" + randomNum.ToString();
+
+                        GameObject floorToCheck = Resources.Load<GameObject>(floorVariation);
+                        LayoutData layoutData = floorToCheck.GetComponent<LayoutData>();
+
+                        if (CheckOutlineLayoutCompatability(outlineData, layoutData))
+                        {
+                            Debug.Log("Found match for floor and outline.");
+                            GameObject floor = Instantiate(floorToCheck);
+                            floor.transform.parent = roomReference.transform;
+                            floor.transform.localPosition = Vector3.zero;
+
+                            controller.layout = floor;
+                            break;
+                        }
+
+                        else
+                        {
+                            Debug.Log("Floor and outline did not match. Re-generating new floor variation.");
+                            // When we hit the end of the list of variations, we want to go back to the start incase we missed any.
+                            randomNum += 1;
+                            if (randomNum == 12)
+                                randomNum = 0;
+                        }
+                    }
 
                     //floor.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
                 }
             }
         }
+    }
+
+    bool CheckOutlineLayoutCompatability(OutlineData outline, LayoutData layout)
+    {
+        if ((outline.up == layout.up && outline.down == layout.down && outline.right == layout.right && outline.left == layout.left) || layout.CompatibleWithEverything)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     GameObject GetRoomPrefab(RoomPattern pattern)

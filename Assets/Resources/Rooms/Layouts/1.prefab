@@ -580,6 +580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 134624772117588952}
   - component: {fileID: 8727532219118274497}
+  - component: {fileID: -1871196550175481446}
   m_Layer: 0
   m_Name: 1
   m_TagString: NavMeshSurface
@@ -633,6 +634,23 @@ MonoBehaviour:
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &-1871196550175481446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797685202156360279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 835457b5d424d4948bae458162a71158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: 0
+  down: 0
+  left: 0
+  right: 0
+  CompatibleWithEverything: 1
 --- !u!1 &1823904627399403856
 GameObject:
   m_ObjectHideFlags: 0
