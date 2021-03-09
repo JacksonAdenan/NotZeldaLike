@@ -13,15 +13,15 @@ public class MainMenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void GameLoad()
+    public void GameLoad(string sceneName)
     {
         transitionManager.Transition();
-        StartCoroutine(PlayWait(1.6f));
+        StartCoroutine(PlayWait(1.6f, sceneName));
     }
 
-    IEnumerator PlayWait(float time)
+    IEnumerator PlayWait(float time, string sceneName)
     {
         yield return new WaitForSeconds(time);
-        SceneManager.LoadScene(gameScene);
+        SceneManager.LoadScene(sceneName);
     }
 }
