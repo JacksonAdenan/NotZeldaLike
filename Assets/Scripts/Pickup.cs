@@ -7,18 +7,22 @@ using UnityEngine;
 public enum PickupType
 { 
     HEALTH,
-    ARMOUR
+    ARMOUR,
+    MAX_HEALTH,
+    MAX_ARMOUR
 }
 public class Pickup : MonoBehaviour
 {
     public PickupType type;
+    public int amount;
+
 
     private Transform itemsTransform;
     public float rotationSpeed = 0.05f;
     public float bobbingSpeed = 0.1f;
     public float bobbingHeight = 0.5f;
 
-    private float originalY;
+    public float originalY = 0.4f;
 
 
     private PlayerManager playerManager;
@@ -27,7 +31,7 @@ public class Pickup : MonoBehaviour
     void Start()
     {
         itemsTransform = this.gameObject.transform;
-        originalY = itemsTransform.position.y;
+        //originalY = itemsTransform.position.y;
         playerManager = PlayerManager.GetInstance();
     }
 
@@ -43,15 +47,21 @@ public class Pickup : MonoBehaviour
 
     void DoPickUp()
     {
-        /*switch (type)
+        switch (type)
         {
-            case PickupType.HEALTH:
-                playerManager.AddHealth(1);
-                break;
-            case PickupType.ARMOUR:
-                playerManager.AddArmour(1);
-                break;
-        }*/
+            //case PickupType.HEALTH:
+            //    playerManager.AddHealth(amount);
+            //    break;
+            //case PickupType.ARMOUR:
+            //    playerManager.AddArmour(amount);
+            //    break;
+            //case PickupType.MAX_ARMOUR:
+            //    playerManager.AddMaxArmour(amount);
+            //    break;
+            //case PickupType.MAX_HEALTH:
+            //    playerManager.AddMaxHealth(amount);
+            //    break;
+        }
     }
 
 	public void OnTriggerEnter(Collider other)
