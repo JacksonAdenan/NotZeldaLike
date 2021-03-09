@@ -7,7 +7,8 @@ using UnityEngine;
 public enum MobType
 { 
     Skeleton,
-    Zombie
+    Zombie,
+    Thromp
 }
 public class MobSpawner : MonoBehaviour
 {

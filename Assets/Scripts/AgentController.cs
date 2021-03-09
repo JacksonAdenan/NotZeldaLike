@@ -6,14 +6,18 @@ using UnityEngine.AI;
 public class AgentController : MonoBehaviour
 {
     NavMeshAgent agent;
+    public MobType mob;
+
     public int health = 5;
 
     public float xWanderDistance = 2;
     public float yWanderDistance = 2;
     public float chaseDistance = 3;
+    public float attackDistance = 1;
 
     public float knockback = 5.0f;
     public int meleeDamage = 1;
+
 
     public Material damageMaterial;
     private Material originalMaterial;
@@ -32,14 +36,23 @@ public class AgentController : MonoBehaviour
     [HideInInspector]
     public bool isAttacking = false;
 
-    private float attackCounter = 0.0f;
+    
+    public float attackCounter = 0.0f;
+
+
+    [HideInInspector]
+    public float originalAngularSpeed;
+
+    // Just for debugging purposes
+    //[HideInInspector]
+    public AIStateMachine.BasicDecisions currentState;
 
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        stateMachine = new AIStateMachine(MobType.Skeleton, agent, this);
+        stateMachine = new AIStateMachine(mob, agent, this);
 
         agentRigidbody = this.gameObject.GetComponent<Rigidbody>();
 
@@ -54,7 +67,8 @@ public class AgentController : MonoBehaviour
             Debug.Log("Couldn't find melee zone for monster.");
         }
 
-        //agent.destination = goal.position;
+        // Storing agents original angular speed so we can modify it.
+        originalAngularSpeed = agent.angularSpeed;
     }
 
     // Update is called once per frame
@@ -64,6 +78,11 @@ public class AgentController : MonoBehaviour
         DamageTimer();
 
         AttackTimer();
+
+
+        // Debugging purposes:
+        currentState = stateMachine.currentState;
+
     }
 
     void DamageTimer()
@@ -109,10 +128,15 @@ public class AgentController : MonoBehaviour
 
             // We have to ResetPath() here because although we are doing it in the state machine when DAMAGED is the current state, the state machine hasn't neccessarily caught up to swapping to
             // the DAMAGE state. To make sure no path's are active we make sure by resetting here.
-            if(agent.hasPath)
+            if (agent.hasPath)
+            { 
                 agent.ResetPath();
+                //agent.acceleration = 0;
+            }
             agent.velocity = pushDirection * playerManager.meleeKnockbackForce;
-             
+            //agent.
+
+            agent.angularSpeed = 0;
 
             Debug.Log("Enemy took damage.");
         }
@@ -135,6 +159,12 @@ public class AgentController : MonoBehaviour
                 meleeZone.gameObject.SetActive(false);
                 attackCounter = 0;
             }
+        }
+
+        // Safety incase melee box doesn't go away like it's supposed to.
+        if (!isAttacking && meleeZone.gameObject.activeSelf)
+        {
+            meleeZone.gameObject.SetActive(false);
         }
     }
 }

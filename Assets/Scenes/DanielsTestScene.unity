@@ -2464,6 +2464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f374e17c5bac0458f72678bfe79eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfLayouts: 11
   cameraZAxis: -1
   cameraYAxis: 10
   currentEntranceRoom: {fileID: 0}

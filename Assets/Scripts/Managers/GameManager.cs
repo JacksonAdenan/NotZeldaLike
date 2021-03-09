@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     private bool hasResetPlayer = false;
 
+    public int numberOfLayouts;
+
     public float cameraZAxis = -3;
     public float cameraYAxis = 10;
 

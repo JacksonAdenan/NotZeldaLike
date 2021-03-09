@@ -125,7 +125,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 if (test.grid[i, j].pattern != RoomPattern.Closed)
                 { 
-                    int randomNum = Random.Range(0, 16);
+                    int randomNum = Random.Range(0, gameManager.numberOfLayouts);
                     string floorVariation = "Rooms/Layouts/" + randomNum.ToString();
 
                     //GameObject floor = Instantiate(Resources.Load<GameObject>(floorVariation));
@@ -179,8 +179,8 @@ public class DungeonGenerator : MonoBehaviour
                             Debug.Log("Floor and outline did not match. Re-generating new floor variation.");
                             // When we hit the end of the list of variations, we want to go back to the start incase we missed any.
                             randomNum += 1;
-                            if (randomNum == 17)
-                                randomNum = Random.Range(0, 16);
+                            if (randomNum == gameManager.numberOfLayouts + 1)
+                                randomNum = 0;
                         }
                     }
 
