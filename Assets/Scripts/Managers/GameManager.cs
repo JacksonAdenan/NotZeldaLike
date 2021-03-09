@@ -46,8 +46,10 @@ public class GameManager : MonoBehaviour
 
     public float cameraZAxis = -3;
     public float cameraYAxis = 10;
+    bool transitionReloadLock = false;
 
-    public TransitionManager transitionManager;
+    TransitionManager transitionManager;
+    public GameObject transitionManagerPrefab;
 
     // We have pointers to these rooms so that we can use them to spawn the player.
     //[HideInInspector]
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
 
         navmeshBaker = NavMeshBaker.GetInstance();
 
+        transitionManager = Instantiate(transitionManagerPrefab).GetComponent<TransitionManager>();
     }
 
     // Update is called once per frame
@@ -102,6 +105,7 @@ public class GameManager : MonoBehaviour
         if (!hasResetPlayer && currentEntranceRoom != null)
         {
             Debug.Log("!NOTE!========= NAV MESH REBAKED ==========!NOTE!");
+            transitionManager = Instantiate(transitionManagerPrefab).GetComponent<TransitionManager>();
             ResetPlayer();
             navmeshBaker.ResetBaker();
         }
@@ -142,14 +146,19 @@ public class GameManager : MonoBehaviour
 
     public void LoadNewLevel()
     {
-        transitionManager.Transition();
-        StartCoroutine(PlayWait(1.6f));        
+        if (transitionReloadLock == false)
+        {
+            transitionReloadLock = true;
+            transitionManager.Transition();
+            StartCoroutine(PlayWait(1.6f));
+        }  
     }
 
     IEnumerator PlayWait(float time)
     {
         yield return new WaitForSeconds(time);
         SceneManager.LoadScene("DanielsTestScene");
+        transitionReloadLock = false;
         hasResetPlayer = false;
         currentEntranceRoom = null;
     }
