@@ -104,7 +104,7 @@ public class AgentController : MonoBehaviour
         this.health -= playerManager.meleeDamage;
         if (this.health <= 0)
         {
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 
