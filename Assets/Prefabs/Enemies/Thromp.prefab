@@ -248,7 +248,7 @@ MonoBehaviour:
   health: 5
   xWanderDistance: 2
   yWanderDistance: 2
-  chaseDistance: 3
+  chaseDistance: 7
   attackDistance: 1
   knockback: 5
   meleeDamage: 1

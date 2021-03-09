@@ -34,6 +34,8 @@ public class AIStateMachine
     private bool isChargeReady = false;
     private float chargeDurationTimer = 0.0f;
 
+    private Vector3 storedPlayerPos;
+
     public enum BasicDecisions
     {
         WANDER,
@@ -61,6 +63,7 @@ public class AIStateMachine
                 StateMachine1();
                 break;
             case MobType.Thromp:
+                StateMachineThromp();
                 break;
         }
         //StateMachine1();
@@ -237,15 +240,15 @@ public class AIStateMachine
             Quaternion rotation = Quaternion.LookRotation(lookPosition);
             agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 10);
 
+            // Loading up charge.
+            RunChargeTimer();
+
             if (isChargeReady)
             { 
                 Debug.Log("Agent is beginning to charge.");
-            }
-           
-                    
-
-
-            agent.SetDestination(player.transform.position);
+                SetState(BasicDecisions.ATTACK);
+                storedPlayerPos = player.transform.position;
+            }          
 
         }
 
@@ -254,6 +257,8 @@ public class AIStateMachine
             if (isChargeReady)
             { 
                 Debug.Log("Agent is charging.");
+
+                agent.SetDestination(storedPlayerPos);
                 controller.Attack();
                 ChargeDuration();
             }
@@ -350,6 +355,7 @@ public class AIStateMachine
             case BasicDecisions.DAMAGED:
                 currentState = BasicDecisions.DAMAGED;
                 break;
+
         }
     }
 
