@@ -7,9 +7,9 @@ using UnityEngine;
 public enum PickupType
 { 
     HEALTH,
-    ARMOUR,
-    MAX_HEALTH,
-    MAX_ARMOUR
+    ARMOUR
+    //MAX_HEALTH,
+    //MAX_ARMOUR
 }
 public class Pickup : MonoBehaviour
 {
@@ -23,7 +23,7 @@ public class Pickup : MonoBehaviour
     public float bobbingHeight = 0.5f;
 
     public float originalY = 0.4f;
-
+    //private float originalY;
 
     private PlayerManager playerManager;
 

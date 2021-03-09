@@ -145,13 +145,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 54417394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f87ea49e58b65540a1573002a0e6443, type: 3}
+  m_Script: {fileID: 11500000, guid: e8fe4fbf3d855a44da87b6efbc63a6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  rotationSpeed: 0.5
-  bobbingSpeed: 1
+  rotationSpeed: 0.05
+  bobbingSpeed: 0.1
   bobbingHeight: 0.05
+  originalY: 0
 --- !u!1 &73714478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,13 +1713,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 848391137}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f87ea49e58b65540a1573002a0e6443, type: 3}
+  m_Script: {fileID: 11500000, guid: e8fe4fbf3d855a44da87b6efbc63a6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  rotationSpeed: 0.5
-  bobbingSpeed: 1
+  rotationSpeed: 0.05
+  bobbingSpeed: 0.1
   bobbingHeight: 0.05
+  originalY: 0
 --- !u!1 &918899559
 GameObject:
   m_ObjectHideFlags: 0
@@ -2404,6 +2404,7 @@ MonoBehaviour:
   player: {fileID: 3070133563548722364, guid: a1197956af98fa248905782de2cec927, type: 3}
   healthUIParent: {fileID: 1998093835}
   armourUIParent: {fileID: 1354573074}
+  endRoomLayouts: []
 --- !u!4 &1526787736 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,
