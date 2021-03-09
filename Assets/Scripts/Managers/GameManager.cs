@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
 
             SpawnPlayer();
+            endRoomLayouts = Resources.LoadAll<GameObject>("Rooms/EndLayouts");
         }
 
 
@@ -74,6 +75,9 @@ public class GameManager : MonoBehaviour
     public GameObject healthUIParent;
     public GameObject armourUIParent;
 
+    [HideInInspector]
+    public GameObject[] endRoomLayouts;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +92,8 @@ public class GameManager : MonoBehaviour
 
         transitionManager = Instantiate(transitionManagerPrefab).GetComponent<TransitionManager>();
         levelUI.text = "Level:" + zoneCount.ToString() + "-" + levelCount.ToString();
+
+        
     }
 
     // Update is called once per frame
