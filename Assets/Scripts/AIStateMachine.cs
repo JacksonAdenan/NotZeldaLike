@@ -27,13 +27,21 @@ public class AIStateMachine
 
     private float attackWindUpTimer = 0.0f;
     private bool isAttackReady = false;
+
+
+    // Thromp stuff.
+    private float chargeWindupTimer = 0.0f;
+    private bool isChargeReady = false;
+    private float chargeDurationTimer = 0.0f;
+
     public enum BasicDecisions
     {
         WANDER,
         CHASE,
         ATTACK,
         DAMAGED,
-        FLEE
+        FLEE,
+        TRACK
     }
     public AIStateMachine(MobType type, NavMeshAgent agent, AgentController control)
     {
@@ -47,7 +55,15 @@ public class AIStateMachine
 
     public void RunStateMachine()
     {
-        StateMachine1();
+        switch (stateMachineType)
+        {
+            case MobType.Skeleton:
+                StateMachine1();
+                break;
+            case MobType.Thromp:
+                break;
+        }
+        //StateMachine1();
 
         
     }
@@ -169,6 +185,134 @@ public class AIStateMachine
         }
     }
 
+    private void StateMachineThromp()
+    {
+        if (currentState == BasicDecisions.WANDER)
+        {
+            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) <= controller.chaseDistance)
+            {
+                currentState = BasicDecisions.TRACK;
+                return;
+            }
+
+            if (hasReachedDestination)
+            {
+                Vector3 destination;
+                float ranX = Random.Range(-controller.xWanderDistance, controller.xWanderDistance);
+                float ranZ = Random.Range(-controller.yWanderDistance, controller.yWanderDistance);
+
+                destination.x = agent.gameObject.transform.position.x + ranX;
+                destination.z = agent.gameObject.transform.position.z + ranZ;
+                destination.y = 0;
+
+                agent.SetDestination(destination);
+                hasReachedDestination = false;
+            }
+
+            if (!agent.pathPending)
+            {
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                    {
+                        hasReachedDestination = true;
+                        Debug.Log("Agent completed wandering path.");
+                    }
+                }
+            }
+
+        }
+
+        else if (currentState == BasicDecisions.TRACK)
+        {
+            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) >= controller.chaseDistance)
+            {
+                currentState = BasicDecisions.WANDER;
+                return;
+            }
+
+            // Getting the thromp to face the player.
+            Vector3 lookPosition = player.transform.position - agent.transform.position;
+            lookPosition.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(lookPosition);
+            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 10);
+
+            if (isChargeReady)
+            { 
+                Debug.Log("Agent is beginning to charge.");
+            }
+           
+                    
+
+
+            agent.SetDestination(player.transform.position);
+
+        }
+
+        else if (currentState == BasicDecisions.ATTACK)
+        {
+            if (isChargeReady)
+            { 
+                Debug.Log("Agent is charging.");
+                controller.Attack();
+                ChargeDuration();
+            }
+            
+
+
+
+
+            else if (Vector3.Distance(agent.transform.position, player.transform.position) >= controller.attackDistance)
+            {
+                // If the agent has an attack winded up, reset it to 0.
+                attackWindUpTimer = 0;
+                currentState = BasicDecisions.WANDER;
+                return;
+            }
+
+            
+        }
+
+        else if (currentState == BasicDecisions.DAMAGED)
+        {
+            Debug.Log("Agent is damaged");
+            //agent.ResetPath();
+            //agent.updatePosition = false;
+
+            // If the agent has an attack winded up, reset it to 0.
+            attackWindUpTimer = 0;
+
+            DamagedTimer();
+            //Vector3 lookPosition = player.transform.position - agent.transform.position;
+            //lookPosition.y = 0;
+            //Quaternion rotation = Quaternion.LookRotation(lookPosition);
+            //agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 10);
+            //if (Vector3.Distance(agent.transform.position, player.transform.position) > 1)
+            //{
+            //    currentState = BasicDecisions.CHASE;
+            //}
+        }
+    }
+
+    private void ChargeDuration()
+    {
+        chargeDurationTimer += Time.deltaTime;
+        if (chargeDurationTimer >= 2)
+        {
+            isChargeReady = false;
+            chargeDurationTimer = 0;
+        }
+    }
+    private void RunChargeTimer()
+    {
+        chargeWindupTimer += Time.deltaTime;
+        if (chargeWindupTimer >= 2)
+        {
+            isChargeReady = true;
+            chargeWindupTimer = 0;
+
+        }
+    }
     private void DamagedTimer()
     {
 

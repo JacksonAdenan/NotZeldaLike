@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class AgentController : MonoBehaviour
 {
     NavMeshAgent agent;
+    public MobType mob;
+
     public int health = 5;
 
     public float xWanderDistance = 2;
@@ -42,7 +44,7 @@ public class AgentController : MonoBehaviour
     public float originalAngularSpeed;
 
     // Just for debugging purposes
-    [HideInInspector]
+    //[HideInInspector]
     public AIStateMachine.BasicDecisions currentState;
 
 
@@ -50,7 +52,7 @@ public class AgentController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        stateMachine = new AIStateMachine(MobType.Skeleton, agent, this);
+        stateMachine = new AIStateMachine(mob, agent, this);
 
         agentRigidbody = this.gameObject.GetComponent<Rigidbody>();
 

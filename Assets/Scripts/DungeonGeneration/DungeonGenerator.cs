@@ -186,6 +186,7 @@ public class DungeonGenerator : MonoBehaviour
 
     bool CheckOutlineLayoutCompatability(OutlineData outline, LayoutData layout)
     {
+        
         if ((outline.up == layout.up && outline.down == layout.down && outline.right == layout.right && outline.left == layout.left) || layout.CompatibleWithEverything)
         {
             return true;
