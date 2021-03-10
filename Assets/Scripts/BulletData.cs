@@ -20,4 +20,12 @@ public class BulletData : MonoBehaviour
     {
         
     }
+
+	private void OnCollisionEnter(Collision collision)
+	{
+        if (collision.collider != agentsCollider)
+        {
+            Destroy(this.gameObject);
+        }
+	}
 }
