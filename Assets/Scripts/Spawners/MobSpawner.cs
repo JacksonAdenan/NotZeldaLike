@@ -8,7 +8,8 @@ public enum MobType
 { 
     Skeleton,
     Zombie,
-    Thromp
+    Thromp,
+    DekuShooter
 }
 public class MobSpawner : MonoBehaviour
 {

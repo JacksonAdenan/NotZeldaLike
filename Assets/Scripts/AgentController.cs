@@ -13,11 +13,12 @@ public class AgentController : MonoBehaviour
     public float xWanderDistance = 2;
     public float yWanderDistance = 2;
     public float chaseDistance = 3;
+    [Tooltip("Changes this probably requires you to change the melee trigger zone size!")]
     public float attackDistance = 1;
 
     public float knockback = 5.0f;
     public int meleeDamage = 1;
-
+    public float stunnedTime = 0.75f;
 
     public Material damageMaterial;
     private Material originalMaterial;
@@ -36,8 +37,12 @@ public class AgentController : MonoBehaviour
     [HideInInspector]
     public bool isAttacking = false;
 
+    // For shooters.
+    public GameObject ammunition;
+
     
-    public float attackCounter = 0.0f;
+    // Tracks how long the attack has been up for.
+    private float attackCounter = 0.0f;
 
 
     [HideInInspector]
@@ -146,6 +151,11 @@ public class AgentController : MonoBehaviour
     {
         meleeZone.gameObject.SetActive(true);
         isAttacking = true;
+    }
+
+    public void Shoot(Vector3 target)
+    {
+        GameObject newBullet = Instantiate(ammunition);
     }
 
     void AttackTimer()
