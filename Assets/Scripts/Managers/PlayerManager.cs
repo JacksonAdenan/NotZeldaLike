@@ -265,12 +265,22 @@ public class PlayerManager : MonoBehaviour
 
     public void DecreaseArmour(int remove)
     {
-        for (int i = 0; i < remove; i++)
-            if (armour > 0)
-                armour--;
+
+        for (int i = 1; i < remove + 1; i++)
+        {
+            if (armour - i < 0)
+            {
+                // This is here to remove health if the hit breaks armour plus more.
+                DecreaseHealth((remove + 1) - i);
+                break;
+            }
+
+            armours[armour - i].armourToggle = ArmourUI.ArmourStates.Empty;
+        }
 
         for (int i = 0; i < remove; i++)
-            armours[armour - i].armourToggle = ArmourUI.ArmourStates.Empty;
+            if (armour > 0)
+                armour--;     
     }
 
     public void AddMaxArmour(int add)
