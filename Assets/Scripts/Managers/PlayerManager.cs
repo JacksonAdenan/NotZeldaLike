@@ -346,14 +346,21 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("Player took damage.");
         }
 
-        else if (other.tag == "Key")
+        
+    }
+
+	private void OnCollisionEnter(Collision collision)
+	{
+        if (collision.gameObject.tag == "Gate")
         {
-            gameManager.hasKey = true;
-            Destroy(other.gameObject);
+            if (gameManager.hasKey)
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
 
-    void TookDamagerTimer()
+	void TookDamagerTimer()
     {
         if (isHit)
         {

@@ -12,7 +12,8 @@ public enum PickupType
     MAX_ARMOUR,
     MOVEMENT_SPEED,
     KNOCK_BACK,
-    DAMAGE
+    DAMAGE,
+    KEY
 }
 public class Pickup : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class Pickup : MonoBehaviour
     //private float originalY;
 
     private PlayerManager playerManager;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,7 @@ public class Pickup : MonoBehaviour
         itemsTransform = this.gameObject.transform;
         //originalY = itemsTransform.position.y;
         playerManager = PlayerManager.GetInstance();
+        gameManager = GameManager.GetInstance();
     }
 
     // Update is called once per frame
@@ -72,6 +75,10 @@ public class Pickup : MonoBehaviour
                 break;
             case PickupType.DAMAGE:
                 playerManager.AddDamage(amount);
+                break;
+            case PickupType.KEY:
+                gameManager.hasKey = true;
+                Destroy(this.gameObject);
                 break;
         }
     }

@@ -205,6 +205,7 @@ public class GameManager : MonoBehaviour
         ResetPlayerPos();
         SpawnCamera();
         hasResetPlayer = true;
+        hasKey = false;
     }
 
     public void GameTimer()

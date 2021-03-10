@@ -9,6 +9,7 @@ TagManager:
   - EnemyMeleeZone
   - Bullet
   - Key
+  - Gate
   layers:
   - Default
   - TransparentFX

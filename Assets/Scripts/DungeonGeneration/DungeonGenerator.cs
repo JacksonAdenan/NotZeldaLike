@@ -139,6 +139,8 @@ public class DungeonGenerator : MonoBehaviour
 
                     // Passing the room controller a reference to the floor variation.
                     RoomController controller = roomReference.GetComponent<RoomController>();
+                    // Giving the controller a reference to the room.
+                    controller.roomReference = test.grid[i, j];
                     //controller.layout = floor;
 
                     // If infiniteLoopPrevention hits 100, we stop trying to find a match. I picked 100 because its way above the amount of variations we will have for a while.
