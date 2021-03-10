@@ -13,11 +13,12 @@ public class AgentController : MonoBehaviour
     public float xWanderDistance = 2;
     public float yWanderDistance = 2;
     public float chaseDistance = 3;
+    [Tooltip("Changes this probably requires you to change the melee trigger zone size!")]
     public float attackDistance = 1;
 
     public float knockback = 5.0f;
     public int meleeDamage = 1;
-
+    public float stunnedTime = 0.75f;
 
     public Material damageMaterial;
     private Material originalMaterial;
@@ -36,8 +37,13 @@ public class AgentController : MonoBehaviour
     [HideInInspector]
     public bool isAttacking = false;
 
+    // For shooters.
+    public GameObject ammunition;
+    public float bulletSpeed;
+    public float shootCooldown = 1;
     
-    public float attackCounter = 0.0f;
+    // Tracks how long the attack has been up for.
+    private float attackCounter = 0.0f;
 
 
     [HideInInspector]
@@ -61,7 +67,9 @@ public class AgentController : MonoBehaviour
         // Saving a reference to the original material.
         originalMaterial = this.gameObject.GetComponent<Renderer>().material;
 
-        meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
+        // Getting the meleeZone reference. If we are a shooter, we don't have a melee zone so don't look for one.
+        if(mob != MobType.DekuShooter)
+            meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
         if (meleeZone == null)
         {
             Debug.Log("Couldn't find melee zone for monster.");
@@ -77,7 +85,8 @@ public class AgentController : MonoBehaviour
         stateMachine.RunStateMachine();
         DamageTimer();
 
-        AttackTimer();
+        if(meleeZone != null)
+            AttackTimer();
 
 
         // Debugging purposes:
@@ -146,6 +155,23 @@ public class AgentController : MonoBehaviour
     {
         meleeZone.gameObject.SetActive(true);
         isAttacking = true;
+    }
+
+    public void Shoot(Vector3 target)
+    {
+        GameObject newBullet = Instantiate(ammunition);
+
+        // Giving the bullet a reference to the controller it came from and the controllers collider.
+        BulletData thisData = newBullet.GetComponent<BulletData>();
+        thisData.agent = this;
+        thisData.agentsCollider = this.gameObject.GetComponent<Collider>();
+
+        newBullet.transform.position = this.transform.position;
+        Rigidbody bulletRigidbody = newBullet.GetComponent<Rigidbody>();
+        Vector3 shotDirection = target - newBullet.transform.position;
+        shotDirection = Vector3.Normalize(shotDirection);
+        shotDirection *= bulletSpeed;
+        bulletRigidbody.AddForce(shotDirection, ForceMode.Impulse);
     }
 
     void AttackTimer()

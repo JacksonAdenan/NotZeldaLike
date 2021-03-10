@@ -956,9 +956,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  amount: 0
   rotationSpeed: 0.05
   bobbingSpeed: 0.1
   bobbingHeight: 0.5
+  originalY: 0.4
 --- !u!114 &791325878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1145,7 +1147,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Daniel HADZAJILC
+  m_text: Daniel HADZAJLIC
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52dbb0fe15f438a44bac3f0ca9bb750f, type: 2}
   m_sharedMaterial: {fileID: 257489644204430845, guid: 52dbb0fe15f438a44bac3f0ca9bb750f,
@@ -1479,9 +1481,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  amount: 0
   rotationSpeed: 0.05
   bobbingSpeed: 0.1
   bobbingHeight: 0.5
+  originalY: 0.4
 --- !u!114 &1808158404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1678,9 +1682,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  amount: 0
   rotationSpeed: 0
   bobbingSpeed: 0.3
   bobbingHeight: 0.5
+  originalY: 0.4
 --- !u!114 &1903581070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1811,9 +1817,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  amount: 0
   rotationSpeed: 0.05
   bobbingSpeed: 0.1
   bobbingHeight: 0.5
+  originalY: 0.4
 --- !u!114 &1911050300
 MonoBehaviour:
   m_ObjectHideFlags: 0

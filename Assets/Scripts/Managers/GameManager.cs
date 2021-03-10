@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
 
             SpawnPlayer();
+            endRoomLayouts = Resources.LoadAll<GameObject>("Rooms/EndLayouts");
         }
 
 
@@ -74,6 +75,19 @@ public class GameManager : MonoBehaviour
     public GameObject healthUIParent;
     public GameObject armourUIParent;
 
+
+    // Timer stuff.
+    //public GameObject timerUI;
+    public TextMeshProUGUI timerTextUI;
+    [Tooltip("Time in seconds")]
+    public float timePerLevel = 60;
+    private float timeLeft = 0;
+    private bool isGameOver = false;
+
+
+    [HideInInspector]
+    public GameObject[] endRoomLayouts;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,6 +102,8 @@ public class GameManager : MonoBehaviour
 
         transitionManager = Instantiate(transitionManagerPrefab).GetComponent<TransitionManager>();
         levelUI.text = "Level:" + zoneCount.ToString() + "-" + levelCount.ToString();
+
+        timeLeft = timePerLevel;
     }
 
     // Update is called once per frame
@@ -100,8 +116,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
             LoadNewLevel();
 
-
-        
+        GameTimer();
+        DisplayTime();
     }
 
 	private void FixedUpdate()
@@ -175,6 +191,8 @@ public class GameManager : MonoBehaviour
         transitionReloadLock = false;
         hasResetPlayer = false;
         currentEntranceRoom = null;
+
+        ResetTimer();
     }
 
     public void ResetPlayer()
@@ -183,5 +201,44 @@ public class GameManager : MonoBehaviour
         ResetPlayerPos();
         SpawnCamera();
         hasResetPlayer = true;
+    }
+
+    public void GameTimer()
+    {
+        if (!isGameOver)
+        {
+            timeLeft -= Time.deltaTime;
+            if (timeLeft <= 0)
+            {
+                isGameOver = true;
+                GameOver();
+            }
+        }
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game is over!");
+    }
+
+    private void DisplayTime()
+    {
+
+        if (isGameOver)
+        {
+            timerTextUI.text = "TIME: " + "00" + ":" + "00";
+            return;
+        }
+
+        int min = Mathf.FloorToInt(timeLeft / 60);
+        int sec = Mathf.FloorToInt(timeLeft % 60);
+
+        timerTextUI.text = "TIME: " + min.ToString("00" + ":" + sec.ToString("00"));
+
+    }
+
+    private void ResetTimer()
+    {
+        timeLeft = timePerLevel;
     }
 }

@@ -82,6 +82,8 @@ public class PlayerManager : MonoBehaviour
 
     [HideInInspector]
     public Rigidbody playerRigidbody;
+    private PlayerController controller;
+
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +93,7 @@ public class PlayerManager : MonoBehaviour
 
         originalMaterial = player.GetComponent<Renderer>().material;
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
+        controller = gameObject.GetComponent<PlayerController>();
 
         foreach (Transform heart in GameManager.GetInstance().healthUIParent.transform)
             hearts.Add(heart.GetComponent<HeartUI>());
@@ -211,7 +214,7 @@ public class PlayerManager : MonoBehaviour
     //    theCamera.transform.position = new Vector3(player.transform.position.x, cameraYAxis, cameraZAxis);
     //}
 
-    void AddHealth(int add)
+    public void AddHealth(int add)
     {
         for (int i = 0; i < add; i++)
             if (health < maxHealth)
@@ -221,17 +224,26 @@ public class PlayerManager : MonoBehaviour
             hearts[i].heartToggle = HeartUI.HeartStates.Full;
     }
 
-    void DecreaseHealth(int remove)
+    public void DecreaseHealth(int remove)
     {
+
+
+        for (int i = 1; i < remove + 1; i++)
+        {
+            // This is stop stop indexing out of range.
+            if (health - i < 0)
+            {
+                break;
+            }
+            hearts[health - i].heartToggle = HeartUI.HeartStates.Empty;
+        }
+
         for (int i = 0; i < remove; i++)
             if (health > 0)
                 health--;
-
-        for (int i = 0; i < remove; i++)
-            hearts[health - i].heartToggle = HeartUI.HeartStates.Empty;
     }
 
-    void AddMaxHealth(int add)
+    public void AddMaxHealth(int add)
     {
         for (int i = 0; i < add; i++)
             if (maxHealth < 10)
@@ -241,7 +253,7 @@ public class PlayerManager : MonoBehaviour
             }
     }
 
-    void AddArmour(int add)
+    public void AddArmour(int add)
     {
         for (int i = 0; i < add; i++)
             if (armour < maxArmour)
@@ -251,17 +263,27 @@ public class PlayerManager : MonoBehaviour
             armours[i].armourToggle = ArmourUI.ArmourStates.Full;
     }
 
-    void DecreaseArmour(int remove)
+    public void DecreaseArmour(int remove)
     {
+
+        for (int i = 1; i < remove + 1; i++)
+        {
+            if (armour - i < 0)
+            {
+                // This is here to remove health if the hit breaks armour plus more.
+                DecreaseHealth((remove + 1) - i);
+                break;
+            }
+
+            armours[armour - i].armourToggle = ArmourUI.ArmourStates.Empty;
+        }
+
         for (int i = 0; i < remove; i++)
             if (armour > 0)
-                armour--;
-
-        for (int i = 0; i < remove; i++)
-            armours[armour - i].armourToggle = ArmourUI.ArmourStates.Empty;
+                armour--;     
     }
 
-    void AddMaxArmour(int add)
+    public void AddMaxArmour(int add)
     {
         for (int i = 0; i < add; i++)
             if (maxArmour < 6)
@@ -271,16 +293,44 @@ public class PlayerManager : MonoBehaviour
             }
     }
 
+    public void AddKnockback(int add)
+    {
+        meleeKnockbackForce += add;
+    }
+
+    public void AddMovementSpeed(int add)
+    {
+        controller.speed += add;
+    }
+
+    public void AddDamage(int add)
+    {
+        meleeDamage += add;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "EnemyMeleeZone" && !isHit)
         {
-            AgentController enemy = other.transform.parent.GetComponent<AgentController>();
+            AgentController enemy;
+            if (other.transform.parent.tag == "Bullet")
+            {
+                BulletData data = other.transform.parent.GetComponent<BulletData>();
+                enemy = data.agent;
+            }
+            else
+            {
+                enemy = other.transform.parent.GetComponent<AgentController>();
+            }
 
             HitPlayer(enemy.meleeDamage);
             Vector3 pushDirection = transform.position - other.transform.parent.position;
             pushDirection = Vector3.Normalize(pushDirection);
-            playerRigidbody.AddForce(pushDirection * enemy.knockback, ForceMode.Impulse);
+
+            // Only knock back if they don't have armour left.
+            if(armour <= 0)
+                playerRigidbody.AddForce(pushDirection * enemy.knockback, ForceMode.Impulse);
+
             //gameObject.transform.position += pushDirection;
 
             isHit = true;

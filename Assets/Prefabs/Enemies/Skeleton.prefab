@@ -111,14 +111,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e555dc6cac414746b2d9c88a72a4576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mob: 0
   health: 5
   xWanderDistance: 2
   yWanderDistance: 2
   chaseDistance: 3
+  attackDistance: 1
   knockback: 15
-  meleeDamage: 1
+  meleeDamage: 3
+  stunnedTime: 0.25
   damageMaterial: {fileID: 2100000, guid: 91f1be260d7f2264fbe84e2c3822d0ff, type: 2}
   isAttacking: 0
+  ammunition: {fileID: 0}
+  bulletSpeed: 0
+  originalAngularSpeed: 0
+  currentState: 0
 --- !u!195 &-7213476575283559284
 NavMeshAgent:
   m_ObjectHideFlags: 0

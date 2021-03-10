@@ -108,7 +108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f87ea49e58b65540a1573002a0e6443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
+  amount: 1
   rotationSpeed: 0.05
   bobbingSpeed: 3
   bobbingHeight: 0.1
+  originalY: 0.4

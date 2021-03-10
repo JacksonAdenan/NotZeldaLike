@@ -124,7 +124,8 @@ public class DungeonGenerator : MonoBehaviour
             for (int j = 0; j < test.levelHeight; j++)
             {
                 if (test.grid[i, j].pattern != RoomPattern.Closed)
-                { 
+                {
+                    
                     int randomNum = Random.Range(0, gameManager.numberOfLayouts);
                     string floorVariation = "Rooms/Layouts/" + randomNum.ToString();
 
@@ -141,7 +142,57 @@ public class DungeonGenerator : MonoBehaviour
                     // If infiniteLoopPrevention hits 100, we stop trying to find a match. I picked 100 because its way above the amount of variations we will have for a while.
                     int infiniteLoopPrevention = 0;
                     OutlineData outlineData = controller.outline.GetComponent<OutlineData>();
+
                     bool foundMatch = false;
+
+                    if (test.grid[i, j].type == RoomType.Entrance)
+                    { 
+                        GameObject floor = Instantiate(Resources.Load<GameObject>("Rooms/Layouts/0"));
+                        floor.transform.parent = roomReference.transform;
+                        floor.transform.localPosition = Vector3.zero;
+                        floor.transform.rotation = controller.outline.transform.rotation;
+
+                        controller.layout = floor;
+
+                        continue;
+                    }
+
+                    else if (test.grid[i, j].type == RoomType.Exit)
+                    {
+                        int index = 0;
+                        while (!foundMatch)
+                        {
+                            //floorVariation = "Rooms/EndLayouts/" + index.ToString();
+                            GameObject floorToCheck = gameManager.endRoomLayouts[index];
+                            LayoutData layoutData = floorToCheck.GetComponent<LayoutData>();
+
+                            if (CheckOutlineLayoutCompatability(outlineData, layoutData))
+                            {
+                                Debug.Log("Found match for exit floor and outline.");
+                                GameObject floor = Instantiate(floorToCheck);
+                                floor.transform.parent = roomReference.transform;
+                                floor.transform.localPosition = Vector3.zero;
+                                floor.transform.rotation = controller.outline.transform.rotation;
+
+                                controller.layout = floor;
+                                break;
+                            }
+
+                            else
+                            {
+                                Debug.Log("Exit floor and outline did not match. Re-generating new exit floor variation.");
+                                // When we hit the end of the list of variations, we want to go back to the start incase we missed any.
+                                index += 1;
+                            }
+
+                        }
+                        // We don't want to execute whats left in this function.
+                        continue;
+                    }
+
+
+
+
                     while (!foundMatch)
                     {
                         infiniteLoopPrevention += 1;
@@ -156,11 +207,6 @@ public class DungeonGenerator : MonoBehaviour
 
                         GameObject floorToCheck = Resources.Load<GameObject>(floorVariation);
                         LayoutData layoutData = floorToCheck.GetComponent<LayoutData>();
-
-                        if (randomNum >= 13)
-                        {
-                            int hi = 1;
-                        }
 
                         if (CheckOutlineLayoutCompatability(outlineData, layoutData))
                         {

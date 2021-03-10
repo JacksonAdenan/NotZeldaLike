@@ -24,7 +24,11 @@ public class AIStateMachine
 
     private float damagedCounter = 0.0f;
 
+    // Getting stun time from AgentController.
+    public float stunTime;
 
+
+    // Skeleton and other melee agent stuff.
     private float attackWindUpTimer = 0.0f;
     private bool isAttackReady = false;
 
@@ -33,6 +37,12 @@ public class AIStateMachine
     private float chargeWindupTimer = 0.0f;
     private bool isChargeReady = false;
     private float chargeDurationTimer = 0.0f;
+
+
+    // Shooter stuff.
+    private float shotWindupTimer = 0.0f;
+    private bool isShotReady = false;
+    public float shootCooldown;
 
     private Vector3 storedPlayerPos;
 
@@ -53,6 +63,10 @@ public class AIStateMachine
 
         PlayerManager playerManager = PlayerManager.GetInstance();
         player = playerManager.player;
+
+        this.stunTime = control.stunnedTime;
+
+        this.shootCooldown = control.shootCooldown;
     }
 
     public void RunStateMachine()
@@ -65,10 +79,14 @@ public class AIStateMachine
             case MobType.Thromp:
                 StateMachineThromp();
                 break;
+            case MobType.Zombie:
+                StateMachine1();
+                break;
+            case MobType.DekuShooter:
+                StateMachineShooter();
+                break;
         }
-        //StateMachine1();
 
-        
     }
 
     private void StateMachine1()
@@ -312,6 +330,92 @@ public class AIStateMachine
         }
     }
 
+    private void StateMachineShooter()
+    {
+        if (currentState == BasicDecisions.WANDER)
+        {
+            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) <= controller.chaseDistance)
+            {
+                currentState = BasicDecisions.TRACK;
+                return;
+            }
+
+            // Because shooters can't move, they don't need to wander around.
+
+        }
+
+        else if (currentState == BasicDecisions.TRACK)
+        {
+            if (Vector3.Distance(agent.gameObject.transform.position, player.transform.position) >= controller.chaseDistance)
+            {
+                currentState = BasicDecisions.WANDER;
+                return;
+            }
+
+            // Getting the thromp to face the player.
+            Vector3 lookPosition = player.transform.position - agent.transform.position;
+            lookPosition.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(lookPosition);
+            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 10);
+
+            // Loading up charge.
+            RunShotTimer();
+
+            if (isShotReady)
+            {
+                Debug.Log("Agent is ready to shoot.");
+                SetState(BasicDecisions.ATTACK);
+                storedPlayerPos = player.transform.position;
+            }
+
+        }
+
+        else if (currentState == BasicDecisions.ATTACK)
+        {
+            if (isShotReady)
+            {
+                Debug.Log("Agent has shot.");
+
+                controller.Shoot(storedPlayerPos);
+
+                isShotReady = false;
+
+            }
+
+            else if (Vector3.Distance(agent.transform.position, player.transform.position) >= controller.attackDistance)
+            {
+                // If the agent has an attack winded up or charge, reset it to 0.
+                attackWindUpTimer = 0;
+                chargeWindupTimer = 0;
+                currentState = BasicDecisions.WANDER;
+
+                agent.ResetPath();
+                return;
+            }
+
+
+        }
+
+        else if (currentState == BasicDecisions.DAMAGED)
+        {
+            Debug.Log("Agent is damaged");
+
+            // If the agent has an attack winded up, reset it to 0.
+            attackWindUpTimer = 0;
+
+            DamagedTimer();
+        }
+    }
+
+    private void RunShotTimer()
+    {
+        shotWindupTimer += Time.deltaTime;
+        if (shotWindupTimer >= shootCooldown)
+        {
+            isShotReady = true;
+            shotWindupTimer = 0;
+        }
+    }
     private void ChargeDuration()
     {
         chargeDurationTimer += Time.deltaTime;
@@ -335,7 +439,7 @@ public class AIStateMachine
     {
 
         damagedCounter += Time.deltaTime;
-        if (damagedCounter >= 2)
+        if (damagedCounter >= stunTime)
         {
             damagedCounter = 0;
             // After it's not stunned anymore just make it wander.
