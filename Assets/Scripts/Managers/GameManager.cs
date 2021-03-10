@@ -191,6 +191,8 @@ public class GameManager : MonoBehaviour
         transitionReloadLock = false;
         hasResetPlayer = false;
         currentEntranceRoom = null;
+
+        ResetTimer();
     }
 
     public void ResetPlayer()
@@ -233,5 +235,10 @@ public class GameManager : MonoBehaviour
 
         timerTextUI.text = "TIME: " + min.ToString("00" + ":" + sec.ToString("00"));
 
+    }
+
+    private void ResetTimer()
+    {
+        timeLeft = timePerLevel;
     }
 }

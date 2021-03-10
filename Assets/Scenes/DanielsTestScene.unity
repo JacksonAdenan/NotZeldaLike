@@ -2613,7 +2613,7 @@ MonoBehaviour:
   healthUIParent: {fileID: 1998093835}
   armourUIParent: {fileID: 1354573074}
   timerTextUI: {fileID: 1660734671}
-  timePerLevel: 5
+  timePerLevel: 30
   endRoomLayouts: []
 --- !u!4 &1526787736 stripped
 Transform:
