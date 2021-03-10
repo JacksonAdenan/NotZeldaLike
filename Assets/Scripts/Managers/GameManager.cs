@@ -88,6 +88,10 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public GameObject[] endRoomLayouts;
 
+    // Lock and key system stuff.
+    public bool keyRequired = false;
+    public bool hasKey = false;
+
     // Start is called before the first frame update
     void Start()
     {

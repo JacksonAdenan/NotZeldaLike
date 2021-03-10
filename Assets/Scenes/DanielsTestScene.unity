@@ -2541,6 +2541,8 @@ MonoBehaviour:
   timerTextUI: {fileID: 1660734671}
   timePerLevel: 30
   endRoomLayouts: []
+  keyRequired: 0
+  hasKey: 0
 --- !u!4 &1526787736 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,

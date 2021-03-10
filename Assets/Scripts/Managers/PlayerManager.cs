@@ -85,6 +85,8 @@ public class PlayerManager : MonoBehaviour
     private PlayerController controller;
 
 
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -103,6 +105,8 @@ public class PlayerManager : MonoBehaviour
         AddHealth(startingHealth);
         AddMaxArmour(startingMaxArmour);
         AddArmour(startingArmour);
+
+        gameManager = GameManager.GetInstance();
     }
 
     // Update is called once per frame
@@ -328,7 +332,7 @@ public class PlayerManager : MonoBehaviour
             pushDirection = Vector3.Normalize(pushDirection);
 
             // Only knock back if they don't have armour left.
-            if(armour <= 0)
+            if (armour <= 0)
                 playerRigidbody.AddForce(pushDirection * enemy.knockback, ForceMode.Impulse);
 
             //gameObject.transform.position += pushDirection;
@@ -340,6 +344,12 @@ public class PlayerManager : MonoBehaviour
 
 
             Debug.Log("Player took damage.");
+        }
+
+        else if (other.tag == "Key")
+        {
+            gameManager.hasKey = true;
+            Destroy(other.gameObject);
         }
     }
 

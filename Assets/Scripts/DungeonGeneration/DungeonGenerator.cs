@@ -68,6 +68,8 @@ public class DungeonGenerator : MonoBehaviour
         GeneratePrefabs();
   
         GenerateFloorVariations();
+
+        GenerateKeyRoom();
     }
 
 	// Update is called once per frame
@@ -159,6 +161,8 @@ public class DungeonGenerator : MonoBehaviour
 
                     else if (test.grid[i, j].type == RoomType.Exit)
                     {
+                        // Telling the controller this is the exit room.
+                        controller.isExit = true;
                         int index = 0;
                         while (!foundMatch)
                         {
@@ -338,5 +342,37 @@ public class DungeonGenerator : MonoBehaviour
 
         }
         
+    }
+
+    private void GenerateKeyRoom()
+    {
+        List<Room> possibleKeyRooms = new List<Room>();
+
+        for (int i = 0; i < test.levelWidth; i++)
+        {
+            for (int j = 0; j < test.levelHeight; j++)
+            {
+                Room currentRoom = test.grid[i, j];
+                if (currentRoom.type == RoomType.DeadEnd)
+                {
+                    possibleKeyRooms.Add(currentRoom);
+                }
+            }
+        }
+
+        // If there are any dead ends, make one a key room.
+        if (possibleKeyRooms.Count > 0)
+        {
+            int randomNum = Random.Range(0, possibleKeyRooms.Count);
+            RoomController keyRoomController = possibleKeyRooms[randomNum].roomObj.GetComponent<RoomController>();
+            keyRoomController.isKeyRoom = true;
+
+            gameManager.keyRequired = true;
+        }
+        // Otherwise, make it so you don't need a key.
+        else
+        {
+            gameManager.keyRequired = false;
+        }
     }
 }

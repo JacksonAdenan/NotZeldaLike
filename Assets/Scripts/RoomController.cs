@@ -18,6 +18,14 @@ public class RoomController : MonoBehaviour
     bool activeFirstTimeRunningButTheOneThatResetsSometimes;
     bool clearedFirstTimeRunning;
 
+    // Lock and key system stuff:
+    public bool isKeyRoom = false;
+    private GameObject keySpawner;
+    GameManager gameManager;
+    [HideInInspector]
+    public bool isExit = false;
+    public GameObject gate;
+
     void Start()
     {
         foreach (Transform enemySpawnersObjects in layout.transform.GetChild(1).transform)
@@ -26,6 +34,13 @@ public class RoomController : MonoBehaviour
         }
 
         RollEnemies();
+
+        // Getting key spawner.
+        //keySpawner = layout.transform.Find("KeySpawner").gameObject;
+        gameManager = GameManager.GetInstance();
+
+        //ActivateKey();
+        GenerateLock();
     }
 
     void Update()
@@ -104,6 +119,27 @@ public class RoomController : MonoBehaviour
         {
             int roll = Random.Range(0, (enemySpawner.enemies.Count - 1));
             enemySpawner.rolledEnemy = enemySpawner.enemies[roll];
+        }
+    }
+
+    void ActivateKey()
+    {
+        if (isKeyRoom && gameManager.keyRequired)
+        {
+            keySpawner.SetActive(true);
+        }
+    }
+
+    void GenerateLock()
+    {
+        if (gameManager.keyRequired && isExit)
+        {
+            GameObject gateObj = Instantiate(gate);
+            GameObject triggers = outline.transform.Find("Triggers").gameObject;
+            GameObject transitionTrigger = triggers.transform.GetChild(0).gameObject;
+            gateObj.transform.parent = transitionTrigger.transform;
+            gateObj.transform.localPosition = Vector3.zero;
+            gateObj.transform.localRotation = Quaternion.identity;
         }
     }
 }
