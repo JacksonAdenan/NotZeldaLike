@@ -75,6 +75,7 @@ public class AIStateMachine
                 StateMachine1();
                 break;
             case MobType.DekuShooter:
+                StateMachineShooter();
                 break;
         }
 
@@ -367,7 +368,7 @@ public class AIStateMachine
             {
                 Debug.Log("Agent has shot.");
 
-                controller.Attack();
+                controller.Shoot(storedPlayerPos);
 
                 ChargeDuration();
 

@@ -39,6 +39,7 @@ public class AgentController : MonoBehaviour
 
     // For shooters.
     public GameObject ammunition;
+    public float bulletSpeed;
 
     
     // Tracks how long the attack has been up for.
@@ -66,7 +67,9 @@ public class AgentController : MonoBehaviour
         // Saving a reference to the original material.
         originalMaterial = this.gameObject.GetComponent<Renderer>().material;
 
-        meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
+        // Getting the meleeZone reference. If we are a shooter, we don't have a melee zone so don't look for one.
+        if(mob != MobType.DekuShooter)
+            meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
         if (meleeZone == null)
         {
             Debug.Log("Couldn't find melee zone for monster.");
@@ -82,7 +85,8 @@ public class AgentController : MonoBehaviour
         stateMachine.RunStateMachine();
         DamageTimer();
 
-        AttackTimer();
+        if(meleeZone != null)
+            AttackTimer();
 
 
         // Debugging purposes:
@@ -156,6 +160,12 @@ public class AgentController : MonoBehaviour
     public void Shoot(Vector3 target)
     {
         GameObject newBullet = Instantiate(ammunition);
+        newBullet.transform.position = this.transform.position;
+        Rigidbody bulletRigidbody = newBullet.GetComponent<Rigidbody>();
+        Vector3 shotDirection = target - newBullet.transform.position;
+        shotDirection = Vector3.Normalize(shotDirection);
+        shotDirection *= bulletSpeed;
+        bulletRigidbody.AddForce(shotDirection, ForceMode.Impulse);
     }
 
     void AttackTimer()
