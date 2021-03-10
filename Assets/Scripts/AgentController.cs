@@ -40,7 +40,7 @@ public class AgentController : MonoBehaviour
     // For shooters.
     public GameObject ammunition;
     public float bulletSpeed;
-    public float shootCooldown;
+    public float shootCooldown = 1;
     
     // Tracks how long the attack has been up for.
     private float attackCounter = 0.0f;

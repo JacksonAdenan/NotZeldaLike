@@ -326,7 +326,11 @@ public class PlayerManager : MonoBehaviour
             HitPlayer(enemy.meleeDamage);
             Vector3 pushDirection = transform.position - other.transform.parent.position;
             pushDirection = Vector3.Normalize(pushDirection);
-            playerRigidbody.AddForce(pushDirection * enemy.knockback, ForceMode.Impulse);
+
+            // Only knock back if they don't have armour left.
+            if(armour <= 0)
+                playerRigidbody.AddForce(pushDirection * enemy.knockback, ForceMode.Impulse);
+
             //gameObject.transform.position += pushDirection;
 
             isHit = true;
