@@ -24,7 +24,7 @@ public class AIStateMachine
 
     private float damagedCounter = 0.0f;
 
-
+    // Skeleton and other melee agent stuff.
     private float attackWindUpTimer = 0.0f;
     private bool isAttackReady = false;
 

@@ -2612,6 +2612,8 @@ MonoBehaviour:
   player: {fileID: 3070133563548722364, guid: a1197956af98fa248905782de2cec927, type: 3}
   healthUIParent: {fileID: 1998093835}
   armourUIParent: {fileID: 1354573074}
+  timerTextUI: {fileID: 1660734671}
+  timePerLevel: 5
   endRoomLayouts: []
 --- !u!4 &1526787736 stripped
 Transform:
@@ -2720,7 +2722,7 @@ GameObject:
   - component: {fileID: 1660734672}
   - component: {fileID: 1660734671}
   m_Layer: 5
-  m_Name: Armor (Text) (2)
+  m_Name: Timer (Text)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
