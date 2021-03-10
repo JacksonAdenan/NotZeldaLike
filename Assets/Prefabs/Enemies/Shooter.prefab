@@ -133,7 +133,7 @@ MonoBehaviour:
   chaseDistance: 3
   attackDistance: 1
   knockback: 5
-  meleeDamage: 1
+  meleeDamage: 5
   stunnedTime: 0.75
   damageMaterial: {fileID: 2100000, guid: a2c088c8e3ed1b74596accd087cd9c90, type: 2}
   isAttacking: 0

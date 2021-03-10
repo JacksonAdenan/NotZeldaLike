@@ -38,6 +38,11 @@ public class AIStateMachine
     private bool isChargeReady = false;
     private float chargeDurationTimer = 0.0f;
 
+
+    // Shooter stuff.
+    private float shotWindupTimer = 0.0f;
+    private bool isShotReady = false;
+
     private Vector3 storedPlayerPos;
 
     public enum BasicDecisions
@@ -351,9 +356,9 @@ public class AIStateMachine
             agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 10);
 
             // Loading up charge.
-            RunChargeTimer();
+            RunShotTimer();
 
-            if (isChargeReady)
+            if (isShotReady)
             {
                 Debug.Log("Agent is ready to shoot.");
                 SetState(BasicDecisions.ATTACK);
@@ -364,14 +369,13 @@ public class AIStateMachine
 
         else if (currentState == BasicDecisions.ATTACK)
         {
-            if (isChargeReady)
+            if (isShotReady)
             {
                 Debug.Log("Agent has shot.");
 
                 controller.Shoot(storedPlayerPos);
 
-                ChargeDuration();
-
+                isShotReady = false;
 
             }
 
@@ -400,6 +404,15 @@ public class AIStateMachine
         }
     }
 
+    private void RunShotTimer()
+    {
+        shotWindupTimer += Time.deltaTime;
+        if (shotWindupTimer >= 2)
+        {
+            isShotReady = true;
+            shotWindupTimer = 0;
+        }
+    }
     private void ChargeDuration()
     {
         chargeDurationTimer += Time.deltaTime;

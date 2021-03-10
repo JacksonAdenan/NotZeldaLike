@@ -226,12 +226,21 @@ public class PlayerManager : MonoBehaviour
 
     public void DecreaseHealth(int remove)
     {
+
+
+        for (int i = 1; i < remove + 1; i++)
+        {
+            // This is stop stop indexing out of range.
+            if (health - i < 0)
+            {
+                break;
+            }
+            hearts[health - i].heartToggle = HeartUI.HeartStates.Empty;
+        }
+
         for (int i = 0; i < remove; i++)
             if (health > 0)
                 health--;
-
-        for (int i = 0; i < remove; i++)
-            hearts[health - i].heartToggle = HeartUI.HeartStates.Empty;
     }
 
     public void AddMaxHealth(int add)
@@ -293,7 +302,16 @@ public class PlayerManager : MonoBehaviour
     {
         if (other.tag == "EnemyMeleeZone" && !isHit)
         {
-            AgentController enemy = other.transform.parent.GetComponent<AgentController>();
+            AgentController enemy;
+            if (other.transform.parent.tag == "Bullet")
+            {
+                BulletData data = other.transform.parent.GetComponent<BulletData>();
+                enemy = data.agent;
+            }
+            else
+            {
+                enemy = other.transform.parent.GetComponent<AgentController>();
+            }
 
             HitPlayer(enemy.meleeDamage);
             Vector3 pushDirection = transform.position - other.transform.parent.position;
