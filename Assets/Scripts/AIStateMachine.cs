@@ -42,6 +42,7 @@ public class AIStateMachine
     // Shooter stuff.
     private float shotWindupTimer = 0.0f;
     private bool isShotReady = false;
+    public float shootCooldown;
 
     private Vector3 storedPlayerPos;
 
@@ -64,6 +65,8 @@ public class AIStateMachine
         player = playerManager.player;
 
         this.stunTime = control.stunnedTime;
+
+        this.shootCooldown = control.shootCooldown;
     }
 
     public void RunStateMachine()
@@ -407,7 +410,7 @@ public class AIStateMachine
     private void RunShotTimer()
     {
         shotWindupTimer += Time.deltaTime;
-        if (shotWindupTimer >= 2)
+        if (shotWindupTimer >= shootCooldown)
         {
             isShotReady = true;
             shotWindupTimer = 0;

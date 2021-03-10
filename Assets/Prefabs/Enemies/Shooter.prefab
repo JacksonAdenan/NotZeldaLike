@@ -139,7 +139,8 @@ MonoBehaviour:
   isAttacking: 0
   ammunition: {fileID: 9068013721408504461, guid: 8ebe15055a95c5647b5f9603742c4810,
     type: 3}
-  bulletSpeed: 5
+  bulletSpeed: 10
+  shootCooldown: 2
   originalAngularSpeed: 0
   currentState: 0
 --- !u!195 &-232559049841898875
