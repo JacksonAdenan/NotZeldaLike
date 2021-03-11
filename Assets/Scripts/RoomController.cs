@@ -23,12 +23,15 @@ public class RoomController : MonoBehaviour
     public bool isKeyRoom = false;
     private GameObject keySpawner;
     GameManager gameManager;
-    [HideInInspector]
+    //[HideInInspector]
     public bool isExit = false;
     //public GameObject gate;
 
     void Start()
     {
+        gameManager = GameManager.GetInstance();
+
+
         foreach (Transform enemySpawnersObjects in layout.transform.GetChild(1).transform)
         {
             enemySpawners.Add(enemySpawnersObjects.GetComponent<EnemySpawner>());
@@ -36,11 +39,16 @@ public class RoomController : MonoBehaviour
 
         RollEnemies();
 
-        // Getting key spawner.
-        //keySpawner = layout.transform.Find("Key").gameObject;
-        gameManager = GameManager.GetInstance();
+        // Getting key spawner. We make sure to only try set it's active state if we actually found it.
+        if (layout.transform.Find("Key"))
+        { 
+            keySpawner = layout.transform.Find("Key").gameObject;
+            ActivateKey();
+        }
 
-        //ActivateKey();
+
+
+
         GenerateLock();
     }
 
@@ -125,6 +133,8 @@ public class RoomController : MonoBehaviour
 
     void ActivateKey()
     {
+        // Making all key spawns false if they're not the key room.
+        keySpawner.SetActive(false);
         if (isKeyRoom && gameManager.keyRequired)
         {
             keySpawner.SetActive(true);
