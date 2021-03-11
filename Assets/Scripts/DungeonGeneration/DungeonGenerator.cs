@@ -41,6 +41,8 @@ public class DungeonGenerator : MonoBehaviour
     private PlayerManager playerManager;
     private GameManager gameManager;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +60,7 @@ public class DungeonGenerator : MonoBehaviour
         // GameManager must be first because it spawns the playerManager!!!.
         gameManager = GameManager.GetInstance();
         playerManager = PlayerManager.GetInstance();
+
 
         test = new Level(4, 4);
         test.InitRooms();
@@ -208,11 +211,45 @@ public class DungeonGenerator : MonoBehaviour
                             break;
                         }
 
+                        GameObject floorToCheck;
+                        LayoutData layoutData;
+
+                        // We want to try use all cool rooms before using generic rooms.
+                        // Using "q" because "i" and "j" are taken.
+                        for (int q = 0; q < gameManager.coolRooms.Count; q++)
+                        {
+                            // Called it specialRandomNum because randomNum is already in use.
+                            //int specialRandomNum = Random.Range(0, gameManager.coolRooms.Count);
+                            floorToCheck = gameManager.coolRooms[i];
+                            layoutData = floorToCheck.GetComponent<LayoutData>();
+
+                            if (CheckOutlineLayoutCompatability(outlineData, layoutData))
+                            {
+                                Debug.Log("Found match for COOL floor and outline.");
+                                GameObject floor = Instantiate(floorToCheck);
+                                floor.transform.parent = roomReference.transform;
+                                floor.transform.localPosition = Vector3.zero;
+                                floor.transform.rotation = controller.outline.transform.rotation;
+
+                                controller.layout = floor;
+                                foundMatch = true;
+                                break;
+                            }
+                        }
+                        // If our cool room is found, go to next while loop iteration.
+                        if (foundMatch)
+                            break;
+
+
+
                         // Updating floorVariation to have the new rolled number.
                         floorVariation = "Rooms/Layouts/" + randomNum.ToString();
 
-                        GameObject floorToCheck = Resources.Load<GameObject>(floorVariation);
-                        LayoutData layoutData = floorToCheck.GetComponent<LayoutData>();
+                        floorToCheck = Resources.Load<GameObject>(floorVariation);
+                        layoutData = floorToCheck.GetComponent<LayoutData>();
+
+                        
+
 
                         if (CheckOutlineLayoutCompatability(outlineData, layoutData))
                         {
@@ -377,4 +414,5 @@ public class DungeonGenerator : MonoBehaviour
             gameManager.keyRequired = false;
         }
     }
+
 }

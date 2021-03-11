@@ -37,6 +37,10 @@ public class GameManager : MonoBehaviour
 
             SpawnPlayer();
             endRoomLayouts = Resources.LoadAll<GameObject>("Rooms/EndLayouts");
+
+            // Getting all the cool rooms.
+            LoadCoolRooms();
+            
         }
 
 
@@ -91,6 +95,10 @@ public class GameManager : MonoBehaviour
     // Lock and key system stuff.
     public bool keyRequired = false;
     public bool hasKey = false;
+
+    // Loading in cool rooms.
+    [HideInInspector]
+    public List<GameObject> coolRooms;
 
     // Start is called before the first frame update
     void Start()
@@ -245,5 +253,22 @@ public class GameManager : MonoBehaviour
     private void ResetTimer()
     {
         timeLeft = timePerLevel;
+    }
+
+    private void LoadCoolRooms()
+    {
+
+        GameObject[] allRooms = Resources.LoadAll<GameObject>("Rooms/Layouts");
+
+        for (int i = 0; i < allRooms.Length; i++)
+        {
+            LayoutData layout = allRooms[i].GetComponent<LayoutData>();
+            if (!layout.CompatibleWithEverything)
+            {
+                coolRooms.Add(allRooms[i]);
+            }
+        }
+
+      
     }
 }
