@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody playerRigidbody;
 
+    private PlayerManager playerManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,8 @@ public class PlayerController : MonoBehaviour
         meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
 
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
+
+        playerManager = PlayerManager.GetInstance();
     }
 
     // Update is called once per frame
@@ -41,6 +45,22 @@ public class PlayerController : MonoBehaviour
             movement *= speed;
             playerRigidbody.AddForce(movement, ForceMode.VelocityChange);
 
+
+            // Do running animation
+            playerManager.SetAnimation(PlayerManager.PlayerAnimation.Running);
+            //playerManager.playerAnimator.SetBool("Running", true);
+            //playerManager.playerAnimator.SetBool("Idle", false);
+
+        }
+        else
+        {
+            if (playerManager.health <= 3)
+            {
+                playerManager.SetAnimation(PlayerManager.PlayerAnimation.Idle_Low);
+            }
+            else
+                playerManager.SetAnimation(PlayerManager.PlayerAnimation.Idle);
+            
         }
 
         LookAtMouse();
@@ -69,6 +89,8 @@ public class PlayerController : MonoBehaviour
         { 
             meleeZone.gameObject.SetActive(true);
             isAttacking = true;
+
+            playerManager.SetAnimation(PlayerManager.PlayerAnimation.Slash);
         }
     }
 

@@ -50,7 +50,8 @@ public class PlayerManager : MonoBehaviour
     public int startingMaxHealth;
     public int startingArmour;
     public int startingMaxArmour;
-    int health;
+    [HideInInspector]
+    public int health;
     int maxHealth;
     int armour;
     int maxArmour;
@@ -87,6 +88,20 @@ public class PlayerManager : MonoBehaviour
 
     private GameManager gameManager;
 
+    // Getting animation controller.
+    [HideInInspector]
+    public Animator playerAnimator;
+
+    public enum PlayerAnimation 
+    { 
+        Idle,
+        Idle_Low,
+        Running,
+        Death,
+        Knockback,
+        Slash,
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -107,6 +122,8 @@ public class PlayerManager : MonoBehaviour
         AddArmour(startingArmour);
 
         gameManager = GameManager.GetInstance();
+
+        playerAnimator = player.transform.Find("Leah").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -372,5 +389,31 @@ public class PlayerManager : MonoBehaviour
                 this.gameObject.GetComponent<Renderer>().material = originalMaterial;
             }
         }
+    }
+
+    public void SetAnimation(PlayerAnimation animation)
+    {
+        switch (animation)
+        {
+            case PlayerAnimation.Idle:
+                playerAnimator.SetBool("Idle", true);
+                playerAnimator.SetBool("Idle Low Health", false);
+                playerAnimator.SetBool("Running", false);
+                break;
+            case PlayerAnimation.Idle_Low:
+                playerAnimator.SetBool("Idle Low Health", true);
+                playerAnimator.SetBool("Idle", false);
+                playerAnimator.SetBool("Running", false);
+                break;
+            case PlayerAnimation.Running:
+                playerAnimator.SetBool("Running", true);
+                playerAnimator.SetBool("Idle", false);
+                playerAnimator.SetBool("Idle Low Health", false);
+                break;
+            case PlayerAnimation.Slash:
+                playerAnimator.SetTrigger("Slash");
+                break;
+        }
+        
     }
 }
