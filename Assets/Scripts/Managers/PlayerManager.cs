@@ -92,6 +92,8 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector]
     public Animator playerAnimator;
 
+    Renderer leahRenderer;
+
     public enum PlayerAnimation 
     { 
         Idle,
@@ -108,7 +110,11 @@ public class PlayerManager : MonoBehaviour
         uiManager = UIManager.GetInstance();
         //SpawnPlayer();
 
-        originalMaterial = player.GetComponent<Renderer>().material;
+        // Have to do this whole thing because the components are shared between different children of Player.
+        GameObject leah = player.transform.Find("Leah").gameObject;
+        leahRenderer = leah.transform.Find("Leahv1").GetComponent<Renderer>();
+        originalMaterial = leahRenderer.sharedMaterial;
+
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
         controller = gameObject.GetComponent<PlayerController>();
 
@@ -123,7 +129,7 @@ public class PlayerManager : MonoBehaviour
 
         gameManager = GameManager.GetInstance();
 
-        playerAnimator = player.transform.Find("Leah").GetComponent<Animator>();
+        playerAnimator = leah.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -355,7 +361,7 @@ public class PlayerManager : MonoBehaviour
             //gameObject.transform.position += pushDirection;
 
             isHit = true;
-            this.gameObject.GetComponent<Renderer>().material = damageMaterial;
+            leahRenderer.sharedMaterial = damageMaterial;
 
             //gameObject.transform.position += pushDirection * enemy.knockback;
 
@@ -386,7 +392,7 @@ public class PlayerManager : MonoBehaviour
             {
                 isHit = false;
                 tookDamageCounter = 0;
-                this.gameObject.GetComponent<Renderer>().material = originalMaterial;
+                leahRenderer.sharedMaterial = originalMaterial;
             }
         }
     }
