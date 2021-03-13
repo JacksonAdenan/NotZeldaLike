@@ -54,8 +54,7 @@ public class GameManager : MonoBehaviour
     public float cameraYAxis = 10;
     bool transitionReloadLock = false;
 
-    TransitionManager transitionManager;
-    public GameObject transitionManagerPrefab;
+    public TransitionManager transitionManager;
 
     public int levelCount = 1;
     public int zoneCount = 1;
@@ -79,6 +78,8 @@ public class GameManager : MonoBehaviour
     public GameObject healthUIParent;
     public GameObject armourUIParent;
 
+    public Color deathTransitionColour;
+
 
     // Timer stuff.
     //public GameObject timerUI;
@@ -87,6 +88,8 @@ public class GameManager : MonoBehaviour
     public float timePerLevel = 60;
     private float timeLeft = 0;
     private bool isGameOver = false;
+
+    bool runsOnce;
 
 
     [HideInInspector]
@@ -111,8 +114,6 @@ public class GameManager : MonoBehaviour
         playerInstance = playerManager.player;
 
         navmeshBaker = NavMeshBaker.GetInstance();
-
-        transitionManager = Instantiate(transitionManagerPrefab).GetComponent<TransitionManager>();
         levelUI.text = "Level:" + zoneCount.ToString() + "-" + levelCount.ToString();
 
         timeLeft = timePerLevel;
@@ -130,6 +131,13 @@ public class GameManager : MonoBehaviour
 
         GameTimer();
         DisplayTime();
+        if (playerManager.health == 0 && runsOnce == false)
+        {
+            runsOnce = true;
+            playerManager.playerAnimator.SetBool("Death", true);
+            transitionManager.TransitionColorChange(deathTransitionColour);
+            transitionManager.Transition();
+        }
     }
 
 	private void FixedUpdate()
@@ -139,7 +147,6 @@ public class GameManager : MonoBehaviour
         if (!hasResetPlayer && currentEntranceRoom != null)
         {
             Debug.Log("!NOTE!========= NAV MESH REBAKED ==========!NOTE!");
-            transitionManager = Instantiate(transitionManagerPrefab).GetComponent<TransitionManager>();
             ResetPlayer();
             navmeshBaker.ResetBaker();
         }
