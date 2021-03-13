@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     void PollAttack()
     {
         //meleeZone.gameObject.SetActive(false);
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isAttacking)
         { 
             meleeZone.gameObject.SetActive(true);
             isAttacking = true;
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking)
         {
             attackCounter += Time.deltaTime;
-            if (attackCounter >= 0.3f)
+            if (attackCounter >= playerManager.attackAnimLength)
             {
                 isAttacking = false;
                 meleeZone.gameObject.SetActive(false);
