@@ -26,12 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289077105050473152}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.64}
-  m_LocalScale: {x: 1.6720939, y: 0.136, z: 0.81437427}
+  m_LocalRotation: {x: -0.00000013411044, y: 0.00000008940696, z: 0.00000003073364,
+    w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.64000005}
+  m_LocalScale: {x: 1.672094, y: 0.13599998, z: 0.8143741}
   m_Children: []
   m_Father: {fileID: 2436621779161267718}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7038359190330937795
 MeshFilter:
@@ -128,8 +129,8 @@ Transform:
   m_LocalPosition: {x: 14, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1600182725430781648}
   - {fileID: 7067994589862543266}
+  - {fileID: 1600182725430781648}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -196,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.4
   isAttacking: 0
+  meleeZone: {fileID: 9209713223513979218}
 --- !u!54 &6131534003548580684
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -254,6 +256,7 @@ MonoBehaviour:
   damageMaterial: {fileID: 2100000, guid: 91f1be260d7f2264fbe84e2c3822d0ff, type: 2}
   playerRigidbody: {fileID: 0}
   playerAnimator: {fileID: 0}
+  attackAnimLength: 0
 --- !u!1001 &507020332042980331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -393,7 +396,7 @@ PrefabInstance:
     - target: {fileID: 7340752273445841309, guid: c707098c8a6ab8a4fa084273fc629ecf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7340752273445841309, guid: c707098c8a6ab8a4fa084273fc629ecf,
         type: 3}

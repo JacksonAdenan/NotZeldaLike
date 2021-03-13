@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private float attackCounter = 0.0f;
 
-    private BoxCollider meleeZone;
+    public BoxCollider meleeZone;
 
     private Rigidbody playerRigidbody;
 
@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = this.gameObject.transform;
-        meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
-
+        //meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
+        
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
 
         playerManager = PlayerManager.GetInstance();
