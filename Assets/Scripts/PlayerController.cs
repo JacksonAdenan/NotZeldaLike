@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private float attackCounter = 0.0f;
 
-    private BoxCollider meleeZone;
+    public BoxCollider meleeZone;
 
     private Rigidbody playerRigidbody;
 
@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = this.gameObject.transform;
-        meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
-
+        //meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
+        
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
 
         playerManager = PlayerManager.GetInstance();
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     void PollAttack()
     {
         //meleeZone.gameObject.SetActive(false);
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isAttacking)
         { 
             meleeZone.gameObject.SetActive(true);
             isAttacking = true;
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking)
         {
             attackCounter += Time.deltaTime;
-            if (attackCounter >= 0.3f)
+            if (attackCounter >= playerManager.attackAnimLength)
             {
                 isAttacking = false;
                 meleeZone.gameObject.SetActive(false);

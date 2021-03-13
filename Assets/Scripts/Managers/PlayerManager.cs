@@ -94,6 +94,9 @@ public class PlayerManager : MonoBehaviour
 
     Renderer leahRenderer;
 
+    [HideInInspector]
+    public float attackAnimLength = 0;
+
     public enum PlayerAnimation 
     { 
         Idle,
@@ -130,6 +133,7 @@ public class PlayerManager : MonoBehaviour
         gameManager = GameManager.GetInstance();
 
         playerAnimator = leah.GetComponent<Animator>();
+        attackAnimLength = GetAttackDuration();
     }
 
     // Update is called once per frame
@@ -421,5 +425,24 @@ public class PlayerManager : MonoBehaviour
                 break;
         }
         
+    }
+
+    private float GetAttackDuration()
+    {
+        float attackDuration = 0;
+
+        // We load all animation clips into this array, I'm hoping C# cleans up this because I only want the "Attack" clip for now.
+        AnimationClip[] playerAnimationClips = playerAnimator.runtimeAnimatorController.animationClips;
+
+        for (int i = 0; i < playerAnimationClips.Length; i++)
+        {
+            if (playerAnimationClips[i].name == "Slash")
+            { 
+                attackDuration = playerAnimationClips[i].length;
+                break;
+            }
+        }
+
+        return attackDuration;
     }
 }
