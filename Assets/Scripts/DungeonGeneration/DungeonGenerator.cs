@@ -73,6 +73,8 @@ public class DungeonGenerator : MonoBehaviour
         GenerateFloorVariations();
 
         GenerateKeyRoom();
+
+        GenerateRoomControllers();
     }
 
 	// Update is called once per frame
@@ -216,11 +218,11 @@ public class DungeonGenerator : MonoBehaviour
 
                         // We want to try use all cool rooms before using generic rooms.
                         // Using "q" because "i" and "j" are taken.
-                        for (int q = 0; q < gameManager.coolRooms.Count; q++)
+                        for (int q = 0; q < gameManager.coolRoomsVariations.Count; q++)
                         {
                             // Called it specialRandomNum because randomNum is already in use.
                             //int specialRandomNum = Random.Range(0, gameManager.coolRooms.Count);
-                            floorToCheck = gameManager.coolRooms[i];
+                            floorToCheck = gameManager.coolRoomsVariations[i];
                             layoutData = floorToCheck.GetComponent<LayoutData>();
 
                             if (CheckOutlineLayoutCompatability(outlineData, layoutData))
@@ -413,6 +415,26 @@ public class DungeonGenerator : MonoBehaviour
         {
             gameManager.keyRequired = false;
         }
+    }
+
+    public void GenerateRoomControllers()
+    {
+        List<RoomController> allRooms = new List<RoomController>();
+        for (int i = 0; i < test.levelWidth; i++)
+        {
+            for (int j = 0; j < test.levelHeight; j++)
+            {
+                Room currentRoom = test.grid[i, j];
+                // If the room is generated, we want to collect it.
+                if (currentRoom.pattern != RoomPattern.Closed)
+                {
+                    allRooms.Add(currentRoom.roomObj.GetComponent<RoomController>());
+                }
+            }
+        }
+
+        gameManager.allRoomControllers.Clear();
+        gameManager.allRoomControllers = allRooms;
     }
 
 }

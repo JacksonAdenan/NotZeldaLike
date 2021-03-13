@@ -17,7 +17,7 @@ public class RoomController : MonoBehaviour
     bool activeFirstTimeRunning;
     bool activeFirstTimeRunningButTheOneThatResetsSometimes;
     bool clearedFirstTimeRunning;
-   
+
     public Room roomReference;
     // Lock and key system stuff:
     public bool isKeyRoom = false;
@@ -26,6 +26,8 @@ public class RoomController : MonoBehaviour
     //[HideInInspector]
     public bool isExit = false;
     //public GameObject gate;
+
+    public bool isCurrentRoom = false;
 
     void Start()
     {
@@ -41,7 +43,7 @@ public class RoomController : MonoBehaviour
 
         // Getting key spawner. We make sure to only try set it's active state if we actually found it.
         if (layout.transform.Find("Key"))
-        { 
+        {
             keySpawner = layout.transform.Find("Key").gameObject;
             ActivateKey();
         }
@@ -79,6 +81,7 @@ public class RoomController : MonoBehaviour
                     foreach (GameObject enemy in enemies)
                         Destroy(enemy);
                     roomStatesToggle = RoomStates.Cleared;
+                    gameManager.amountClearedRooms++;
                 }
                 count = 0;
                 break;
@@ -90,6 +93,15 @@ public class RoomController : MonoBehaviour
                 }
                 break;
         }
+
+        // Spawn the monster key in the room we're in if we've cleared everything.
+        if (isCurrentRoom && gameManager.isMonsterKeyReady)
+        {
+            SpawnMonsterKey();
+            gameManager.isMonsterKeyReady = false;
+            gameManager.isMonsterKeySpawned = true;
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -102,6 +114,9 @@ public class RoomController : MonoBehaviour
             Time.timeScale = 1.0f;
 
             //Camera
+
+            // Setting it to the "current room"
+            isCurrentRoom = true;
         }
     }
 
@@ -119,6 +134,9 @@ public class RoomController : MonoBehaviour
             }
 
             Time.timeScale = 0.0f;
+
+            // Removing "current room" from the room we're leaving.
+            isCurrentRoom = false;
         }
     }
 
@@ -148,7 +166,7 @@ public class RoomController : MonoBehaviour
             switch (roomReference.pattern)
             {
                 case RoomPattern.Up:
-                    { 
+                    {
                         GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Up)"));
                         gateObj.transform.parent = this.transform;
 
@@ -157,7 +175,7 @@ public class RoomController : MonoBehaviour
                         break;
                     }
                 case RoomPattern.Down:
-                    { 
+                    {
                         GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Down)"));
                         gateObj.transform.parent = this.transform;
 
@@ -166,7 +184,7 @@ public class RoomController : MonoBehaviour
                         break;
                     }
                 case RoomPattern.Left:
-                    { 
+                    {
                         GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Left)"));
                         gateObj.transform.parent = this.transform;
 
@@ -175,7 +193,7 @@ public class RoomController : MonoBehaviour
                         break;
                     }
                 case RoomPattern.Right:
-                    { 
+                    {
                         GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Right)"));
                         gateObj.transform.parent = this.transform;
 
@@ -184,7 +202,16 @@ public class RoomController : MonoBehaviour
                         break;
                     }
             }
-            
+
         }
+
     }
+
+    void SpawnMonsterKey()
+    {
+        GameObject monsterKey = Instantiate(gameManager.monsterKey);
+        monsterKey.transform.parent = keySpawner.transform.parent;
+        monsterKey.transform.localPosition = new Vector3(keySpawner.transform.localPosition.x + 0.5f, keySpawner.transform.localPosition.y, keySpawner.transform.localPosition.z);
+    }
+
 }
