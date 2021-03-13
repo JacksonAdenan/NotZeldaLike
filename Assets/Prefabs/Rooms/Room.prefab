@@ -145,8 +145,14 @@ MonoBehaviour:
   roomStatesToggle: 0
   enemies: []
   layout: {fileID: 0}
+  outline: {fileID: 0}
   enemySpawnerParent: {fileID: 0}
   mapColourObject: {fileID: 2077523265390828976}
+  isKeyRoom: 0
+  keySpawner: {fileID: 4648160474890708142, guid: 3d6ebd2506ecb884daf6818ce0b66e84,
+    type: 3}
+  isExit: 0
+  gate: {fileID: 8256751107092374613, guid: 6563f56bd5b6fa24992cc8fbba57e165, type: 3}
 --- !u!65 &7388344468979255194
 BoxCollider:
   m_ObjectHideFlags: 0

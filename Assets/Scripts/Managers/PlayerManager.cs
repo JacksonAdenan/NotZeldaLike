@@ -50,7 +50,8 @@ public class PlayerManager : MonoBehaviour
     public int startingMaxHealth;
     public int startingArmour;
     public int startingMaxArmour;
-    int health;
+    [HideInInspector]
+    public int health;
     int maxHealth;
     int armour;
     int maxArmour;
@@ -85,13 +86,35 @@ public class PlayerManager : MonoBehaviour
     private PlayerController controller;
 
 
+    private GameManager gameManager;
+
+    // Getting animation controller.
+    [HideInInspector]
+    public Animator playerAnimator;
+
+    Renderer leahRenderer;
+
+    public enum PlayerAnimation 
+    { 
+        Idle,
+        Idle_Low,
+        Running,
+        Death,
+        Knockback,
+        Slash,
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         uiManager = UIManager.GetInstance();
         //SpawnPlayer();
 
-        originalMaterial = player.GetComponent<Renderer>().material;
+        // Have to do this whole thing because the components are shared between different children of Player.
+        GameObject leah = player.transform.Find("Leah").gameObject;
+        leahRenderer = leah.transform.Find("Leahv1").GetComponent<Renderer>();
+        originalMaterial = leahRenderer.sharedMaterial;
+
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
         controller = gameObject.GetComponent<PlayerController>();
 
@@ -103,6 +126,10 @@ public class PlayerManager : MonoBehaviour
         AddHealth(startingHealth);
         AddMaxArmour(startingMaxArmour);
         AddArmour(startingArmour);
+
+        gameManager = GameManager.GetInstance();
+
+        playerAnimator = leah.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -328,22 +355,35 @@ public class PlayerManager : MonoBehaviour
             pushDirection = Vector3.Normalize(pushDirection);
 
             // Only knock back if they don't have armour left.
-            if(armour <= 0)
+            if (armour <= 0)
                 playerRigidbody.AddForce(pushDirection * enemy.knockback, ForceMode.Impulse);
 
             //gameObject.transform.position += pushDirection;
 
             isHit = true;
-            this.gameObject.GetComponent<Renderer>().material = damageMaterial;
+            leahRenderer.sharedMaterial = damageMaterial;
 
             //gameObject.transform.position += pushDirection * enemy.knockback;
 
 
             Debug.Log("Player took damage.");
         }
+
+        
     }
 
-    void TookDamagerTimer()
+	private void OnCollisionEnter(Collision collision)
+	{
+        if (collision.gameObject.tag == "Gate")
+        {
+            if (gameManager.hasKey)
+            {
+                Destroy(collision.gameObject);
+            }
+        }
+    }
+
+	void TookDamagerTimer()
     {
         if (isHit)
         {
@@ -352,8 +392,34 @@ public class PlayerManager : MonoBehaviour
             {
                 isHit = false;
                 tookDamageCounter = 0;
-                this.gameObject.GetComponent<Renderer>().material = originalMaterial;
+                leahRenderer.sharedMaterial = originalMaterial;
             }
         }
+    }
+
+    public void SetAnimation(PlayerAnimation animation)
+    {
+        switch (animation)
+        {
+            case PlayerAnimation.Idle:
+                playerAnimator.SetBool("Idle", true);
+                playerAnimator.SetBool("Idle Low Health", false);
+                playerAnimator.SetBool("Running", false);
+                break;
+            case PlayerAnimation.Idle_Low:
+                playerAnimator.SetBool("Idle Low Health", true);
+                playerAnimator.SetBool("Idle", false);
+                playerAnimator.SetBool("Running", false);
+                break;
+            case PlayerAnimation.Running:
+                playerAnimator.SetBool("Running", true);
+                playerAnimator.SetBool("Idle", false);
+                playerAnimator.SetBool("Idle Low Health", false);
+                break;
+            case PlayerAnimation.Slash:
+                playerAnimator.SetTrigger("Slash");
+                break;
+        }
+        
     }
 }

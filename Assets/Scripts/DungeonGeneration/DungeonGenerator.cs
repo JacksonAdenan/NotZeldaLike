@@ -41,6 +41,8 @@ public class DungeonGenerator : MonoBehaviour
     private PlayerManager playerManager;
     private GameManager gameManager;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +61,7 @@ public class DungeonGenerator : MonoBehaviour
         gameManager = GameManager.GetInstance();
         playerManager = PlayerManager.GetInstance();
 
+
         test = new Level(4, 4);
         test.InitRooms();
         test.GenerateMainPath();
@@ -68,6 +71,8 @@ public class DungeonGenerator : MonoBehaviour
         GeneratePrefabs();
   
         GenerateFloorVariations();
+
+        GenerateKeyRoom();
     }
 
 	// Update is called once per frame
@@ -137,6 +142,8 @@ public class DungeonGenerator : MonoBehaviour
 
                     // Passing the room controller a reference to the floor variation.
                     RoomController controller = roomReference.GetComponent<RoomController>();
+                    // Giving the controller a reference to the room.
+                    controller.roomReference = test.grid[i, j];
                     //controller.layout = floor;
 
                     // If infiniteLoopPrevention hits 100, we stop trying to find a match. I picked 100 because its way above the amount of variations we will have for a while.
@@ -159,6 +166,8 @@ public class DungeonGenerator : MonoBehaviour
 
                     else if (test.grid[i, j].type == RoomType.Exit)
                     {
+                        // Telling the controller this is the exit room.
+                        controller.isExit = true;
                         int index = 0;
                         while (!foundMatch)
                         {
@@ -202,11 +211,45 @@ public class DungeonGenerator : MonoBehaviour
                             break;
                         }
 
+                        GameObject floorToCheck;
+                        LayoutData layoutData;
+
+                        // We want to try use all cool rooms before using generic rooms.
+                        // Using "q" because "i" and "j" are taken.
+                        for (int q = 0; q < gameManager.coolRooms.Count; q++)
+                        {
+                            // Called it specialRandomNum because randomNum is already in use.
+                            //int specialRandomNum = Random.Range(0, gameManager.coolRooms.Count);
+                            floorToCheck = gameManager.coolRooms[i];
+                            layoutData = floorToCheck.GetComponent<LayoutData>();
+
+                            if (CheckOutlineLayoutCompatability(outlineData, layoutData))
+                            {
+                                Debug.Log("Found match for COOL floor and outline.");
+                                GameObject floor = Instantiate(floorToCheck);
+                                floor.transform.parent = roomReference.transform;
+                                floor.transform.localPosition = Vector3.zero;
+                                floor.transform.rotation = controller.outline.transform.rotation;
+
+                                controller.layout = floor;
+                                foundMatch = true;
+                                break;
+                            }
+                        }
+                        // If our cool room is found, go to next while loop iteration.
+                        if (foundMatch)
+                            break;
+
+
+
                         // Updating floorVariation to have the new rolled number.
                         floorVariation = "Rooms/Layouts/" + randomNum.ToString();
 
-                        GameObject floorToCheck = Resources.Load<GameObject>(floorVariation);
-                        LayoutData layoutData = floorToCheck.GetComponent<LayoutData>();
+                        floorToCheck = Resources.Load<GameObject>(floorVariation);
+                        layoutData = floorToCheck.GetComponent<LayoutData>();
+
+                        
+
 
                         if (CheckOutlineLayoutCompatability(outlineData, layoutData))
                         {
@@ -339,4 +382,37 @@ public class DungeonGenerator : MonoBehaviour
         }
         
     }
+
+    private void GenerateKeyRoom()
+    {
+        List<Room> possibleKeyRooms = new List<Room>();
+
+        for (int i = 0; i < test.levelWidth; i++)
+        {
+            for (int j = 0; j < test.levelHeight; j++)
+            {
+                Room currentRoom = test.grid[i, j];
+                if (currentRoom.type == RoomType.DeadEnd)
+                {
+                    possibleKeyRooms.Add(currentRoom);
+                }
+            }
+        }
+
+        // If there are any dead ends, make one a key room.
+        if (possibleKeyRooms.Count > 0)
+        {
+            int randomNum = Random.Range(0, possibleKeyRooms.Count);
+            RoomController keyRoomController = possibleKeyRooms[randomNum].roomObj.GetComponent<RoomController>();
+            keyRoomController.isKeyRoom = true;
+
+            gameManager.keyRequired = true;
+        }
+        // Otherwise, make it so you don't need a key.
+        else
+        {
+            gameManager.keyRequired = false;
+        }
+    }
+
 }
