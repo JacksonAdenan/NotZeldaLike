@@ -380,7 +380,7 @@ public class PlayerManager : MonoBehaviour
 	{
         if (collision.gameObject.tag == "Gate")
         {
-            if (gameManager.hasKey)
+            if (gameManager.hasKey || gameManager.hasMonsterKey)
             {
                 Destroy(collision.gameObject);
             }

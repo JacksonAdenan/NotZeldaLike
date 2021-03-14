@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 
             // Getting all the cool rooms.
             LoadCoolRooms();
+            allRoomControllers = new List<RoomController>();
             
         }
 
@@ -101,7 +102,15 @@ public class GameManager : MonoBehaviour
 
     // Loading in cool rooms.
     [HideInInspector]
-    public List<GameObject> coolRooms;
+    public List<GameObject> coolRoomsVariations;
+
+    public List<RoomController> allRoomControllers;
+
+    public GameObject monsterKey;
+    public int amountClearedRooms = 0;
+    public bool isMonsterKeyReady = false;
+    public bool isMonsterKeySpawned = false;
+    public bool hasMonsterKey = false;
 
     // Start is called before the first frame update
     void Start()
@@ -138,6 +147,12 @@ public class GameManager : MonoBehaviour
             transitionManager.TransitionColorChange(deathTransitionColour);
             transitionManager.Transition();
         }
+
+        // -1 because we don't want to check the exit. Also, we don't want to spawn if it's already spawned.
+        if ((amountClearedRooms == allRoomControllers.Count - 1) && !isMonsterKeySpawned)
+        {
+            isMonsterKeyReady = true;
+        }
     }
 
 	private void FixedUpdate()
@@ -149,6 +164,11 @@ public class GameManager : MonoBehaviour
             Debug.Log("!NOTE!========= NAV MESH REBAKED ==========!NOTE!");
             ResetPlayer();
             navmeshBaker.ResetBaker();
+
+            amountClearedRooms = 0;
+            isMonsterKeyReady = false;
+            isMonsterKeySpawned = false;
+            hasMonsterKey = false;
         }
     }
 
@@ -272,7 +292,7 @@ public class GameManager : MonoBehaviour
             LayoutData layout = allRooms[i].GetComponent<LayoutData>();
             if (!layout.CompatibleWithEverything)
             {
-                coolRooms.Add(allRooms[i]);
+                coolRoomsVariations.Add(allRooms[i]);
             }
         }
 

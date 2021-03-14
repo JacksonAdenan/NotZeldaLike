@@ -13,7 +13,8 @@ public enum PickupType
     MOVEMENT_SPEED,
     KNOCK_BACK,
     DAMAGE,
-    KEY
+    KEY,
+    MONSTER_KEY
 }
 public class Pickup : MonoBehaviour
 {
@@ -78,6 +79,10 @@ public class Pickup : MonoBehaviour
                 break;
             case PickupType.KEY:
                 gameManager.hasKey = true;
+                Destroy(this.gameObject);
+                break;
+            case PickupType.MONSTER_KEY:
+                gameManager.hasMonsterKey = true;
                 Destroy(this.gameObject);
                 break;
         }

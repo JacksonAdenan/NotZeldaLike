@@ -2666,7 +2666,14 @@ MonoBehaviour:
   endRoomLayouts: []
   keyRequired: 0
   hasKey: 0
-  coolRooms: []
+  coolRoomsVariations: []
+  allRoomControllers: []
+  monsterKey: {fileID: 8363134864509366307, guid: da098b21389732245bee892b6ae1ff7b,
+    type: 3}
+  amountClearedRooms: 0
+  isMonsterKeyReady: 0
+  isMonsterKeySpawned: 0
+  hasMonsterKey: 0
 --- !u!4 &1526787736 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 37a6b0d5545b4c54cb1900081ca65f2b,

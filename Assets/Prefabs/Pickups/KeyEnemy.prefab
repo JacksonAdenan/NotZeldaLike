@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5254532949230789948}
   - component: {fileID: 8002666367342629366}
   - component: {fileID: 2332260257968839200}
+  - component: {fileID: 4062280345991318252}
   m_Layer: 0
   m_Name: KeyEnemy
   m_TagString: Untagged
@@ -26,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8363134864509366307}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1.25, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &5254532949230789948
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -94,9 +95,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f87ea49e58b65540a1573002a0e6443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 8
   amount: 0
   rotationSpeed: 0.05
   bobbingSpeed: 0.1
-  bobbingHeight: 0.5
+  bobbingHeight: 0.1
   originalY: 0.4
+--- !u!65 &4062280345991318252
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8363134864509366307}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2268, y: 0.56700015, z: 0.0756001}
+  m_Center: {x: 0, y: -0.05670002, z: -0.00000001303852}
