@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -56,6 +57,11 @@ public class GameManager : MonoBehaviour
     bool transitionReloadLock = false;
 
     public TransitionManager transitionManager;
+
+    public TextMeshProUGUI deathText;
+    public GameObject deathRestartButton;
+    public GameObject deathMainMenuButton;
+    public Animator deathTextAnimator;
 
     public int levelCount = 1;
     public int zoneCount = 1;
@@ -140,12 +146,22 @@ public class GameManager : MonoBehaviour
 
         GameTimer();
         DisplayTime();
-        if (playerManager.health == 0 && runsOnce == false)
+        if (playerManager.health == 0)
+        {
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        if (runsOnce == false)
         {
             runsOnce = true;
-            playerManager.playerAnimator.SetBool("Death", true);
+            playerManager.playerAnimator.SetTrigger("Death");
+            deathTextAnimator.SetTrigger("FadeIn");
             transitionManager.TransitionColorChange(deathTransitionColour);
-            transitionManager.Transition();
+            transitionManager.Transition(0.45f);
+            DumbDeathWait(2f);
         }
 
         // -1 because we don't want to check the exit. Also, we don't want to spawn if it's already spawned.
@@ -155,7 +171,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-	private void FixedUpdate()
+    IEnumerator DumbDeathWait(float time)
+    {
+        yield return new WaitForSeconds(time);
+        deathMainMenuButton.SetActive(true);
+        deathRestartButton.SetActive(true);
+    }
+
+    public void DeathSceneLoad(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
+
+    private void FixedUpdate()
 	{
 
         // I think resetting the player pos has to be here because when we reload the scene we have to wait for DungeonGenerators Awake() function to be called before we re position the player.
@@ -227,11 +255,18 @@ public class GameManager : MonoBehaviour
             levelCount++;
         levelUI.text = "Level: " + zoneCount.ToString() + "-" + levelCount.ToString();
         SceneManager.LoadScene("DanielsTestScene");
+        DontDestroyOnLoadStart();
         transitionReloadLock = false;
         hasResetPlayer = false;
         currentEntranceRoom = null;
 
         ResetTimer();
+    }
+
+    void DontDestroyOnLoadStart()
+    {
+        transitionManager.gameObject.SetActive(false);
+        transitionManager.gameObject.SetActive(true);
     }
 
     public void ResetPlayer()

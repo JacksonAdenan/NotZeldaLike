@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-using UnityEditor.AI;
-
 public class AIStateMachine
 {
     public MobType stateMachineType;

@@ -152,7 +152,6 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
             AddHealth(1);
-
         if (Input.GetKeyDown(KeyCode.J))
             DecreaseHealth(1);
         if (Input.GetKeyDown(KeyCode.B))
