@@ -20,8 +20,10 @@ public class TransitionManager : MonoBehaviour
         bottomUp.GetComponent<Image>().color = color;
         topDown.GetComponent<Image>().color = color;
     }
-    public void Transition()
+    public void Transition(float speed = 1)
     {
+        bottomUp.speed = speed;
+        topDown.speed = speed;
         bottomUp.SetBool("transition", true);
         topDown.SetBool("transition", true);
     }

@@ -16,8 +16,8 @@ public class RoomController : MonoBehaviour
     public GameObject mapColourObject;
     bool activeFirstTimeRunning;
     bool activeFirstTimeRunningButTheOneThatResetsSometimes;
-    bool clearedFirstTimeRunning;
-
+    bool clearedFirstTimeRunning;
+
     public Room roomReference;
     // Lock and key system stuff:
     public bool isKeyRoom = false;
@@ -42,8 +42,8 @@ public class RoomController : MonoBehaviour
         RollEnemies();
 
         // Getting key spawner. We make sure to only try set it's active state if we actually found it.
-        if (layout.transform.Find("Key"))
-        {
+        if (layout.transform.Find("Key"))
+        {
             keySpawner = layout.transform.Find("Key").gameObject;
             ActivateKey();
         }
@@ -95,8 +95,8 @@ public class RoomController : MonoBehaviour
         }
 
         // Spawn the monster key in the room we're in if we've cleared everything.
-        if (isCurrentRoom && gameManager.isMonsterKeyReady)
-        {
+        if (isCurrentRoom && gameManager.isMonsterKeyReady)
+        {
             SpawnMonsterKey();
             gameManager.isMonsterKeyReady = false;
             gameManager.isMonsterKeySpawned = true;
@@ -159,56 +159,56 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    void GenerateLock()
-    {
-        if (gameManager.keyRequired && isExit)
-        {
-            switch (roomReference.pattern)
-            {
-                case RoomPattern.Up:
-                    {
-                        GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Up)"));
-                        gateObj.transform.parent = this.transform;
-
-                        gateObj.transform.localPosition = new Vector3(0, 0, -6.3f);
-                        gateObj.transform.localRotation = Quaternion.Euler(0, 180, 0);
-                        break;
-                    }
-                case RoomPattern.Down:
-                    {
-                        GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Down)"));
-                        gateObj.transform.parent = this.transform;
-
-                        gateObj.transform.localPosition = new Vector3(0, 0, 6.3f);
-                        gateObj.transform.localRotation = Quaternion.Euler(0, 180, 0);
-                        break;
-                    }
-                case RoomPattern.Left:
-                    {
-                        GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Left)"));
-                        gateObj.transform.parent = this.transform;
-
-                        gateObj.transform.localPosition = new Vector3(8, 0, 0);
-                        gateObj.transform.localRotation = Quaternion.Euler(0, 180, 0);
-                        break;
-                    }
-                case RoomPattern.Right:
-                    {
-                        GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Right)"));
-                        gateObj.transform.parent = this.transform;
-
-                        gateObj.transform.localPosition = new Vector3(-8, 0, 0);
-                        gateObj.transform.localRotation = Quaternion.Euler(0, 180, 0);
-                        break;
-                    }
-            }
-
-        }
-
+    void GenerateLock()
+    {
+        if (gameManager.keyRequired && isExit)
+        {
+            switch (roomReference.pattern)
+            {
+                case RoomPattern.Up:
+                    {
+                        GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Up)"));
+                        gateObj.transform.parent = this.transform;
+
+                        gateObj.transform.localPosition = new Vector3(0, 0, -6.3f);
+                        gateObj.transform.localRotation = Quaternion.Euler(0, 180, 0);
+                        break;
+                    }
+                case RoomPattern.Down:
+                    {
+                        GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Down)"));
+                        gateObj.transform.parent = this.transform;
+
+                        gateObj.transform.localPosition = new Vector3(0, 0, 6.3f);
+                        gateObj.transform.localRotation = Quaternion.Euler(0, 180, 0);
+                        break;
+                    }
+                case RoomPattern.Left:
+                    {
+                        GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Left)"));
+                        gateObj.transform.parent = this.transform;
+
+                        gateObj.transform.localPosition = new Vector3(8, 0, 0);
+                        gateObj.transform.localRotation = Quaternion.Euler(0, 180, 0);
+                        break;
+                    }
+                case RoomPattern.Right:
+                    {
+                        GameObject gateObj = Instantiate(Resources.Load<GameObject>("Rooms/Gate/Gate (Right)"));
+                        gateObj.transform.parent = this.transform;
+
+                        gateObj.transform.localPosition = new Vector3(-8, 0, 0);
+                        gateObj.transform.localRotation = Quaternion.Euler(0, 180, 0);
+                        break;
+                    }
+            }
+
+        }
+
     }
 
-    void SpawnMonsterKey()
-    {
+    void SpawnMonsterKey()
+    {
         GameObject monsterKey = Instantiate(gameManager.monsterKey);
         monsterKey.transform.parent = keySpawner.transform.parent;
         monsterKey.transform.localPosition = new Vector3(keySpawner.transform.localPosition.x + 0.5f, keySpawner.transform.localPosition.y, keySpawner.transform.localPosition.z);
