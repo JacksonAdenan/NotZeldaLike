@@ -37,14 +37,11 @@ public class PlayerManager : MonoBehaviour
     // Replace this with loading it in from the resources folder.
     public GameObject player;
 
+    // ------- Camera Settings ------- //
     public float cameraZAxis = -3;
     public float cameraYAxis = 10;
 
-
-    /*public int health;
-    public int armour;
-    public int maxHealth;
-    public int maxArmour;*/
+    // ------- Player Stats ------- //
     [Header("Stats")]
     public int startingHealth;
     public int startingMaxHealth;
@@ -61,42 +58,36 @@ public class PlayerManager : MonoBehaviour
     public int meleeDamage = 1;
     public float meleeKnockbackForce = 7.0f;
 
-    //// We have pointers to these rooms so that we can use them to spawn the player.
-    //[HideInInspector]
-    //public GameObject currentEntranceRoom;
-    //[HideInInspector]
-    //public GameObject currentExitRoom;
 
+
+    // ------- Combat Stuff ------- //
     [HideInInspector]
     public bool isAlive;
-
 
     public Material damageMaterial;
     private Material originalMaterial;
 
-
     private float tookDamageCounter = 0;
     private bool isHit = false;
 
+
+    // ------- Manager References ------- //
     // Reference to the UIManager so we can take away and add hearts and stuff to the screen.
     private UIManager uiManager;
+    private GameManager gameManager;
 
+    // ------- References to other components ------- //
     [HideInInspector]
     public Rigidbody playerRigidbody;
     private PlayerController controller;
-
-
-    private GameManager gameManager;
-
-    // Getting animation controller.
     [HideInInspector]
     public Animator playerAnimator;
-
     Renderer leahRenderer;
 
+
+    // ------- Animation System ------- //
     [HideInInspector]
     public float attackAnimLength = 0;
-
     public enum PlayerAnimation 
     { 
         Idle,
@@ -111,7 +102,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         uiManager = UIManager.GetInstance();
-        //SpawnPlayer();
+        gameManager = GameManager.GetInstance();
 
         // Have to do this whole thing because the components are shared between different children of Player.
         GameObject leah = player.transform.Find("Leah").gameObject;
@@ -130,7 +121,6 @@ public class PlayerManager : MonoBehaviour
         AddMaxArmour(startingMaxArmour);
         AddArmour(startingArmour);
 
-        gameManager = GameManager.GetInstance();
 
         playerAnimator = leah.GetComponent<Animator>();
         attackAnimLength = GetAttackDuration();
@@ -166,84 +156,15 @@ public class PlayerManager : MonoBehaviour
             TookDamagerTimer();
     }
 
-    //public void SpawnPlayer()
-    //{
-    //    player = Instantiate(player);
-    //    player.transform.position = new Vector3(currentEntranceRoom.transform.position.x, 1, currentEntranceRoom.transform.position.y);
-    //
-    //    SpawnCamera();
-    //    
-    //}
     public void HitPlayer(int damageAmount)
     {
         if (armour > 0)
             DecreaseArmour(damageAmount);
         else
             DecreaseHealth(damageAmount);
-        // The player will lose 1 peice of armour if they have it, if the player has no armour the damage goes to their health.
-        /*if (armour > 0)
-        {
-            armour -= 1;
-            for (int i = 0; i < damageAmount; i++)
-            {
-                uiManager.RemoveIcon(UIManager.IconType.ArmourIcon);
-            }
-
-            if (armour < 0)
-                armour = 0;
-        }
-        else
-        { 
-            health -= damageAmount;
-            for (int i = 0; i < damageAmount; i++)
-            { 
-                uiManager.RemoveIcon(UIManager.IconType.HealthIcon);
-            }
-
-            if (health < 0)
-                health = 0;
-        }*/
+        
     }
-    /*public void AddArmour(int armourAmount)
-    {
-        armour += armourAmount;
-        for (int i = 0; i < armourAmount; i++)
-        {
-            if ((armour - armourAmount) + 1 <= maxArmour)
-                uiManager.AddIcon(UIManager.IconType.ArmourIcon, armour);
-        }
-
-        // Making it so that the player never has over the max amount.
-        if (armour > maxArmour)
-        {
-            armour = maxArmour;
-        }
-    }
-    public void AddHealth(int healthAmount)
-    {
-        health += healthAmount;
-
-        for (int i = 0; i < healthAmount; i++)
-        {
-            if((health - healthAmount) + 1 <= maxHealth)
-                uiManager.AddIcon(UIManager.IconType.HealthIcon, health);
-        }
-
-
-        // Making it so that the player never has over the max amount.
-        if (health > maxHealth)
-        {
-            health = maxHealth;
-        }
-    }*/
-
-    //public void SpawnCamera()
-    //{
-    //    Camera theCamera = Camera.main;
-    //
-    //    theCamera.transform.position = new Vector3(player.transform.position.x, cameraYAxis, cameraZAxis);
-    //}
-
+    
     public void AddHealth(int add)
     {
         for (int i = 0; i < add; i++)

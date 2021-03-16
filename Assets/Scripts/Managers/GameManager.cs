@@ -150,6 +150,12 @@ public class GameManager : MonoBehaviour
         {
             Death();
         }
+
+        // -1 because we don't want to check the exit. Also, we don't want to spawn if it's already spawned.
+        if ((amountClearedRooms == allRoomControllers.Count - 1) && !isMonsterKeySpawned)
+        {
+            isMonsterKeyReady = true;
+        }
     }
 
     void Death()
@@ -164,11 +170,7 @@ public class GameManager : MonoBehaviour
             DumbDeathWait(2f);
         }
 
-        // -1 because we don't want to check the exit. Also, we don't want to spawn if it's already spawned.
-        if ((amountClearedRooms == allRoomControllers.Count - 1) && !isMonsterKeySpawned)
-        {
-            isMonsterKeyReady = true;
-        }
+        
     }
 
     IEnumerator DumbDeathWait(float time)
