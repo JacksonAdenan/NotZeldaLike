@@ -101,8 +101,6 @@ public class DungeonGenerator : MonoBehaviour
                     }
                     else if (test.grid[i, j].type == RoomType.Exit)
                     {
-                        GameObject health = Instantiate(testHealth);
-                        health.transform.position = new Vector3(i * roomSpacingX, 0, j * roomSpacingY);
                         gameManager.currentExitRoom = outline;
                     }
 
