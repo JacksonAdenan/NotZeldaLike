@@ -113,17 +113,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mob: 0
   health: 5
+  knockback: 15
+  meleeDamage: 3
+  stunnedTime: 0.25
   xWanderDistance: 2
   yWanderDistance: 2
   chaseDistance: 3
   attackDistance: 1
-  knockback: 15
-  meleeDamage: 3
-  stunnedTime: 0.25
   damageMaterial: {fileID: 2100000, guid: 91f1be260d7f2264fbe84e2c3822d0ff, type: 2}
+  monsterExplosion: {fileID: 4121587030580197355, guid: 15466c1a08c263545af3267a0f30d322,
+    type: 3}
   isAttacking: 0
   ammunition: {fileID: 0}
   bulletSpeed: 0
+  shootCooldown: 1
   originalAngularSpeed: 0
   currentState: 0
 --- !u!195 &-7213476575283559284

@@ -25,6 +25,8 @@ public class AgentController : MonoBehaviour
     public Material damageMaterial;
     private Material originalMaterial;
 
+    public GameObject monsterExplosion;
+
     private AIStateMachine stateMachine;
 
     private Rigidbody agentRigidbody;
@@ -118,6 +120,7 @@ public class AgentController : MonoBehaviour
         if (this.health <= 0)
         {
             gameObject.SetActive(false);
+            DefeatEnemy();
             Debug.Log("Killed an enemy");
         }
     }
@@ -197,5 +200,11 @@ public class AgentController : MonoBehaviour
         {
             meleeZone.gameObject.SetActive(false);
         }
+    }
+
+    private void DefeatEnemy()
+    {
+        GameObject explosion = Instantiate(monsterExplosion);
+        explosion.transform.position = this.transform.position;
     }
 }
