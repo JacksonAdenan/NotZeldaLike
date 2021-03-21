@@ -15,7 +15,7 @@ public class AIStateMachine
     public BasicDecisions currentState = BasicDecisions.WANDER;
 
 
-    private AgentController controller;
+    private BaseEnemyController controller;
 
     bool hasReachedDestination = true;
 
@@ -53,7 +53,7 @@ public class AIStateMachine
         FLEE,
         TRACK
     }
-    public AIStateMachine(MobType type, NavMeshAgent agent, AgentController control)
+    public AIStateMachine(MobType type, NavMeshAgent agent, BaseEnemyController control)
     {
         stateMachineType = type;
         this.agent = agent;
