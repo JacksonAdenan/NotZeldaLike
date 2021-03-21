@@ -8,18 +8,20 @@ public class AgentController : MonoBehaviour
     NavMeshAgent agent;
     public MobType mob;
 
+    [Header("Base mob stats")]
     public int health = 5;
+    public float knockback = 5.0f;
+    public int meleeDamage = 1;
+    public float stunnedTime = 0.75f;
 
+    [Header("AI Decision Making Values")]
     public float xWanderDistance = 2;
     public float yWanderDistance = 2;
     public float chaseDistance = 3;
     [Tooltip("Changes this probably requires you to change the melee trigger zone size!")]
     public float attackDistance = 1;
 
-    public float knockback = 5.0f;
-    public int meleeDamage = 1;
-    public float stunnedTime = 0.75f;
-
+    [Header("Other")]
     public Material damageMaterial;
     private Material originalMaterial;
 
@@ -38,6 +40,7 @@ public class AgentController : MonoBehaviour
     public bool isAttacking = false;
 
     // For shooters.
+    [Header("Values for shooter types")]
     public GameObject ammunition;
     public float bulletSpeed;
     public float shootCooldown = 1;
@@ -51,6 +54,7 @@ public class AgentController : MonoBehaviour
 
     // Just for debugging purposes
     //[HideInInspector]
+    [Header("Debugging Purposes")]
     public AIStateMachine.BasicDecisions currentState;
 
 
@@ -114,6 +118,7 @@ public class AgentController : MonoBehaviour
         if (this.health <= 0)
         {
             gameObject.SetActive(false);
+            Debug.Log("Killed an enemy");
         }
     }
 

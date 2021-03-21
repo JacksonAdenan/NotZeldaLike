@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestScript : TestParent
+public class TestScript2 : TestParent
 {
     public int test { get; set; }
 
-    public TestScript() {}
-
     // Start is called before the first frame update
+
+    public TestScript2() { }
     void Start() => PrintMessage();
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void PrintMessage()
@@ -25,6 +25,6 @@ public class TestScript : TestParent
 
     void TestParent.PrintName()
     {
-        Debug.Log("TestScript 1");
+        Debug.Log("TestScript 2");
     }
 }
