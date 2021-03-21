@@ -11,7 +11,6 @@ public class ShooterAgentController : BaseAgentController
 		return null;
 	}
 
-
 	public override void Shoot(Vector3 target)
 	{
 	    GameObject newBullet = Instantiate(ammunition);

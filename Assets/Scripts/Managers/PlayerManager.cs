@@ -263,11 +263,11 @@ public class PlayerManager : MonoBehaviour
     {
         if (other.tag == "EnemyMeleeZone" && !isHit)
         {
-            MeleeAgentController enemy;
+            BaseAgentController enemy;
             if (other.transform.parent.tag == "Bullet")
             {
                 BulletData data = other.transform.parent.GetComponent<BulletData>();
-                enemy = (MeleeAgentController)data.agent;
+                enemy = data.agent;
             }
             else
             {

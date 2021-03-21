@@ -123,24 +123,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3582980225011052068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e555dc6cac414746b2d9c88a72a4576, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f78f9a3e4fea540a164230e10f59f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mob: 3
   health: 5
+  knockback: 5
+  meleeDamage: 1
+  stunnedTime: 0.75
   xWanderDistance: 2
   yWanderDistance: 2
-  chaseDistance: 5
+  chaseDistance: 3
   attackDistance: 1
-  knockback: 5
-  meleeDamage: 5
-  stunnedTime: 0.75
   damageMaterial: {fileID: 2100000, guid: a2c088c8e3ed1b74596accd087cd9c90, type: 2}
+  monsterExplosion: {fileID: 4121587030580197355, guid: 15466c1a08c263545af3267a0f30d322,
+    type: 3}
   isAttacking: 0
   ammunition: {fileID: 9068013721408504461, guid: 8ebe15055a95c5647b5f9603742c4810,
     type: 3}
-  bulletSpeed: 10
-  shootCooldown: 2
+  bulletSpeed: 1
+  shootCooldown: 1
   originalAngularSpeed: 0
   currentState: 0
 --- !u!195 &-232559049841898875
