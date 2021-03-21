@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class BaseEnemyController : MonoBehaviour
+public abstract class BaseAgentController : MonoBehaviour
 {
     protected NavMeshAgent agent;
 
@@ -71,12 +71,32 @@ public abstract class BaseEnemyController : MonoBehaviour
 
         // Saving a reference to the original material.
         originalMaterial = this.gameObject.GetComponent<Renderer>().material;
+
+        meleeZone = FindMeleeZone();
+
+        // Storing agents original angular speed so we can modify it.
+        originalAngularSpeed = agent.angularSpeed;
     }
 
     // Update is called once per frame
-    public abstract void Update();
+    public virtual void Update()
+    {
+        stateMachine.RunStateMachine();
+        DamageTimer();
 
-    public abstract BoxCollider FindMeleeZone();
+        if (meleeZone != null)
+            AttackTimer();
+
+
+        // Debugging purposes:
+        currentState = stateMachine.currentState;
+    }
+
+    // By defualt, FindMeleeZone() will return null unless specifically told otherwise.
+    public virtual BoxCollider FindMeleeZone()
+    {
+        return null;
+    }
 
 	protected void OnTriggerEnter(Collider other)
 	{
@@ -123,7 +143,7 @@ public abstract class BaseEnemyController : MonoBehaviour
         }
     }
 
-    protected virtual void DefeatEnemy()
+    void DefeatEnemy()
     {
         GameObject explosion = Instantiate(monsterExplosion);
         explosion.transform.position = this.transform.position;
@@ -136,4 +156,39 @@ public abstract class BaseEnemyController : MonoBehaviour
     }
 
     public abstract void Shoot(Vector3 target);
+
+    void DamageTimer()
+    {
+        if (isHit)
+        {
+            tookDamageCounter += Time.deltaTime;
+            if (tookDamageCounter >= 0.2f)
+            {
+                isHit = false;
+                tookDamageCounter = 0;
+                this.gameObject.GetComponent<Renderer>().material = originalMaterial;
+            }
+        }
+    }
+
+    void AttackTimer()
+    {
+        if (isAttacking)
+        {
+            attackCounter += Time.deltaTime;
+            if (attackCounter >= 0.3f)
+            {
+                isAttacking = false;
+                meleeZone.gameObject.SetActive(false);
+                attackCounter = 0;
+            }
+        }
+
+        // Safety incase melee box doesn't go away like it's supposed to.
+        if (!isAttacking && meleeZone.gameObject.activeSelf)
+        {
+            meleeZone.gameObject.SetActive(false);
+        }
+    }
+
 }

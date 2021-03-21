@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletData : MonoBehaviour
 {
     [HideInInspector]
-    public AgentController agent;
+    public BaseAgentController agent;
     [HideInInspector]
     public Collider agentsCollider;
 
