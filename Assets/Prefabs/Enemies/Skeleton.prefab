@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 8445974987776806834}
   - component: {fileID: 5968068616511667064}
   - component: {fileID: 3298867645089904534}
-  - component: {fileID: -8585038957880759510}
   - component: {fileID: -7213476575283559284}
   - component: {fileID: 1910233879611813240}
   - component: {fileID: -9137736783130581211}
+  - component: {fileID: 3568326131113528651}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -99,36 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5269317d7e24b4abd8a192ab5215a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-8585038957880759510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5319361085763623597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540dfc24fe927b941bd39b808a2f168d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mob: 0
-  health: 5
-  knockback: 5
-  meleeDamage: 1
-  stunnedTime: 0.75
-  xWanderDistance: 2
-  yWanderDistance: 2
-  chaseDistance: 3
-  attackDistance: 1
-  damageMaterial: {fileID: 2100000, guid: a2c088c8e3ed1b74596accd087cd9c90, type: 2}
-  monsterExplosion: {fileID: 4121587030580197355, guid: 15466c1a08c263545af3267a0f30d322,
-    type: 3}
-  isAttacking: 0
-  ammunition: {fileID: 0}
-  bulletSpeed: 0
-  shootCooldown: 1
-  originalAngularSpeed: 0
-  currentState: 0
 --- !u!195 &-7213476575283559284
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -180,6 +150,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.03, y: 2.1, z: 0.21000004}
   m_Center: {x: -0.035000026, y: 0.07000005, z: 0.000000014901161}
+--- !u!114 &3568326131113528651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5319361085763623597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e2976fec4e81c499cc0aecea283a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 0}
 --- !u!1 &8931060314928142605
 GameObject:
   m_ObjectHideFlags: 0
