@@ -13,9 +13,14 @@ namespace WhiteWillow
         public void Tick()
         {
             if (RunningNode != null)
+            { 
                 RunningNode.Tick();
+                Debug.Log(RunningNode.Name + " node running.");
+            }
             else
                 RootNode?.Tick();
+
+            
         }
 
         public void SetRootNode(TreeNode node) => RootNode = node;

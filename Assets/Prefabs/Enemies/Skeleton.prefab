@@ -163,6 +163,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Target: {fileID: 0}
+  health: 100
+  meleeDamage: 0
+  knockback: 3
+  monsterExplosion: {fileID: 4121587030580197355, guid: 15466c1a08c263545af3267a0f30d322,
+    type: 3}
+  damagedMaterial: {fileID: 2100000, guid: a2c088c8e3ed1b74596accd087cd9c90, type: 2}
+  stunTime: 5
+  stunCounter: 0
 --- !u!1 &8931060314928142605
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5315148868932817340
 Transform:
   m_ObjectHideFlags: 0

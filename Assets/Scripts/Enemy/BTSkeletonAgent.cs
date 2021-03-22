@@ -20,13 +20,30 @@ public class BTSkeletonAgent : MonoBehaviour
     // ------- Non Behaviour Tree Stuff ------- //
     NavMeshAgent agent;
 
+    PlayerManager playerManager;
+
     float attackWindupCounter = 0;
     bool isAttackReady = false;
     BoxCollider meleeZone;
 
     // ------- Enemy Stats ------- //
+    [Header("Enemy Stats")]
+    public float health = 5;
     public int meleeDamage = 3;
     public float knockback = 3;
+
+    [Header("Other")]
+    public GameObject monsterExplosion;
+    public Material damagedMaterial;
+    private Material originalMaterial;
+    private Renderer agentRenderer;
+
+    private float originalAngularSpeed;
+
+    [Header("Behavioural Stats")]
+    public float stunTime;
+    public float stunCounter = 0;
+    private bool isEnemyHit = false;
 
     private void Awake() => Initialise();
     private void Update()
@@ -38,11 +55,17 @@ public class BTSkeletonAgent : MonoBehaviour
 
     private void Initialise()
     {
+        playerManager = PlayerManager.GetInstance();
+
         SetTarget(PlayerManager.GetInstance().player.transform);
         meleeZone = FindMeleeZone();
 
         agent = this.GetComponent<NavMeshAgent>();
 
+        originalAngularSpeed = agent.angularSpeed;
+
+        agentRenderer = transform.GetComponent<Renderer>();
+        originalMaterial = agentRenderer.material;
 
         m_Tree = new BehaviourTree();
         m_Animator = GetComponentInChildren<Animator>();
@@ -50,13 +73,38 @@ public class BTSkeletonAgent : MonoBehaviour
         Func<bool> atPosition = () => Vector3.Distance(transform.position, m_Target.position) < 0.5f;
 
         LeafNode moveTo = new LeafNode(m_Tree, "Move To Position", () => MoveToPosition(m_Target.position), () => !atPosition());
-        LeafNode wander = new LeafNode(m_Tree, "Wander", () => agent.SetDestination(RandomNavMeshLocation(5)), () => CompletedWander());
+        LeafNode wander = new LeafNode(m_Tree, "Wander", () => agent.SetDestination(RandomNavMeshLocation(5)), () => HasCompleteWander());
         LeafNode idle = new LeafNode(m_Tree, "Idle", DoNothing, atPosition);
         LeafNode chase = new LeafNode(m_Tree, "Chase", () => agent.SetDestination(m_Target.position), () => TargetWithinRange(5));
         LeafNode attack = new LeafNode(m_Tree, "Attack", () => Attack(), () => TargetWithinRange(1));
-        SelectorNode atTarget = new SelectorNode(m_Tree, "At Target", idle, wander, chase, attack);
+        LeafNode damaged = new LeafNode(m_Tree, "Damaged", () => StunEnemy(stunTime), () => CheckIsEnemyHit());
 
-        m_Tree.SetRootNode(atTarget);
+        SelectorNode atTarget = new SelectorNode(m_Tree, "At Target", attack);
+
+        SequenceNode noTargetNear = new SequenceNode(m_Tree, "No Target Near", wander);
+        SelectorNode targetNear = new SelectorNode(m_Tree, "Target near", atTarget, chase);
+
+
+        SelectorNode notDamaged = new SelectorNode(m_Tree, "Not damaged", targetNear, noTargetNear);
+
+        SelectorNode start = new SelectorNode(m_Tree, "Start", damaged, notDamaged);
+
+        //attack.SetParent(atTarget);
+        //atTarget.SetParent(targetNear);
+        //chase.SetParent(targetNear);
+        //targetNear.SetParent(notDamaged);
+        //
+        //wander.SetParent(noTargetNear);
+        //noTargetNear.SetParent(notDamaged);
+        //
+        //notDamaged.SetParent(start);
+        //damaged.SetParent(start);
+
+        SelectorNode testStart = new SelectorNode(m_Tree, "Test Start", damaged);
+        damaged.SetParent(testStart);
+
+
+        m_Tree.SetRootNode(testStart);
     }
 
     private void Animate()
@@ -96,7 +144,7 @@ public class BTSkeletonAgent : MonoBehaviour
         return finalPosition;
     }
 
-    private bool CompletedWander()
+    private bool HasCompleteWander()
     {
         if (!agent.pathPending)
         {
@@ -154,4 +202,74 @@ public class BTSkeletonAgent : MonoBehaviour
         BoxCollider collider = transform.Find("MeleeZone").GetComponent<BoxCollider>();
         return collider;
     }
+
+    private void TakeDamage()
+    {
+        isEnemyHit = true;
+
+        if(agent.hasPath)
+            agent.ResetPath();
+
+        //agent.velocity = Vector3.zero;
+        agent.angularSpeed = 0;
+
+        RemoveHealth();
+        KnockBackEnemy(m_Target.position);
+
+        SetMaterial(damagedMaterial);
+
+
+        StunEnemy(stunTime);
+    }
+    private void RemoveHealth()
+    {
+        this.health -= playerManager.meleeDamage;
+        if (this.health <= 0)
+        {
+            gameObject.SetActive(false);
+            DefeatEnemy();
+            Debug.Log("Killed an enemy");
+        }
+    }
+    private void DefeatEnemy()
+    {
+        GameObject explosion = Instantiate(monsterExplosion);
+        explosion.transform.position = this.transform.position;
+    }
+
+    private void KnockBackEnemy(Vector3 pushersPosition)
+    {
+        Vector3 pushDirection = transform.position - pushersPosition;
+        pushDirection = Vector3.Normalize(pushDirection);
+
+        agent.velocity = pushDirection * playerManager.meleeKnockbackForce;
+    }
+
+	public void OnTriggerEnter(Collider other)
+	{
+        if (other.tag == "Melee")
+        {
+            TakeDamage();
+        }
+	}
+
+    private void SetMaterial(Material mat) { agentRenderer.material = mat; }
+
+    private void StunEnemy(float stunTime)
+    {
+        Debug.Log("StunEnemy() called.");
+
+        stunCounter += Time.deltaTime;
+        if (stunCounter >= stunTime)
+        {
+            stunCounter = 0;
+            isEnemyHit = false;
+            agentRenderer.material = originalMaterial;
+            agent.angularSpeed = originalAngularSpeed;
+
+            agent.velocity = Vector3.zero;
+        }
+    }
+    private bool CheckIsEnemyHit() { return (isEnemyHit); }
+
 }
