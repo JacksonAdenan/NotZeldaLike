@@ -263,15 +263,17 @@ public class PlayerManager : MonoBehaviour
     {
         if (other.tag == "EnemyMeleeZone" && !isHit)
         {
-            BaseAgentController enemy;
+            BTSkeletonAgent enemy;
             if (other.transform.parent.tag == "Bullet")
             {
-                BulletData data = other.transform.parent.GetComponent<BulletData>();
-                enemy = data.agent;
+                //BulletData data = other.transform.parent.GetComponent<BulletData>();                    // Temporarily removed bullets because of implementation of behaviour tree.
+                //enemy = data.agent;
+
+                enemy = other.transform.parent.GetComponent<BTSkeletonAgent>();                           // This line is here because I don't want to remove the if/else statement.
             }
             else
             {
-                enemy = other.transform.parent.GetComponent<MeleeAgentController>();
+                enemy = other.transform.parent.GetComponent<BTSkeletonAgent>();
             }
 
             HitPlayer(enemy.meleeDamage);
