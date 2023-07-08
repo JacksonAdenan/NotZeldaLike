@@ -12,7 +12,7 @@ public class TransitionTrigger : MonoBehaviour
 
     private void Start()
     {
-        camera = Camera.main;
+        /*camera = Camera.main;
         switch (directionToggle)
         {
             case Direction.Up:
@@ -31,7 +31,7 @@ public class TransitionTrigger : MonoBehaviour
                 playerLocation = new Vector3(-2, 0, 0);
                 cameraLocation = new Vector3(-14, 0, 0);
                 break;
-        }
+        }*/
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -39,8 +39,10 @@ public class TransitionTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Entered Transition Trigger");
-            other.transform.position = transform.position + playerLocation;
-            camera.transform.position += cameraLocation;
+            other.GetComponent<CharacterController>().enabled = false;
+            //other.transform.position = transform.position + playerLocation;
+            other.GetComponent<CharacterController>().enabled = true;
+            //camera.transform.position += cameraLocation;
         }
     }
 }

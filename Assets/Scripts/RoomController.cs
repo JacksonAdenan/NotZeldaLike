@@ -133,7 +133,7 @@ public class RoomController : MonoBehaviour
                 Destroy(enemy);
             }
 
-            Time.timeScale = 0.0f;
+            //Time.timeScale = 0.0f;
 
             // Removing "current room" from the room we're leaving.
             isCurrentRoom = false;

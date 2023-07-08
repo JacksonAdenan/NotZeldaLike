@@ -57,8 +57,8 @@ public class UIManager : MonoBehaviour
         armourIcons = new List<GameObject>();
 
         //Hiding the health and armour sprites that are visible in editor.
-        healthIcon.SetActive(false);
-        armourIcon.SetActive(false);
+        //healthIcon.SetActive(false);
+        //armourIcon.SetActive(false);
 
         /*for (int i = 0; i < playerManager.health; i++)
         {

@@ -21,6 +21,7 @@ public class PlayerManager : MonoBehaviour
     }
 	private void Awake()
 	{
+        
         if (instance != null && instance != this)
         {
             Debug.Log("======= WARNING ======= : You have created PlayerManager multiple times!");
@@ -83,16 +84,15 @@ public class PlayerManager : MonoBehaviour
 
     [HideInInspector]
     public Rigidbody playerRigidbody;
-    private PlayerController controller;
+    public PlayerController controller;
 
 
     private GameManager gameManager;
 
     // Getting animation controller.
-    [HideInInspector]
     public Animator playerAnimator;
 
-    Renderer leahRenderer;
+    public Renderer leahRenderer;
 
     [HideInInspector]
     public float attackAnimLength = 0;
@@ -107,6 +107,8 @@ public class PlayerManager : MonoBehaviour
         Slash,
     }
 
+   
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -114,8 +116,8 @@ public class PlayerManager : MonoBehaviour
         //SpawnPlayer();
 
         // Have to do this whole thing because the components are shared between different children of Player.
-        GameObject leah = player.transform.Find("Leah").gameObject;
-        leahRenderer = leah.transform.Find("Leahv1").GetComponent<Renderer>();
+        //GameObject leah = player.transform.Find("Paladin J Nordstrom (1)").gameObject;
+        //leahRenderer = leah.transform.Find("Leahv1").GetComponent<Renderer>();
         originalMaterial = leahRenderer.sharedMaterial;
 
         playerRigidbody = gameObject.GetComponent<Rigidbody>();
@@ -132,7 +134,7 @@ public class PlayerManager : MonoBehaviour
 
         gameManager = GameManager.GetInstance();
 
-        playerAnimator = leah.GetComponent<Animator>();
+     
         attackAnimLength = GetAttackDuration();
     }
 
@@ -402,6 +404,9 @@ public class PlayerManager : MonoBehaviour
 
     public void SetAnimation(PlayerAnimation animation)
     {
+        if (!playerAnimator)
+            return;
+
         switch (animation)
         {
             case PlayerAnimation.Idle:

@@ -220,9 +220,11 @@ public class GameManager : MonoBehaviour
         // WARNING --------- Have no idea but when the player is not kinematic and gets stuck inside a thing on spawn, you can change its position like this. So my temporary solution
         // is just to make him kinematic for a split second then change him back.
 
-        playerManager.playerRigidbody.isKinematic = true;
+        //playerManager.playerRigidbody.isKinematic = true;
+        playerManager.controller.enabled = false;
         playerInstance.transform.position = new Vector3(currentEntranceRoom.transform.position.x, 1, currentEntranceRoom.transform.position.y);
-        playerManager.playerRigidbody.isKinematic = false;
+        playerManager.controller.enabled = true;
+        //playerManager.playerRigidbody.isKinematic = false;
     }
 
     public void SpawnCamera()

@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public BoxCollider meleeZone;
 
-    private Rigidbody playerRigidbody;
+    private CharacterController characterController;
 
     private PlayerManager playerManager;
 
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         player = this.gameObject.transform;
         //meleeZone = this.gameObject.transform.Find("MeleeZone").GetComponent<BoxCollider>();
         
-        playerRigidbody = gameObject.GetComponent<Rigidbody>();
+        characterController = gameObject.GetComponent<CharacterController>();
 
         playerManager = PlayerManager.GetInstance();
     }
@@ -35,7 +35,21 @@ public class PlayerController : MonoBehaviour
     {
         float xTranslation = Input.GetAxis("Horizontal");
         float yTranslation = Input.GetAxis("Vertical");
-        if (xTranslation != 0 || yTranslation != 0)
+
+        if (Input.GetMouseButton(1))
+        {
+            Vector3 movement = transform.forward;
+            //movement = Vector3.Normalize(movement);
+
+            //player.position += movement * speed * Time.deltaTime;
+            movement *= speed;
+            //playerRigidbody.AddForce(movement, ForceMode.Impulse);
+            characterController.Move(movement * speed * Time.deltaTime);
+
+            // Do running animation
+            playerManager.SetAnimation(PlayerManager.PlayerAnimation.Running);
+        }
+        /*if (xTranslation != 0 || yTranslation != 0)
         {
             // We put yTranslation in the z value because in our game, y means going into the sky.
             Vector3 movement = new Vector3(xTranslation, 0, yTranslation).normalized;
@@ -43,15 +57,15 @@ public class PlayerController : MonoBehaviour
 
             //player.position += movement * speed * Time.deltaTime;
             movement *= speed;
-            playerRigidbody.AddForce(movement, ForceMode.VelocityChange);
-
+            //playerRigidbody.AddForce(movement, ForceMode.Impulse);
+            player.transform.position += movement * speed * Time.deltaTime;
 
             // Do running animation
             playerManager.SetAnimation(PlayerManager.PlayerAnimation.Running);
             //playerManager.playerAnimator.SetBool("Running", true);
             //playerManager.playerAnimator.SetBool("Idle", false);
 
-        }
+        }*/
         else
         {
             if (playerManager.health <= 3)
@@ -71,14 +85,22 @@ public class PlayerController : MonoBehaviour
 
     void LookAtMouse()
     {
-        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float rayLength;
+
+        Vector3 testPoint = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        //testPoint = Camera.main.transform.worldToLocalMatrix * Camera.main.projectionMatrix.inverse * testPoint;
+        //Ray cameraRay = new Ray(testPoint, Camera.main.transform.forward);
+        //Gizmos.DrawRay(cameraRay);
+
+        Ray cameraRay = ViewportPointToRay(testPoint);
 
         if (groundPlane.Raycast(cameraRay, out rayLength))
         {
             Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+            Vector3 cachedRot = transform.rotation.eulerAngles;
+            transform.LookAt(new Vector3(pointToLook.x, pointToLook.y + 1, pointToLook.z));
+            transform.eulerAngles = new Vector3(cachedRot.x, transform.eulerAngles.y, cachedRot.z);
         }
     }
 
@@ -109,5 +131,55 @@ public class PlayerController : MonoBehaviour
                 attackCounter = 0;
             }
         }
+    }
+
+	private void OnDrawGizmos()
+	{
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength;
+
+        Vector3 testPoint = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        //testPoint = Camera.main.transform.worldToLocalMatrix * Camera.main.projectionMatrix.inverse * testPoint;
+        //Ray cameraRay = new Ray(testPoint, Camera.main.transform.forward);
+        //Gizmos.DrawRay(cameraRay);
+
+        Ray cameraRay = ViewportPointToRay(testPoint);
+
+        /*var viewportToWorldMatrix = (Camera.main.projectionMatrix * Camera.main.worldToCameraMatrix).inverse;
+        var rayOrigin = viewportToWorldMatrix.MultiplyPoint(Input.mousePosition);
+
+        var endPosition = Input.mousePosition;
+        endPosition.z = 1f;
+        var rayEnd = viewportToWorldMatrix.MultiplyPoint(endPosition);
+
+        Ray cameraRay = new Ray(rayOrigin, rayEnd - rayOrigin);
+
+        Gizmos.matrix = viewportToWorldMatrix;
+        Gizmos.DrawWireCube(Vector3.zero, Vector3.one);*/
+
+
+
+        if (groundPlane.Raycast(cameraRay, out rayLength))
+        {
+            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(pointToLook, 0.25f);
+        }
+    }
+    public Ray ViewportPointToRay(Vector3 position)
+    {
+        position.x = (position.x - 0.5f) * 2f;
+        position.y = (position.y - 0.5f) * 2f;
+        position.z = -1f;
+
+        var viewportToWorldMatrix = (Camera.main.projectionMatrix * Camera.main.worldToCameraMatrix).inverse;
+
+        var rayOrigin = viewportToWorldMatrix.MultiplyPoint(position);
+
+        var endPosition = position;
+        endPosition.z = 1f;
+        var rayEnd = viewportToWorldMatrix.MultiplyPoint(endPosition);
+
+        return new Ray(rayOrigin, rayEnd - rayOrigin);
     }
 }
