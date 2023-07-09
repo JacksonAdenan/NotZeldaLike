@@ -118,6 +118,9 @@ public class GameManager : MonoBehaviour
     public bool isMonsterKeySpawned = false;
     public bool hasMonsterKey = false;
 
+    public Camera _mainCamera;
+    public Camera _rtCamera;
+
     // Start is called before the first frame update
     void Start()
     {

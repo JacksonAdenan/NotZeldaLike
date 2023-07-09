@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float rayLength;
 
-        Vector3 testPoint = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        Vector3 testPoint = GameManager.GetInstance()._rtCamera.ScreenToViewportPoint(Input.mousePosition);
         //testPoint = Camera.main.transform.worldToLocalMatrix * Camera.main.projectionMatrix.inverse * testPoint;
         //Ray cameraRay = new Ray(testPoint, Camera.main.transform.forward);
         //Gizmos.DrawRay(cameraRay);
@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float rayLength;
 
-        Vector3 testPoint = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        Vector3 testPoint = GameManager.GetInstance()._rtCamera.ScreenToViewportPoint(Input.mousePosition);
         //testPoint = Camera.main.transform.worldToLocalMatrix * Camera.main.projectionMatrix.inverse * testPoint;
         //Ray cameraRay = new Ray(testPoint, Camera.main.transform.forward);
         //Gizmos.DrawRay(cameraRay);
@@ -172,7 +172,9 @@ public class PlayerController : MonoBehaviour
         position.y = (position.y - 0.5f) * 2f;
         position.z = -1f;
 
-        var viewportToWorldMatrix = (Camera.main.projectionMatrix * Camera.main.worldToCameraMatrix).inverse;
+        Camera camera = GameManager.GetInstance()._mainCamera;
+        Camera rtCamera = GameManager.GetInstance()._rtCamera;
+        var viewportToWorldMatrix = (camera.projectionMatrix * camera.worldToCameraMatrix).inverse;
 
         var rayOrigin = viewportToWorldMatrix.MultiplyPoint(position);
 

@@ -11,6 +11,8 @@ public class TestScript : MonoBehaviour
 
     [SerializeField] private GameManager _gameManager;
 
+    //[SerializeField] private Camera _camera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +26,12 @@ public class TestScript : MonoBehaviour
     }
     void SetObliqueness()
     {
-        Camera camera = Camera.main;
+        if (!GameManager.GetInstance())
+        {
+            return;
+        }
+
+        Camera camera = GameManager.GetInstance()._mainCamera;
         camera.orthographic = true;
         var orthoHeight = camera.orthographicSize;
         var orthoWidth = camera.aspect * orthoHeight;
